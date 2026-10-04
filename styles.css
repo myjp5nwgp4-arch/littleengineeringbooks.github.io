@@ -207,12 +207,12 @@ img { max-width: 100%; display: block; }
 
 /* ============ FOOTER ============ */
 .site-footer { background: var(--text-dark); color: rgba(255, 255, 255, 0.75); padding: 3rem 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-.footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
-.footer-content h3 { font-family: 'Baloo 2', sans-serif; font-weight: 700; color: white; margin-bottom: 0.5rem; }
-.footer-content p { font-size: 0.9rem; margin: 0; }
-.footer-links { display: flex; flex-direction: column; gap: 0.75rem; }
-.footer-links a { color: rgba(255, 255, 255, 0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; }
-.footer-links a:hover { color: white; }
+.footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
+.footer-text h3 { font-family: 'Baloo 2', sans-serif; font-weight: 700; color: white; margin-bottom: 0.5rem; }
+.footer-text p { font-size: 0.9rem; margin: 0; }
+.footer-nav { display: flex; flex-direction: column; gap: 0.75rem; }
+.footer-nav a { color: rgba(255, 255, 255, 0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; }
+.footer-nav a:hover { color: white; }
 .footer-legal { text-align: right; }
 .footer-legal p { font-size: 0.85rem; }
 
