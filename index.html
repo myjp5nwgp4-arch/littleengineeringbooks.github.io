@@ -5,36 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Little Engineering Books: Plain-English electronics guides. Big subjects. Small books. No waffle.">
   <title>Little Engineering Books | Big Subjects. Small Books. No Waffle.</title>
-  
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <!-- HEADER / NAV -->
   <header class="site-header">
     <div class="container header-inner">
       <div class="logo">
         <h1>Little Engineering Books</h1>
       </div>
       <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
       <nav class="site-nav">
+        <a href="index.html">Home</a>
         <a href="#books">Books</a>
-        <a href="#about-author">About Author</a>
+        <a href="about.html">About Author</a>
         <a href="#books" class="btn btn-primary btn-small">Browse Books</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- HERO BANNER -->
     <section class="hero" id="hero">
       <div class="container hero-inner">
         <div class="hero-text">
@@ -50,12 +44,10 @@
       </div>
     </section>
 
-    <!-- SIGNAL CHAIN EXPLANATION -->
     <section class="section signal-chain-section" id="signal-chain">
       <div class="container">
         <h2 class="section-title">From Physics to Code</h2>
         <p class="section-subtitle">The diagram above shows how real-world signals become data your microcontroller can use.</p>
-        
         <div class="chain-steps">
           <div class="chain-step">
             <div class="step-header">
@@ -63,47 +55,45 @@
               <h3>Analog Sensors</h3>
             </div>
             <p>Start with the real world—temperature, light, pressure. Sensors convert those physical quantities into electrical signals.</p>
-            <a href="#book-sensors" class="btn btn-solid-1">Read Analog Sensors</a>
+            <a href="books/analog-sensors.html" class="btn btn-solid-1">Read Analog Sensors</a>
           </div>
-          
+
           <div class="chain-step">
             <div class="step-header">
               <div class="step-icon" style="background: var(--color-opamps-main);"></div>
               <h3>Op-Amps</h3>
             </div>
             <p>Raw sensor signals are messy. Op-amps amplify, filter, and condition them into clean, usable signals.</p>
-            <a href="#book-opamps" class="btn btn-solid-2">Read Op-Amps</a>
+            <a href="books/op-amps.html" class="btn btn-solid-2">Read Op-Amps</a>
           </div>
-          
+
           <div class="chain-step">
             <div class="step-header">
               <div class="step-icon" style="background: var(--color-converters-main);"></div>
               <h3>Converters</h3>
             </div>
             <p>Microcontrollers are digital. ADCs convert analog signals to numbers your code can process.</p>
-            <a href="#book-converters" class="btn btn-solid-3">Read Converters</a>
+            <a href="books/converters.html" class="btn btn-solid-3">Read Converters</a>
           </div>
-          
+
           <div class="chain-step">
             <div class="step-header">
               <div class="step-icon" style="background: var(--color-digital-comms-main);"></div>
               <h3>Digital Communications</h3>
             </div>
             <p>Once you have the data, send it where it needs to go. UART, SPI, I²C, CAN—pick the right protocol.</p>
-            <a href="#book-comms" class="btn btn-solid-4">Read Digital Communications</a>
+            <a href="books/digital-communications.html" class="btn btn-solid-4">Read Digital Communications</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- BOOKS SECTION -->
     <section class="section books-section" id="books">
       <div class="container">
         <h2 class="section-title">The Series</h2>
         <p class="section-subtitle">Four practical guides that work together—or on their own.</p>
-        
+
         <div class="book-grid">
-          <!-- Book 1: Analog Sensors -->
           <article class="book-card" id="book-sensors">
             <div class="book-cover">
               <img src="images/Sensors%20Cover.jpeg" alt="Analog Sensors book cover" loading="lazy">
@@ -114,12 +104,11 @@
               <p class="book-description">Analog sensors turn things like temperature, light, force and position into signals you can measure, but understanding them doesn't have to be hard.</p>
               <div class="book-topics">Voltage dividers, thermistors, LDRs, strain gauges, Wheatstone bridges, current shunts, LVDTs &amp; RVDTs.</div>
               <div class="book-buttons">
-                <a href="#" class="btn btn-solid-1">Buy Now</a>
+                <a href="books/analog-sensors.html" class="btn btn-solid-1">View Book</a>
               </div>
             </div>
           </article>
 
-          <!-- Book 2: Op-Amps -->
           <article class="book-card" id="book-opamps">
             <div class="book-cover">
               <img src="images/IMG_8821.jpeg" alt="Op-Amps book cover" loading="lazy">
@@ -130,12 +119,11 @@
               <p class="book-description">Op-amps are one of the most useful building blocks in electronics, but understanding them doesn't have to mean wading through pages of complex theory.</p>
               <div class="book-topics">Twelve common op-amp circuits including amplifiers, comparators, integrators and filters.</div>
               <div class="book-buttons">
-                <a href="#" class="btn btn-solid-2">Buy Now</a>
+                <a href="books/op-amps.html" class="btn btn-solid-2">View Book</a>
               </div>
             </div>
           </article>
 
-          <!-- Book 3: Converters -->
           <article class="book-card" id="book-converters">
             <div class="book-cover">
               <img src="images/ADC%20Cover.jpeg" alt="Analog and Digital Converters book cover" loading="lazy">
@@ -146,12 +134,11 @@
               <p class="book-description">Analog and digital converters connect the real world to the digital one, but understanding them doesn't have to be hard.</p>
               <div class="book-topics">Sampling, ADC types, using ADCs, DACs, Flash converters, SAR and successive approximation.</div>
               <div class="book-buttons">
-                <a href="#" class="btn btn-solid-3">Buy Now</a>
+                <a href="books/converters.html" class="btn btn-solid-3">View Book</a>
               </div>
             </div>
           </article>
 
-          <!-- Book 4: Digital Communications -->
           <article class="book-card" id="book-comms">
             <div class="book-cover">
               <img src="images/IMG_8820.jpeg" alt="Digital Communications book cover" loading="lazy">
@@ -162,7 +149,7 @@
               <p class="book-description">Communicating with the outside world. Real digital communications protocols for the real world.</p>
               <div class="book-topics">UART, SPI, I²C, CAN and more protocols for moving data between sensors, microcontrollers and systems.</div>
               <div class="book-buttons">
-                <a href="#" class="btn btn-solid-4">Buy Now</a>
+                <a href="books/digital-communications.html" class="btn btn-solid-4">View Book</a>
               </div>
             </div>
           </article>
@@ -170,12 +157,10 @@
       </div>
     </section>
 
-    <!-- WHY SECTION -->
     <section class="section why-section">
       <div class="container">
         <h2 class="section-title">Why Little Engineering Books</h2>
         <p class="section-subtitle">Electronics education, reimagined.</p>
-        
         <div class="why-grid">
           <div class="why-card">
             <h3>Plain English</h3>
@@ -193,7 +178,6 @@
       </div>
     </section>
 
-    <!-- ABOUT AUTHOR SECTION -->
     <section class="section about-section" id="about-author">
       <div class="container about-inner">
         <div class="author-photo">
@@ -203,12 +187,12 @@
           <h2>About the Author</h2>
           <p>Alistair Likeman is an electronic design engineer with 15 years of experience, a UWE Bristol graduate based in the UK. After countless hours explaining circuits to colleagues, interns and students, he realised that most electronics books miss the mark—they're either too simple or way too complex.</p>
           <p>These books are his attempt to fix that. They're written in plain English, aimed at anyone who wants to understand how real circuits work without drowning in theory.</p>
+          <p><a href="about.html" class="inline-link">Read the full author profile</a></p>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-text">
@@ -216,8 +200,9 @@
         <p>Big Subjects. Small Books. No Waffle.</p>
       </div>
       <nav class="footer-nav">
+        <a href="index.html">Home</a>
         <a href="#books">Books</a>
-        <a href="#about-author">About Author</a>
+        <a href="about.html">About Author</a>
       </nav>
       <div class="footer-legal">
         <p>&copy; 2026 Alistair Likeman. All rights reserved.</p>
