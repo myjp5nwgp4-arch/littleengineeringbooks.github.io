@@ -177,8 +177,9 @@ body {
   color: var(--primary-dark);
   border-radius: 9999px;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 1.5rem;
+  font-family: var(--font-display);
 }
 
 .hero h1 {
