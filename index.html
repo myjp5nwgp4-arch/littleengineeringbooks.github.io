@@ -6,12 +6,12 @@
     <title>Little Engineering Books — Big Subjects. Small Books. No Waffle.</title>
     <meta
       name="description"
-      content="Little Engineering Books: practical guides to electronics and analog circuits, explained without the waffle."
+      content="Practical guides to electronics and analog circuits. Refined, no-nonsense explanations of sensors, op-amps, converters, and digital communications."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -19,10 +19,9 @@
   <body>
     <header class="site-header">
       <div class="container nav-wrapper">
-        <div class="brand">Little Engineering Books</div>
+        <div class="brand">LEB</div>
         <nav>
-          <a href="#signal-chain">Signal Chain</a>
-          <a href="#books">All Books</a>
+          <a href="#books">Books</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -31,318 +30,156 @@
 
     <main>
       <section class="hero">
-        <div class="container hero-inner">
-          <div class="hero-copy">
-            <p class="eyebrow">Big Subjects. Small Books. No Waffle.</p>
-            <h1>Electronics, explained.</h1>
-            <p class="lead">
-              Practical guides to analog circuits, sensors, converters, and digital
-              communications. No theory overload, no hand-waving—just clear explanations
-              of how things work and why you'd use them.
+        <div class="container">
+          <div class="hero-content">
+            <h1>Electronics, explained</h1>
+            <p class="hero-subtitle">
+              Four practical guides to analog circuits, sensors, converters, and digital communications. 
+              No theory overload. No hand-waving. Just clear explanations of how things work.
             </p>
             <div class="cta-row">
-              <a class="button primary" href="#signal-chain">See the signal chain</a>
-              <a class="button secondary" href="#books">Browse all books</a>
+              <a class="button primary" href="#books">Browse books</a>
+              <a class="button secondary" href="#about">Learn more</a>
             </div>
           </div>
-
-          <div class="hero-art">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1620 640" width="100%" height="auto" style="max-width: 500px;">
-              <rect width="1620" height="640" fill="#ffffff"/>
-              <g font-family="Nunito, 'Trebuchet MS', Helvetica, Arial, sans-serif" text-anchor="middle">
-                <text x="810" y="62" font-size="42" font-weight="700" fill="#222">From sensor to data</text>
-                <text x="810" y="96" font-size="22" fill="#555">Four little books, one signal chain</text>
-              </g>
-
-              <rect x="40"   y="120" width="340" height="460" rx="24" fill="#F5E6F7" stroke="#A733B2" stroke-width="4"/>
-              <rect x="440"  y="120" width="340" height="460" rx="24" fill="#FAE5EF" stroke="#B33380" stroke-width="4"/>
-              <rect x="840"  y="120" width="340" height="460" rx="24" fill="#E1F5F3" stroke="#33B2A7" stroke-width="4"/>
-              <rect x="1240" y="120" width="340" height="460" rx="24" fill="#E5EDFB" stroke="#3A6FD8" stroke-width="4"/>
-
-              <rect x="70"   y="140" width="280" height="44" rx="22" fill="#A733B2"/>
-              <rect x="470"  y="140" width="280" height="44" rx="22" fill="#B33380"/>
-              <rect x="870"  y="140" width="280" height="44" rx="22" fill="#33B2A7"/>
-              <rect x="1270" y="140" width="280" height="44" rx="22" fill="#3A6FD8"/>
-
-              <g font-family="Nunito, 'Trebuchet MS', Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#fff" text-anchor="middle">
-                <text x="210"  y="170">1  Sensors</text>
-                <text x="610"  y="170">2  Op-Amps</text>
-                <text x="1010" y="170">3  Converters</text>
-                <text x="1410" y="170">4  Digital Comms</text>
-              </g>
-
-              <g fill="none" stroke="#555" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M380 330 H432"/>
-                <path d="M422 320 L436 330 L422 340"/>
-                <path d="M780 330 H832"/>
-                <path d="M822 320 L836 330 L822 340"/>
-                <path d="M1180 330 H1232"/>
-                <path d="M1222 320 L1236 330 L1222 340"/>
-              </g>
-
-              <g fill="none" stroke="#7D1F87" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="170" cy="222" r="7" fill="#F5E6F7"/>
-                <path d="M170 229 V245"/>
-                <rect x="158" y="245" width="24" height="60" fill="#F5E6F7"/>
-                <path d="M170 305 V360"/>
-                <rect x="158" y="360" width="24" height="60" fill="#F5E6F7"/>
-                <path d="M146 432 L194 348"/>
-                <path d="M170 420 V445"/>
-                <path d="M148 445 H192"/>
-                <path d="M157 454 H183"/>
-                <path d="M166 463 H174"/>
-                <path d="M170 330 H380"/>
-              </g>
-              <circle cx="170" cy="330" r="6" fill="#7D1F87"/>
-              <g font-family="Nunito, 'Trebuchet MS', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#7D1F87">
-                <text x="190" y="227">+5 V</text>
-                <text x="198" y="282">R</text>
-                <text x="198" y="397">NTC</text>
-              </g>
-
-              <g fill="none" stroke="#8A1F5E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M440 330 H480 V290 H520"/>
-                <polygon points="520,250 520,410 680,330" fill="#FAE5EF"/>
-                <path d="M680 330 H780"/>
-                <path d="M710 330 V440 H490 V370 H520"/>
-              </g>
-              <circle cx="710" cy="330" r="6" fill="#8A1F5E"/>
-              <g font-family="Nunito, 'Trebuchet MS', Helvetica, Arial, sans-serif" fill="#8A1F5E" text-anchor="middle">
-                <text x="536" y="298" font-size="24" font-weight="700">+</text>
-                <text x="536" y="378" font-size="24" font-weight="700">−</text>
-                <text x="600" y="472" font-size="18" font-weight="600">Voltage follower</text>
-              </g>
-
-              <g fill="none" stroke="#1B7F76" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M840 330 H860"/>
-                <polygon points="860,330 940,255 1160,255 1160,405 940,405" fill="#ffffff"/>
-                <path d="M1160 330 H1180"/>
-                <path d="M880 450 C890 422 905 422 915 450 S940 478 950 450" stroke-width="3"/>
-                <path d="M968 450 H1034"/><path d="M1024 441 L1036 450 L1024 459"/>
-                <path d="M1050 466 V434 H1075 V466 H1100 V434 H1125 V466 H1150" stroke-width="3"/>
-              </g>
-              <g font-family="Nunito, 'Trebuchet MS', Helvetica, Arial, sans-serif" font-weight="800" fill="#1B7F76" text-anchor="middle">
-                <text x="930" y="338" font-size="20">IN</text>
-                <text x="1030" y="345" font-size="38">ADC</text>
-                <text x="1128" y="338" font-size="20">OUT</text>
-              </g>
-
-              <g fill="none" stroke="#2450A8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1240 330 H1330"/>
-                <path d="M1277 342 L1293 318"/>
-                <rect x="1330" y="250" width="190" height="160" rx="8" fill="#ffffff"/>
-                <path d="M1360 230 V250"/><path d="M1400 230 V250"/><path d="M1440 230 V250"/><path d="M1480 230 V250"/>
-                <path d="M1360 410 V430"/><path d="M1400 410 V430"/><path d="M1440 410 V430"/><path d="M1480 410 V430"/>
-              </g>
-              <g font-family="Nunito, 'Trebuchet MS', Helvetica, Arial, sans-serif" fill="#2450A8" text-anchor="middle">
-                <text x="1285" y="302" font-size="17" font-weight="700">SPI / I²C</text>
-                <text x="1425" y="343" font-size="38" font-weight="800">MCU</text>
-              </g>
-              <text x="1410" y="474" font-family="'Courier New', Courier, monospace" font-size="24" font-weight="700" fill="#2450A8" text-anchor="middle">1 0 1 1  0 1 0 0</text>
-
-              <g font-family="Nunito, 'Trebuchet MS', Helvetica, Arial, sans-serif" text-anchor="middle">
-                <g font-size="26" font-weight="800">
-                  <text x="210"  y="518" fill="#7D1F87">Measure</text>
-                  <text x="610"  y="518" fill="#8A1F5E">Clean up</text>
-                  <text x="1010" y="518" fill="#1B7F76">Convert</text>
-                  <text x="1410" y="518" fill="#2450A8">Send</text>
-                </g>
-                <g font-size="18" fill="#444">
-                  <text x="210"  y="550">Temperature becomes a voltage</text>
-                  <text x="610"  y="550">A buffer gives a stable signal</text>
-                  <text x="1010" y="550">The voltage becomes a number</text>
-                  <text x="1410" y="550">The number goes to a processor</text>
-                </g>
-                <text x="810" y="618" font-size="18" fill="#777">Big Subjects. Small Books. No Waffle.</text>
-              </g>
-            </svg>
-          </div>
         </div>
       </section>
 
-      <section id="signal-chain" class="section">
+      <section id="books" class="section books-section">
         <div class="container">
-          <div class="section-heading center">
-            <p class="eyebrow">How it all connects</p>
-            <h2>The signal chain</h2>
-            <p class="section-subtitle">
-              Four books, one journey. From the real world to your microcontroller.
-            </p>
+          <div class="section-header">
+            <h2>The Series</h2>
+            <p>Four interconnected books that form a complete signal chain—from the real world to your microcontroller.</p>
           </div>
 
-          <div class="chain-cards">
-            <a href="#sensors" class="chain-card">
-              <div class="chain-number">1</div>
-              <h3>Sensors</h3>
-              <p>Temperature becomes a voltage. Learn how analog sensors capture the real world.</p>
-            </a>
-            <a href="#op-amps" class="chain-card">
-              <div class="chain-number">2</div>
-              <h3>Op-Amps</h3>
-              <p>A buffer gives a stable signal. Twelve common circuits explained in plain English.</p>
-            </a>
-            <a href="#converters" class="chain-card">
-              <div class="chain-number">3</div>
-              <h3>Converters</h3>
-              <p>The voltage becomes a number. ADCs and DACs bridge analog and digital.</p>
-            </a>
-            <a href="#comms" class="chain-card">
-              <div class="chain-number">4</div>
-              <h3>Digital Comms</h3>
-              <p>The number goes to a processor. Get data from sensors to your microcontroller.</p>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section id="books" class="section alt">
-        <div class="container">
-          <div class="section-heading center">
-            <p class="eyebrow">Our library</p>
-            <h2>All books</h2>
+          <div class="books-intro">
+            <div class="book-flow">
+              <div class="flow-item">
+                <div class="flow-number">1</div>
+                <h3>Sensors</h3>
+                <p>Measure</p>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-item">
+                <div class="flow-number">2</div>
+                <h3>Op-Amps</h3>
+                <p>Condition</p>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-item">
+                <div class="flow-number">3</div>
+                <h3>Converters</h3>
+                <p>Convert</p>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-item">
+                <div class="flow-number">4</div>
+                <h3>Digital Comms</h3>
+                <p>Transmit</p>
+              </div>
+            </div>
           </div>
 
           <div class="book-grid">
-            <article id="sensors" class="book-card">
-              <div class="book-cover" style="background: linear-gradient(135deg, #F17C58 0%, #E94B3C 100%);">
-                <div class="cover-text">
-                  <div class="cover-title">Sensors</div>
-                  <div class="cover-subtitle">Measuring the real world</div>
-                </div>
-              </div>
+            <article class="book-card">
+              <div class="book-cover" style="background: linear-gradient(135deg, #F17C58 0%, #E94B3C 100%);"></div>
               <div class="book-info">
+                <div class="book-number">01</div>
                 <h3>Sensors</h3>
-                <p class="book-series">Little Engineering Books</p>
+                <p class="book-tagline">Measuring the real world</p>
                 <p class="book-description">
-                  From thermistors and strain gauges to photodiodes and accelerometers, learn how sensors
-                  convert physical quantities into electrical signals you can measure.
+                  From thermistors and strain gauges to photodiodes and accelerometers. Learn how sensors convert physical quantities into electrical signals.
                 </p>
-                <div class="book-meta">
-                  <span class="tag">Analog</span>
-                  <span class="tag">Measurement</span>
-                </div>
               </div>
             </article>
 
-            <article id="op-amps" class="book-card">
-              <div class="book-cover" style="background: linear-gradient(135deg, #D946A6 0%, #C2185B 100%);">
-                <div class="cover-text">
-                  <div class="cover-title">Op-Amps</div>
-                  <div class="cover-subtitle">12 essential circuits</div>
-                </div>
-              </div>
+            <article class="book-card">
+              <div class="book-cover" style="background: linear-gradient(135deg, #D946A6 0%, #C2185B 100%);"></div>
               <div class="book-info">
+                <div class="book-number">02</div>
                 <h3>Op-Amps</h3>
-                <p class="book-series">Little Engineering Books</p>
+                <p class="book-tagline">Twelve essential circuits</p>
                 <p class="book-description">
-                  Op-amps are everywhere in electronics. This book takes twelve common circuits—voltage
-                  followers, amplifiers, comparators, integrators, and filters—and explains what they do,
-                  how they work, and where you'd use them.
+                  Voltage followers, amplifiers, comparators, integrators, and filters. The twelve circuits you'll encounter again and again in electronics.
                 </p>
-                <div class="book-meta">
-                  <span class="tag">Op-Amps</span>
-                  <span class="tag">Signal Conditioning</span>
-                </div>
               </div>
             </article>
 
-            <article id="converters" class="book-card">
-              <div class="book-cover" style="background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);">
-                <div class="cover-text">
-                  <div class="cover-title">Analog and Digital Converters</div>
-                  <div class="cover-subtitle">Bridging two worlds</div>
-                </div>
-              </div>
+            <article class="book-card">
+              <div class="book-cover" style="background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);"></div>
               <div class="book-info">
+                <div class="book-number">03</div>
                 <h3>Analog and Digital Converters</h3>
-                <p class="book-series">Little Engineering Books</p>
+                <p class="book-tagline">Bridging two worlds</p>
                 <p class="book-description">
-                  ADCs and DACs are the bridge between the real world and your microcontroller. Learn about
-                  sampling, resolution, Flash converters, SAR, and successive approximation in plain English.
+                  ADCs and DACs connect the real world to the digital one. Sampling, resolution, Flash, SAR, and successive approximation—explained clearly.
                 </p>
-                <div class="book-meta">
-                  <span class="tag">ADC</span>
-                  <span class="tag">DAC</span>
-                  <span class="tag">Conversion</span>
-                </div>
               </div>
             </article>
 
-            <article id="comms" class="book-card">
-              <div class="book-cover" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);">
-                <div class="cover-text">
-                  <div class="cover-title">Digital Communications</div>
-                  <div class="cover-subtitle">Getting data where it needs to go</div>
-                </div>
-              </div>
+            <article class="book-card">
+              <div class="book-cover" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);"></div>
               <div class="book-info">
+                <div class="book-number">04</div>
                 <h3>Digital Communications</h3>
-                <p class="book-series">Little Engineering Books</p>
+                <p class="book-tagline">Getting data where it needs to go</p>
                 <p class="book-description">
-                  From UART and SPI to I²C and CAN, learn the protocols that move data between sensors,
-                  microcontrollers, and the outside world. No jargon, just practical explanations.
+                  UART, SPI, I²C, and CAN. The protocols that move data between sensors, microcontrollers, and the outside world.
                 </p>
-                <div class="book-meta">
-                  <span class="tag">UART</span>
-                  <span class="tag">SPI</span>
-                  <span class="tag">I²C</span>
-                </div>
               </div>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="about" class="section">
-        <div class="container split">
-          <div>
-            <p class="eyebrow">Why we exist</p>
-            <h2>Electronics doesn't have to be hard.</h2>
-            <p>
-              Too many textbooks on electronics are written like dissertations. Thirty pages to explain
-              an op-amp buffer. Equations without intuition. Jargon without context.
-            </p>
-            <p>
-              These books are different. We explain what circuits do, how they work, and where you'd use
-              them—all in plain English. No theory overload. No hand-waving. Just clear, practical
-              explanations that actually stick.
-            </p>
-            <p style="margin-top: 2rem;">
-              <strong>Big Subjects. Small Books. No Waffle.</strong>
-            </p>
-          </div>
+      <section id="about" class="section about-section">
+        <div class="container">
+          <div class="about-content">
+            <div class="about-text">
+              <h2>Why these books exist</h2>
+              <p>
+                Too many electronics textbooks are written like dissertations. Thirty pages to explain an op-amp buffer. Equations without intuition. Jargon without context.
+              </p>
+              <p>
+                Little Engineering Books are different. We explain what circuits <em>do</em>, how they <em>work</em>, and where you'd <em>use</em> them—all in plain English. No theory overload. No hand-waving. Just clear, practical explanations.
+              </p>
+              <p>
+                <strong>Big Subjects. Small Books. No Waffle.</strong>
+              </p>
+            </div>
 
-          <div class="stats">
-            <div class="stat">
-              <strong>4</strong>
-              <span>Books published</span>
-            </div>
-            <div class="stat">
-              <strong>1</strong>
-              <span>Signal chain</span>
-            </div>
-            <div class="stat">
-              <strong>100%</strong>
-              <span>Waffle-free</span>
+            <div class="about-stats">
+              <div class="stat-item">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Books</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Signal chain</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Applications</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <section id="contact" class="section cta-section">
-        <div class="container cta-box">
-          <div>
-            <p class="eyebrow">Get in touch</p>
-            <h2>Questions or feedback?</h2>
+        <div class="container">
+          <div class="cta-content">
+            <h2>Have questions?</h2>
+            <p>Reach out with feedback, ideas, or just to say hello.</p>
+            <a class="button primary" href="mailto:hello@littleengineeringbooks.com">Get in touch</a>
           </div>
-          <a class="button primary" href="mailto:hello@littleengineeringbooks.com">Email us</a>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <div class="container footer-inner">
-        <p>© 2026 Little Engineering Books</p>
+      <div class="container">
+        <p>Little Engineering Books</p>
         <p>Big Subjects. Small Books. No Waffle.</p>
       </div>
     </footer>
