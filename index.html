@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <!-- HEADER / NAV -->
@@ -20,7 +20,7 @@
       <div class="logo">
         <h1>Little Engineering Books</h1>
       </div>
-      <button class="mobile-menu-btn" aria-label="Toggle menu">
+      <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
         <span></span>
         <span></span>
         <span></span>
@@ -37,15 +37,17 @@
   <main>
     <!-- HERO BANNER -->
     <section class="hero" id="hero">
-      <div class="hero-bg"></div>
       <div class="container hero-inner">
         <div class="hero-text">
-          <h2 class="hero-title">Big Engineering Topics in Little Books</h2>
+          <h2>Big Engineering Topics in Little Books</h2>
           <p class="hero-subtitle">Plain-English electronics guides. Big subjects. Small books. No waffle.</p>
           <div class="hero-buttons">
             <a href="#books" class="btn btn-primary btn-large">Browse the Books</a>
             <a href="#flow" class="btn btn-secondary btn-large">See How They Fit Together</a>
           </div>
+        </div>
+        <div class="hero-visual">
+          <img src="images/signal-chain-diagram.jpeg" alt="Signal chain diagram from sensor to digital communication" loading="lazy">
         </div>
       </div>
     </section>
@@ -58,8 +60,10 @@
         
         <div class="book-grid">
           <!-- Book 1: Analog Sensors -->
-          <article class="book-card book-card-1">
-            <div class="book-cover"></div>
+          <article class="book-card">
+            <div class="book-cover">
+              <img src="images/analog-sensors-cover.jpg" alt="Analog Sensors book cover" loading="lazy">
+            </div>
             <div class="book-content">
               <span class="book-category">Electronics</span>
               <h3>Analog Sensors</h3>
@@ -73,8 +77,10 @@
           </article>
 
           <!-- Book 2: Op-Amps -->
-          <article class="book-card book-card-2">
-            <div class="book-cover"></div>
+          <article class="book-card">
+            <div class="book-cover">
+              <img src="images/opamps-cover.jpg" alt="Op-Amps book cover" loading="lazy">
+            </div>
             <div class="book-content">
               <span class="book-category">Electronics</span>
               <h3>Op-Amps</h3>
@@ -88,8 +94,10 @@
           </article>
 
           <!-- Book 3: Converters -->
-          <article class="book-card book-card-3">
-            <div class="book-cover"></div>
+          <article class="book-card">
+            <div class="book-cover">
+              <img src="images/converters-cover.jpg" alt="Analog and Digital Converters book cover" loading="lazy">
+            </div>
             <div class="book-content">
               <span class="book-category">Electronics</span>
               <h3>Analog and Digital Converters</h3>
@@ -102,13 +110,15 @@
             </div>
           </article>
 
-          <!-- Book 4: Digital Communications -->
-          <article class="book-card book-card-4">
-            <div class="book-cover"></div>
+          <!-- Book 4: Digital Communications (placeholder) -->
+          <article class="book-card">
+            <div class="book-cover">
+              <img src="images/logic-gates-cover.jpg" alt="Digital Communications book cover (placeholder)" loading="lazy">
+            </div>
             <div class="book-content">
               <span class="book-category">Electronics</span>
               <h3>Digital Communications</h3>
-              <p class="book-description">[TODO: add description]</p>
+              <p class="book-description">[Coming soon: Communicating with the outside world. Real digital communications protocols for the real world.]</p>
               <div class="book-topics">UART, SPI, I²C, CAN and more protocols for moving data between sensors, microcontrollers and systems.</div>
               <div class="book-buttons">
                 <a href="#" class="btn btn-outline-4">Learn More</a>
@@ -183,7 +193,10 @@
     <!-- ABOUT AUTHOR SECTION -->
     <section class="section about-section" id="about-author">
       <div class="container about-inner">
-        <div class="author-photo"></div>
+        <div class="author-photo">
+          <!-- Placeholder for author photo: replace this img src with the actual photo path -->
+          <img src="images/author-photo.jpg" alt="Alistair Likeman, author of Little Engineering Books" loading="lazy">
+        </div>
         <div class="author-text">
           <h2>About the Author</h2>
           <p>Alistair Likeman is an electronic design engineer with 15 years of experience, a UWE Bristol graduate based in the UK. After countless hours explaining circuits to colleagues, interns and students, he realised that most electronics books miss the mark—they're either too simple or way too complex.</p>
