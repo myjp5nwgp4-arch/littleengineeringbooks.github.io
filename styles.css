@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Little Engineering Books — Big Subjects. Small Books. No Waffle.</title>
+    <meta
+      name="description"
+      content="Little Engineering Books: practical guides to electronics and analog circuits, explained without the waffle."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrapper">
+        <div class="brand">Little Engineering Books</div>
+        <nav>
+          <a href="#signal-chain">Signal Chain</a>
+          <a href="#books">All Books</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">Big Subjects. Small Books. No Waffle.</p>
+            <h1>Electronics, explained.</h1>
+            <p class="lead">
+              Practical guides to analog circuits, sensors, converters, and digital
+              communications. No theory overload, no hand-waving—just clear explanations
+              of how things work and why you'd use them.
+            </p>
+            <div class="cta-row">
+              <a class="button primary" href="#signal-chain">See the signal chain</a>
+              <a class="button secondary" href="#books">Browse all books</a>
+            </div>
+          </div>
+
+          <div class="hero-art">
+            <img
+              src="images/signal_chain.svg"
+              alt="Signal chain: from analog sensors through op-amps, converters, to digital communications"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="signal-chain" class="section">
+        <div class="container">
+          <div class="section-heading center">
+            <p class="eyebrow">How it all connects</p>
+            <h2>The signal chain</h2>
+            <p class="section-subtitle">
+              Four books, one journey. From the real world to your microcontroller.
+            </p>
+          </div>
+
+          <div class="signal-chain-graphic">
+            <img
+              src="images/signal_chain.svg"
+              alt="Complete signal chain diagram"
+            />
+          </div>
+
+          <div class="chain-cards">
+            <a href="#sensors" class="chain-card">
+              <div class="chain-number">1</div>
+              <h3>Sensors</h3>
+              <p>Temperature becomes a voltage. Learn how analog sensors capture the real world.</p>
+            </a>
+            <a href="#op-amps" class="chain-card">
+              <div class="chain-number">2</div>
+              <h3>Op-Amps</h3>
+              <p>A buffer gives a stable signal. Twelve common circuits explained in plain English.</p>
+            </a>
+            <a href="#converters" class="chain-card">
+              <div class="chain-number">3</div>
+              <h3>Converters</h3>
+              <p>The voltage becomes a number. ADCs and DACs bridge analog and digital.</p>
+            </a>
+            <a href="#comms" class="chain-card">
+              <div class="chain-number">4</div>
+              <h3>Digital Comms</h3>
+              <p>The number goes to a processor. Get data from sensors to your microcontroller.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="books" class="section alt">
+        <div class="container">
+          <div class="section-heading center">
+            <p class="eyebrow">Our library</p>
+            <h2>All books</h2>
+          </div>
+
+          <div class="book-grid">
+            <article id="sensors" class="book-card">
+              <div class="book-cover" style="background: linear-gradient(135deg, #F17C58 0%, #E94B3C 100%);">
+                <div class="cover-text">
+                  <div class="cover-title">Sensors</div>
+                  <div class="cover-subtitle">Measuring the real world</div>
+                </div>
+              </div>
+              <div class="book-info">
+                <h3>Sensors</h3>
+                <p class="book-series">Little Engineering Books</p>
+                <p class="book-description">
+                  From thermistors and strain gauges to photodiodes and accelerometers, learn how sensors
+                  convert physical quantities into electrical signals you can measure.
+                </p>
+                <div class="book-meta">
+                  <span class="tag">Analog</span>
+                  <span class="tag">Measurement</span>
+                </div>
+              </div>
+            </article>
+
+            <article id="op-amps" class="book-card">
+              <div class="book-cover" style="background: linear-gradient(135deg, #D946A6 0%, #C2185B 100%);">
+                <div class="cover-text">
+                  <div class="cover-title">Op-Amps</div>
+                  <div class="cover-subtitle">12 essential circuits</div>
+                </div>
+              </div>
+              <div class="book-info">
+                <h3>Op-Amps</h3>
+                <p class="book-series">Little Engineering Books</p>
+                <p class="book-description">
+                  Op-amps are everywhere in electronics. This book takes twelve common circuits—voltage
+                  followers, amplifiers, comparators, integrators, and filters—and explains what they do,
+                  how they work, and where you'd use them.
+                </p>
+                <div class="book-meta">
+                  <span class="tag">Op-Amps</span>
+                  <span class="tag">Signal Conditioning</span>
+                </div>
+              </div>
+            </article>
+
+            <article id="converters" class="book-card">
+              <div class="book-cover" style="background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);">
+                <div class="cover-text">
+                  <div class="cover-title">Analog and Digital Converters</div>
+                  <div class="cover-subtitle">Bridging two worlds</div>
+                </div>
+              </div>
+              <div class="book-info">
+                <h3>Analog and Digital Converters</h3>
+                <p class="book-series">Little Engineering Books</p>
+                <p class="book-description">
+                  ADCs and DACs are the bridge between the real world and your microcontroller. Learn about
+                  sampling, resolution, Flash converters, SAR, and successive approximation in plain English.
+                </p>
+                <div class="book-meta">
+                  <span class="tag">ADC</span>
+                  <span class="tag">DAC</span>
+                  <span class="tag">Conversion</span>
+                </div>
+              </div>
+            </article>
+
+            <article id="comms" class="book-card">
+              <div class="book-cover" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);">
+                <div class="cover-text">
+                  <div class="cover-title">Digital Communications</div>
+                  <div class="cover-subtitle">Getting data where it needs to go</div>
+                </div>
+              </div>
+              <div class="book-info">
+                <h3>Digital Communications</h3>
+                <p class="book-series">Little Engineering Books</p>
+                <p class="book-description">
+                  From UART and SPI to I²C and CAN, learn the protocols that move data between sensors,
+                  microcontrollers, and the outside world. No jargon, just practical explanations.
+                </p>
+                <div class="book-meta">
+                  <span class="tag">UART</span>
+                  <span class="tag">SPI</span>
+                  <span class="tag">I²C</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="container split">
+          <div>
+            <p class="eyebrow">Why we exist</p>
+            <h2>Electronics doesn't have to be hard.</h2>
+            <p>
+              Too many textbooks on electronics are written like dissertations. Thirty pages to explain
+              an op-amp buffer. Equations without intuition. Jargon without context.
+            </p>
+            <p>
+              These books are different. We explain what circuits do, how they work, and where you'd use
+              them—all in plain English. No theory overload. No hand-waving. Just clear, practical
+              explanations that actually stick.
+            </p>
+            <p style="margin-top: 2rem;">
+              <strong>Big Subjects. Small Books. No Waffle.</strong>
+            </p>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>4</strong>
+              <span>Books published</span>
+            </div>
+            <div class="stat">
+              <strong>1</strong>
+              <span>Signal chain</span>
+            </div>
+            <div class="stat">
+              <strong>100%</strong>
+              <span>Waffle-free</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section cta-section">
+        <div class="container cta-box">
+          <div>
+            <p class="eyebrow">Get in touch</p>
+            <h2>Questions or feedback?</h2>
+          </div>
+          <a class="button primary" href="mailto:hello@littleengineeringbooks.com">Email us</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© 2026 Little Engineering Books</p>
+        <p>Big Subjects. Small Books. No Waffle.</p>
+      </div>
+    </footer>
+  </body>
+</html>
