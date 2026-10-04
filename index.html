@@ -27,7 +27,6 @@
       </button>
       <nav class="site-nav">
         <a href="#books">Books</a>
-        <a href="#flow">How They Fit</a>
         <a href="#about-author">About</a>
         <a href="#books" class="btn btn-primary btn-small">Browse Books</a>
       </nav>
@@ -43,11 +42,56 @@
           <p class="hero-subtitle">Plain-English electronics guides. Big subjects. Small books. No waffle.</p>
           <div class="hero-buttons">
             <a href="#books" class="btn btn-primary btn-large">Browse the Books</a>
-            <a href="#flow" class="btn btn-secondary btn-large">See How They Fit Together</a>
           </div>
         </div>
         <div class="hero-visual">
-          <img src="images/IMG_8771.jpeg" alt="Signal chain diagram from sensor to digital communication" loading="lazy">
+          <img src="images/IMG_8771.jpeg" alt="Signal chain: Analog Sensors measure the real world. Op-Amps clean up the signal. Converters turn it digital. Digital Communications send it on." loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- SIGNAL CHAIN EXPLANATION -->
+    <section class="section signal-chain-section" id="signal-chain">
+      <div class="container">
+        <h2 class="section-title">From Physics to Code</h2>
+        <p class="section-subtitle">The diagram above shows how real-world signals become data your microcontroller can use.</p>
+        
+        <div class="chain-steps">
+          <div class="chain-step">
+            <div class="step-header">
+              <div class="step-icon" style="background: var(--color-analog-sensors-main);"></div>
+              <h3>Analog Sensors</h3>
+            </div>
+            <p>Start with the real world—temperature, light, pressure. Sensors convert those physical quantities into electrical signals.</p>
+            <a href="#book-sensors" class="btn btn-solid-1">Read Analog Sensors</a>
+          </div>
+          
+          <div class="chain-step">
+            <div class="step-header">
+              <div class="step-icon" style="background: var(--color-opamps-main);"></div>
+              <h3>Op-Amps</h3>
+            </div>
+            <p>Raw sensor signals are messy. Op-amps amplify, filter, and condition them into clean, usable signals.</p>
+            <a href="#book-opamps" class="btn btn-solid-2">Read Op-Amps</a>
+          </div>
+          
+          <div class="chain-step">
+            <div class="step-header">
+              <div class="step-icon" style="background: var(--color-converters-main);"></div>
+              <h3>Converters</h3>
+            </div>
+            <p>Microcontrollers are digital. ADCs convert analog signals to numbers your code can process.</p>
+            <a href="#book-converters" class="btn btn-solid-3">Read Converters</a>
+          </div>
+          
+          <div class="chain-step">
+            <div class="step-header">
+              <div class="step-icon" style="background: var(--color-digital-comms-main);"></div>
+              <h3>Digital Communications</h3>
+            </div>
+            <p>Once you have the data, send it where it needs to go. UART, SPI, I²C, CAN—pick the right protocol.</p>
+            <a href="#book-comms" class="btn btn-solid-4">Read Digital Communications</a>
+          </div>
         </div>
       </div>
     </section>
@@ -60,7 +104,7 @@
         
         <div class="book-grid">
           <!-- Book 1: Analog Sensors -->
-          <article class="book-card">
+          <article class="book-card" id="book-sensors">
             <div class="book-cover">
               <img src="images/Sensors%20Cover.jpeg" alt="Analog Sensors book cover" loading="lazy">
             </div>
@@ -76,7 +120,7 @@
           </article>
 
           <!-- Book 2: Op-Amps -->
-          <article class="book-card">
+          <article class="book-card" id="book-opamps">
             <div class="book-cover">
               <img src="images/IMG_8821.jpeg" alt="Op-Amps book cover" loading="lazy">
             </div>
@@ -92,7 +136,7 @@
           </article>
 
           <!-- Book 3: Converters -->
-          <article class="book-card">
+          <article class="book-card" id="book-converters">
             <div class="book-cover">
               <img src="images/ADC%20Cover.jpeg" alt="Analog and Digital Converters book cover" loading="lazy">
             </div>
@@ -107,10 +151,10 @@
             </div>
           </article>
 
-          <!-- Book 4: Digital Communications (placeholder) -->
-          <article class="book-card">
+          <!-- Book 4: Digital Communications -->
+          <article class="book-card" id="book-comms">
             <div class="book-cover">
-              <img src="images/IMG_8820.jpeg" alt="Digital Communications book cover (placeholder)" loading="lazy">
+              <img src="images/IMG_8820.jpeg" alt="Digital Communications book cover" loading="lazy">
             </div>
             <div class="book-content">
               <span class="book-category">Electronics</span>
@@ -122,43 +166,6 @@
               </div>
             </div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- FLOW SECTION -->
-    <section class="section flow-section" id="flow">
-      <div class="container">
-        <h2 class="section-title">How They Fit Together</h2>
-        <p class="section-subtitle">A complete signal chain from the real world to your microcontroller.</p>
-        
-        <div class="signal-flow">
-          <div class="flow-block flow-block-1">
-            <div class="flow-label">Analog Sensors</div>
-            <div class="flow-caption">Measure</div>
-          </div>
-          <div class="flow-arrow">→</div>
-          
-          <div class="flow-block flow-block-2">
-            <div class="flow-label">Op-Amps</div>
-            <div class="flow-caption">Clean up</div>
-          </div>
-          <div class="flow-arrow">→</div>
-          
-          <div class="flow-block flow-block-3">
-            <div class="flow-label">Converters</div>
-            <div class="flow-caption">Convert</div>
-          </div>
-          <div class="flow-arrow">→</div>
-          
-          <div class="flow-block flow-block-4">
-            <div class="flow-label">Digital Comms</div>
-            <div class="flow-caption">Send</div>
-          </div>
-        </div>
-
-        <div class="flow-note">
-          <p><strong>Each book works on its own</strong>, but together they tell the complete story of how signals travel from the real world into your code. More end-to-end system examples are coming to this site.</p>
         </div>
       </div>
     </section>
@@ -190,7 +197,7 @@
     <section class="section about-section" id="about-author">
       <div class="container about-inner">
         <div class="author-photo">
-          <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #ddd, #eee); display: flex; align-items: center; justify-content: center; color: #999; font-size: 0.9rem;">Author photo</div>
+          <img src="images/1FB3B41F-363C-47ED-A72C-4EC232F28.jpeg" alt="Alistair Likeman, author of Little Engineering Books" loading="lazy">
         </div>
         <div class="author-text">
           <h2>About the Author</h2>
@@ -210,7 +217,6 @@
       </div>
       <nav class="footer-nav">
         <a href="#books">Books</a>
-        <a href="#flow">How They Fit</a>
         <a href="#about-author">About</a>
       </nav>
       <div class="footer-legal">
