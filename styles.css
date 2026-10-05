@@ -4,7 +4,7 @@
   --c2: #B33380; --c2-dark: #8A1F5E; --c2-tint: #FAE5EF;
   --c3: #33B2A7; --c3-dark: #1B7F76; --c3-tint: #E1F5F3;
   --c4: #3A6FD8; --c4-dark: #2450A8; --c4-tint: #E5EDFB;
-  --text: #222; --muted: #555; --white: #fff; --light: #f9f9f9; --border: #e0e0e0;
+  --text: #222; --text-dark: #222; --muted: #555; --white: #fff; --light: #f9f9f9; --border: #e0e0e0;
   --shadow-sm: 0 2px 4px rgba(0,0,0,.1);
   --shadow-md: 0 4px 12px rgba(0,0,0,.15);
   --shadow-lg: 0 8px 24px rgba(0,0,0,.2);
@@ -206,7 +206,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============ FOOTER ============ */
-.site-footer { background: var(--text-dark); color: rgba(255, 255, 255, 0.75); padding: 3rem 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.site-footer { background: var(--text-dark, #222); color: rgba(255, 255, 255, 0.75); padding: 3rem 0; border-top: 1px solid rgba(255, 255, 255, 0.1); }
 .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; align-items: start; }
 .footer-text h3 { font-family: 'Baloo 2', sans-serif; font-weight: 700; color: white; margin-bottom: 0.5rem; }
 .footer-text p { font-size: 0.9rem; margin: 0; }
