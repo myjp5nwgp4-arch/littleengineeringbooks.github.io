@@ -39,3 +39,13 @@ document.querySelectorAll('.btn, a, button').forEach(element => {
     }
   });
 });
+
+document.querySelectorAll('.copy-btn').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var code = btn.parentElement.querySelector('code').textContent;
+    navigator.clipboard.writeText(code).then(function () {
+      btn.textContent = 'Copied!';
+      setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+    });
+  });
+});

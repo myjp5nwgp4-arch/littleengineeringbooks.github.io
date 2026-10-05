@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Op-Amps Worked Examples | Little Engineering Books</title>
+  <meta name="description" content="Op-Amps: worked examples with schematics, code and parts lists.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="accent-2">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo"><a href="../index.html"><h1>Little Engineering Books</h1></a></div>
+      <button class="mobile-menu-btn" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
+      <nav class="site-nav">
+        <a href="../index.html">Home</a>
+        <a href="../books.html">Books</a>
+        <a href="../why.html">Why Little Engineering Books</a>
+        <a href="../about.html">About the Author</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Worked Examples</span>
+        <h1>Op-Amps: Worked Examples</h1>
+        <p>Tap an example to open its schematic, copy-and-paste code and parts list.</p>
+        <div class="page-actions">
+          <a href="op-amps.html" class="btn btn-accent-outline btn-large">&larr; Back to Op-Amps</a>
+          <a href="../books.html" class="btn btn-accent-outline btn-large">All Books</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section"><div class="container">
+      <div class="examples">
+          <details class="example">
+            <summary><span class="example-num">1</span> Voltage Follower (Buffer)</summary>
+            <div class="example-body">
+              <p>Gain of 1. Passes Vin to Vout while isolating the source from the load.</p>
+              <p class="formula"><strong>Vout = Vin</strong></p>
+              <h3>Schematic</h3>
+              <svg viewBox="0 0 320 160" role="img" aria-label="Voltage Follower (Buffer) schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Output wired directly to the inverting input</text></g></svg>
+              <h3>Code</h3>
+              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Reads Vout on A0 and compares it with the expected value
+const float VREF = 5.0;      // ADC reference (V)
+const float VIN  = 1.0;      // test input voltage (V)
+
+void setup() { Serial.begin(9600); }
+void loop() {
+  float vout = analogRead(A0) * VREF / 1023.0;
+  float expected = VIN;
+  Serial.print(&quot;Measured: &quot;); Serial.print(vout, 3);
+  Serial.print(&quot; V  Expected: &quot;); Serial.println(expected, 3);
+  delay(500);
+}</code></pre></div>
+              <h3>Parts list</h3>
+              <ul><li>1 &times; Op-amp (e.g. MCP6002 or LM358))</li><li>1 &times; 100 nF decoupling capacitor</li><li>Breadboard and jumper wires</li><li>Arduino (or any MCU with an ADC)</li></ul>
+            </div>
+          </details>
+          <details class="example">
+            <summary><span class="example-num">2</span> Non-Inverting Amplifier</summary>
+            <div class="example-body">
+              <p>Amplifies the input without flipping its sign.</p>
+              <p class="formula"><strong>Vout = Vin &times; (1 + Rf/Rg)</strong></p>
+              <h3>Schematic</h3>
+              <svg viewBox="0 0 320 160" role="img" aria-label="Non-Inverting Amplifier schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Rf = 10k, Rg = 1k</text></g></svg>
+              <h3>Code</h3>
+              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Reads Vout on A0 and compares it with the expected value
+const float VREF = 5.0;      // ADC reference (V)
+const float VIN  = 1.0;      // test input voltage (V)
+const float RF = 10000, RG = 1000;
+void setup() { Serial.begin(9600); }
+void loop() {
+  float vout = analogRead(A0) * VREF / 1023.0;
+  float expected = VIN * (1.0 + RF / RG);
+  Serial.print(&quot;Measured: &quot;); Serial.print(vout, 3);
+  Serial.print(&quot; V  Expected: &quot;); Serial.println(expected, 3);
+  delay(500);
+}</code></pre></div>
+              <h3>Parts list</h3>
+              <ul><li>1 &times; Op-amp</li><li>1 &times; 10 k&Omega; resistor (Rf)</li><li>1 &times; 1 k&Omega; resistor (Rg)</li><li>1 &times; 100 nF capacitor</li></ul>
+            </div>
+          </details>
+          <details class="example">
+            <summary><span class="example-num">3</span> Inverting Amplifier</summary>
+            <div class="example-body">
+              <p>Amplifies and inverts the input. Needs a negative supply or a mid-rail reference for single-supply use.</p>
+              <p class="formula"><strong>Vout = &minus;Vin &times; (Rf/Rin)</strong></p>
+              <h3>Schematic</h3>
+              <svg viewBox="0 0 320 160" role="img" aria-label="Inverting Amplifier schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Rf = 10k, Rin = 1k</text></g></svg>
+              <h3>Code</h3>
+              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Reads Vout on A0 and compares it with the expected value
+const float VREF = 5.0;      // ADC reference (V)
+const float VIN  = 1.0;      // test input voltage (V)
+const float RF = 10000, RIN = 1000;
+void setup() { Serial.begin(9600); }
+void loop() {
+  float vout = analogRead(A0) * VREF / 1023.0;
+  float expected = -VIN * (RF / RIN);
+  Serial.print(&quot;Measured: &quot;); Serial.print(vout, 3);
+  Serial.print(&quot; V  Expected: &quot;); Serial.println(expected, 3);
+  delay(500);
+}</code></pre></div>
+              <h3>Parts list</h3>
+              <ul><li>1 &times; Op-amp</li><li>1 &times; 10 k&Omega; resistor (Rf)</li><li>1 &times; 1 k&Omega; resistor (Rin)</li><li>Dual supply (&plusmn;5 V)</li><li>1 &times; 100 nF capacitor</li></ul>
+            </div>
+          </details>
+          <details class="example">
+            <summary><span class="example-num">4</span> Summing Amplifier (Adder)</summary>
+            <div class="example-body">
+              <p>Adds several inputs together, each with its own weighting.</p>
+              <p class="formula"><strong>Vout = &minus;Rf &times; (V1/R1 + V2/R2)</strong></p>
+              <h3>Schematic</h3>
+              <svg viewBox="0 0 320 160" role="img" aria-label="Summing Amplifier (Adder) schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Rf = R1 = R2 = 10k</text></g></svg>
+              <h3>Code</h3>
+              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Reads Vout on A0 and compares it with the expected value
+const float VREF = 5.0;      // ADC reference (V)
+const float VIN  = 1.0;      // test input voltage (V)
+const float RF = 10000, R1 = 10000, R2 = 10000;
+const float V1 = 1.0, V2 = 0.5;
+void setup() { Serial.begin(9600); }
+void loop() {
+  float vout = analogRead(A0) * VREF / 1023.0;
+  float expected = -RF * (V1 / R1 + V2 / R2);
+  Serial.print(&quot;Measured: &quot;); Serial.print(vout, 3);
+  Serial.print(&quot; V  Expected: &quot;); Serial.println(expected, 3);
+  delay(500);
+}</code></pre></div>
+              <h3>Parts list</h3>
+              <ul><li>1 &times; Op-amp</li><li>3 &times; 10 k&Omega; resistors</li><li>Dual supply (&plusmn;5 V)</li><li>1 &times; 100 nF capacitor</li></ul>
+            </div>
+          </details>
+          <details class="example">
+            <summary><span class="example-num">5</span> Differential Amplifier</summary>
+            <div class="example-body">
+              <p>Amplifies the difference between two inputs and rejects what they share.</p>
+              <p class="formula"><strong>Vout = (V2 &minus; V1) &times; (Rf/R1)</strong></p>
+              <h3>Schematic</h3>
+              <svg viewBox="0 0 320 160" role="img" aria-label="Differential Amplifier schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">All four resistors matched (10k)</text></g></svg>
+              <h3>Code</h3>
+              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Reads Vout on A0 and compares it with the expected value
+const float VREF = 5.0;      // ADC reference (V)
+const float VIN  = 1.0;      // test input voltage (V)
+const float RF = 10000, R1 = 10000;
+const float V1 = 1.0, V2 = 1.5;
+void setup() { Serial.begin(9600); }
+void loop() {
+  float vout = analogRead(A0) * VREF / 1023.0;
+  float expected = (V2 - V1) * (RF / R1);
+  Serial.print(&quot;Measured: &quot;); Serial.print(vout, 3);
+  Serial.print(&quot; V  Expected: &quot;); Serial.println(expected, 3);
+  delay(500);
+}</code></pre></div>
+              <h3>Parts list</h3>
+              <ul><li>1 &times; Op-amp</li><li>4 &times; 10 k&Omega; resistors (1% or better)</li><li>1 &times; 100 nF capacitor</li></ul>
+            </div>
+          </details>
+          <details class="example">
+            <summary><span class="example-num">6</span> Comparator</summary>
+            <div class="example-body">
+              <p>Compares two voltages and swings the output fully high or low.</p>
+              <p class="formula"><strong>Vout = high if V+ &gt; V&minus;, otherwise low</strong></p>
+              <h3>Schematic</h3>
+              <svg viewBox="0 0 320 160" role="img" aria-label="Comparator schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Reference set by a divider</text></g></svg>
+              <h3>Code</h3>
+              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Reads the comparator output on D2 and reports its state
+const int OUT_PIN = 2;
+void setup() { Serial.begin(9600); pinMode(OUT_PIN, INPUT); }
+void loop() {
+  Serial.println(digitalRead(OUT_PIN) ? &quot;Input ABOVE reference&quot; : &quot;Input BELOW reference&quot;);
+  delay(500);
+}</code></pre></div>
+              <h3>Parts list</h3>
+              <ul><li>1 &times; Comparator (e.g. LM393) or op-amp</li><li>2 &times; 10 k&Omega; resistors (reference divider)</li><li>1 &times; 10 k&Omega; pull-up resistor</li><li>1 &times; 100 nF capacitor</li></ul>
+            </div>
+          </details>
+          <details class="example">
+            <summary><span class="example-num">7</span> Schmitt Trigger</summary>
+            <div class="example-body">
+              <p>A comparator with hysteresis, so noisy inputs don't cause chattering.</p>
+              <p class="formula"><strong>Thresholds: Vth = Vout &times; R1/(R1+R2)</strong></p>
+              <h3>Schematic</h3>
+              <svg viewBox="0 0 320 160" role="img" aria-label="Schmitt Trigger schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">R1 = 10k, R2 = 10k (positive feedback)</text></g></svg>
+              <h3>Code</h3>
+              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Counts output transitions to show noise rejection
+const int OUT_PIN = 2;
+int last = LOW; unsigned long edges = 0;
+void setup() { Serial.begin(9600); pinMode(OUT_PIN, INPUT); }
+void loop() {
+  int now = digitalRead(OUT_PIN);
+  if (now != last) { edges++; last = now; Serial.println(edges); }
+}</code></pre></div>
+              <h3>Parts list</h3>
+              <ul><li>1 &times; Op-amp</li><li>2 &times; 10 k&Omega; resistors</li><li>1 &times; 100 nF capacitor</li></ul>
+            </div>
+          </details>
+          <details class="example">
+            <summary><span class="example-num">8</span> Inverting Schmitt Trigger</summary>
+            <div class="example-body">
+              <p>Hysteresis comparator whose output is the opposite of the input.</p>
+              <p class="formula"><strong>Thresholds: &plusmn;Vsat &times; R1/(R1+R2)</strong></p>
+              <h3>Schematic</h3>
+              <svg viewBox="0 0 320 160" role="img" aria-label="Inverting Schmitt Trigger schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Input to inverting pin, feedback to non-inverting</text></g></svg>
+              <h3>Code</h3>
+              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Prints the output state; it flips when the input crosses either threshold
+const int OUT_PIN = 2;
+void setup() { Serial.begin(9600); pinMode(OUT_PIN, INPUT); }
+void loop() {
+  Serial.println(digitalRead(OUT_PIN) ? &quot;HIGH (input low)&quot; : &quot;LOW (input high)&quot;);
+  delay(200);
+}</code></pre></div>
+              <h3>Parts list</h3>
+              <ul><li>1 &times; Op-amp</li><li>2 &times; 10 k&Omega; resistors</li><li>1 &times; 100 nF capacitor</li></ul>
+            </div>
+          </details>
+          <details class="example">
+            <summary><span class="example-num">9</span> Integrator</summary>
+            <div class="example-body">
+              <p>Output is the running total (integral) of the input over time.</p>
+              <p class="formula"><strong>Vout = &minus;(1/RC) &int; Vin dt</strong></p>
+              <h3>Schematic</h3>
+              <svg viewBox="0 0 320 160" role="img" aria-label="Integrator schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">R = 10k, C = 100 nF</text></g></svg>
+              <h3>Code</h3>
+              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Integrates a constant input in software to compare with the measured Vout
+const float VREF = 5.0, VIN = 0.1, R = 10000, C = 100e-9;
+unsigned long t0;
+void setup() { Serial.begin(9600); t0 = millis(); }
+void loop() {
+  float t = (millis() - t0) / 1000.0;
+  float vout = analogRead(A0) * VREF / 1023.0;
+  Serial.print(&quot;Measured: &quot;); Serial.print(vout, 3);
+  Serial.print(&quot; V  Expected: &quot;); Serial.println(-VIN * t / (R * C), 3);
+  delay(100);
+}</code></pre></div>
+              <h3>Parts list</h3>
+              <ul><li>1 &times; Op-amp</li><li>1 &times; 10 k&Omega; resistor</li><li>1 &times; 100 nF capacitor (Cf)</li><li>1 &times; 1 M&Omega; resistor across Cf (optional, limits drift)</li><li>Dual supply (&plusmn;5 V)</li></ul>
+            </div>
+          </details>
+          <details class="example">
+            <summary><span class="example-num">10</span> Differentiator</summary>
+            <div class="example-body">
+              <p>Output is proportional to how fast the input changes.</p>
+              <p class="formula"><strong>Vout = &minus;RC &times; dVin/dt</strong></p>
+              <h3>Schematic</h3>
+              <svg viewBox="0 0 320 160" role="img" aria-label="Differentiator schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">R = 10k, C = 100 nF</text></g></svg>
+              <h3>Code</h3>
+              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Estimates the input slope and prints the expected Vout
+const float R = 10000, C = 100e-9;
+float prevV = 0; unsigned long prevT = 0;
+void setup() { Serial.begin(9600); }
+void loop() {
+  unsigned long t = micros();
+  float v = analogRead(A1) * 5.0 / 1023.0;   // Vin on A1
+  float dt = (t - prevT) / 1e6;
+  if (prevT) Serial.println(-R * C * (v - prevV) / dt, 3);
+  prevV = v; prevT = t; delay(10);
+}</code></pre></div>
+              <h3>Parts list</h3>
+              <ul><li>1 &times; Op-amp</li><li>1 &times; 100 nF capacitor (input)</li><li>1 &times; 10 k&Omega; resistor (feedback)</li><li>Small series resistor and feedback capacitor for stability</li><li>Dual supply (&plusmn;5 V)</li></ul>
+            </div>
+          </details>
+          <details class="example">
+            <summary><span class="example-num">11</span> Active Low-Pass Filter</summary>
+            <div class="example-body">
+              <p>Passes low frequencies and attenuates high ones, with optional gain.</p>
+              <p class="formula"><strong>fc = 1/(2&pi;RfCf), gain = &minus;Rf/Rin</strong></p>
+              <h3>Schematic</h3>
+              <svg viewBox="0 0 320 160" role="img" aria-label="Active Low-Pass Filter schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Rf = Rin = 10k, Cf = 10 nF (fc &amp;asymp; 1.6 kHz)</text></g></svg>
+              <h3>Code</h3>
+              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Calculates cutoff frequency and gain for the chosen parts
+const float RF = 10000, RIN = 10000, CF = 10e-9;
+void setup() {
+  Serial.begin(9600);
+  Serial.print(&quot;Cutoff (Hz): &quot;); Serial.println(1.0 / (2 * PI * RF * CF));
+  Serial.print(&quot;Gain: &quot;); Serial.println(-RF / RIN);
+}
+void loop() {}</code></pre></div>
+              <h3>Parts list</h3>
+              <ul><li>1 &times; Op-amp</li><li>2 &times; 10 k&Omega; resistors</li><li>1 &times; 10 nF capacitor</li><li>Dual supply (&plusmn;5 V)</li></ul>
+            </div>
+          </details>
+          <details class="example">
+            <summary><span class="example-num">12</span> Active High-Pass Filter</summary>
+            <div class="example-body">
+              <p>Passes high frequencies and attenuates low ones, with optional gain.</p>
+              <p class="formula"><strong>fc = 1/(2&pi;RinCin), gain = &minus;Rf/Rin</strong></p>
+              <h3>Schematic</h3>
+              <svg viewBox="0 0 320 160" role="img" aria-label="Active High-Pass Filter schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Rin = Rf = 10k, Cin = 10 nF (fc &amp;asymp; 1.6 kHz)</text></g></svg>
+              <h3>Code</h3>
+              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Calculates cutoff frequency and gain for the chosen parts
+const float RF = 10000, RIN = 10000, CIN = 10e-9;
+void setup() {
+  Serial.begin(9600);
+  Serial.print(&quot;Cutoff (Hz): &quot;); Serial.println(1.0 / (2 * PI * RIN * CIN));
+  Serial.print(&quot;Gain: &quot;); Serial.println(-RF / RIN);
+}
+void loop() {}</code></pre></div>
+              <h3>Parts list</h3>
+              <ul><li>1 &times; Op-amp</li><li>2 &times; 10 k&Omega; resistors</li><li>1 &times; 10 nF capacitor</li><li>Dual supply (&plusmn;5 V)</li></ul>
+            </div>
+          </details>
+      </div>
+    </div></section>
+</main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-text"><h3>Little Engineering Books</h3><p>Big Subjects. Small Books. No Waffle.</p></div>
+      <nav class="footer-nav">
+        <a href="../index.html">Home</a>
+        <a href="../books.html">Books</a>
+        <a href="../why.html">Why Little Engineering Books</a>
+        <a href="../about.html">About the Author</a>
+      </nav>
+      <div class="footer-legal"><p>&copy; 2026 Alistair Likeman. All rights reserved.</p></div>
+    </div>
+  </footer>
+  <script src="../js/main.js"></script>
+</body>
+</html>

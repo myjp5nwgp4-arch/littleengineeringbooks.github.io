@@ -246,3 +246,19 @@ img { max-width: 100%; display: block; }
   .section-header h2 { font-size: 1.75rem; }
   .cta-content h2 { font-size: 1.75rem; }
 }
+
+/* ============ WORKED EXAMPLES ============ */
+.examples { display: flex; flex-direction: column; gap: 0.75rem; max-width: 860px; margin: 0 auto; }
+.example { background: white; border: 2px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; }
+.example summary { cursor: pointer; padding: 1rem 1.25rem; font-weight: 700; font-size: 1.1rem; list-style: none; display: flex; align-items: center; gap: 0.75rem; }
+.example summary::-webkit-details-marker { display: none; }
+.example summary::after { content: "+"; margin-left: auto; font-size: 1.5rem; }
+.example[open] summary::after { content: "\2212"; }
+.example[open] summary { border-bottom: 1px solid rgba(0,0,0,0.1); }
+.example-num { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border-radius: 50%; background: #222; color: white; font-size: 0.9rem; }
+.example-body { padding: 1rem 1.25rem 1.5rem; }
+.example-body h3 { margin: 1.25rem 0 0.5rem; }
+.schematic { width: 100%; max-width: 420px; color: #222; background: #fafafa; border-radius: 8px; }
+.code-block { position: relative; }
+.code-block pre { background: #1e1e1e; color: #eee; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.85rem; }
+.copy-btn { position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.25rem 0.75rem; border: 0; border-radius: 6px; cursor: pointer; }
