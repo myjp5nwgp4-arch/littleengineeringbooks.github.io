@@ -53,7 +53,8 @@ img { max-width: 100%; display: block; }
 .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
 .hero-text h2 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1rem; }
 .hero-subtitle { font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.8; }
-.hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-buttons { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; }
+.hero-buttons .btn { width: 16rem; max-width: 100%; min-height: 3.5rem; }
 .hero-visual { text-align: center; }
 .hero-visual img { margin: 0 auto; height: auto; border-radius: 16px; box-shadow: var(--shadow-lg); }
 
@@ -240,4 +241,3 @@ img { max-width: 100%; display: block; }
   .section-header h2 { font-size: 1.75rem; }
   .cta-content h2 { font-size: 1.75rem; }
 }
-
