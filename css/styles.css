@@ -1,17 +1,17 @@
 
 :root {
-  --c1: #A733B2; --c1-dark: #7D1F87; --c1-tint: #F5E6F7;
-  --c2: #B33380; --c2-dark: #8A1F5E; --c2-tint: #FAE5EF;
-  --c3: #33B2A7; --c3-dark: #1B7F76; --c3-tint: #E1F5F3;
-  --c4: #3A6FD8; --c4-dark: #2450A8; --c4-tint: #E5EDFB;
-  --c5: #2E7FE6; --c5-dark: #1F5AB5; --c5-tint: #E3EEFB;
-  --c6: #339FE6; --c6-dark: #1F77B5; --c6-tint: #E3F2FB;
-  --c7: #33C8E6; --c7-dark: #1F8FB5; --c7-tint: #E3F8FB;
-  --c8: #33E6A4; --c8-dark: #1FB582; --c8-tint: #E3FBF3;
-  --c9: #5AE633; --c9-dark: #3FB51F; --c9-tint: #F1FBE3;
-  --c10: #A4E633; --c10-dark: #82B51F; --c10-tint: #F8FBE3;
-  --c11: #E6C833; --c11-dark: #B5A01F; --c11-tint: #FBFAE3;
-  --c12: #E68833; --c12-dark: #B56B1F; --c12-tint: #FBF3E3;
+  --c1: #B2343E; --c1-dark: #7D242B; --c1-tint: #F5E6E7;
+  --c2: #B26834; --c2-dark: #7D4924; --c2-tint: #F5ECE6;
+  --c3: #B2A734; --c3-dark: #7D7524; --c3-tint: #F5F4E6;
+  --c4: #7DB234; --c4-dark: #587D24; --c4-tint: #EFF5E6;
+  --c5: #3EB234; --c5-dark: #2B7D24; --c5-tint: #E7F5E6;
+  --c6: #34B269; --c6-dark: #247D4A; --c6-tint: #E6F5EC;
+  --c7: #33B2A7; --c7-dark: #1B7F76; --c7-tint: #E1F5F3;
+  --c8: #347DB2; --c8-dark: #24587D; --c8-tint: #E6EFF5;
+  --c9: #343EB2; --c9-dark: #242B7D; --c9-tint: #E6E7F5;
+  --c10: #6934B2; --c10-dark: #4A247D; --c10-tint: #ECE6F5;
+  --c11: #A834B2; --c11-dark: #76247D; --c11-tint: #F4E6F5;
+  --c12: #B33380; --c12-dark: #8A1F5E; --c12-tint: #FAE5EF;
   --text: #222; --text-dark: #222; --muted: #555; --white: #fff; --light: #f9f9f9; --border: #e0e0e0;
   --shadow-sm: 0 2px 4px rgba(0,0,0,.1);
   --shadow-md: 0 4px 12px rgba(0,0,0,.15);
@@ -38,6 +38,9 @@ img { max-width: 100%; display: block; }
 .accent-10 { --accent: var(--c10); --accent-dark: var(--c10-dark); --accent-tint: var(--c10-tint); }
 .accent-11 { --accent: var(--c11); --accent-dark: var(--c11-dark); --accent-tint: var(--c11-tint); }
 .accent-12 { --accent: var(--c12); --accent-dark: var(--c12-dark); --accent-tint: var(--c12-tint); }
+.accent-digital-comms { --accent: var(--c1); --accent-dark: var(--c1-dark); --accent-tint: var(--c1-tint); }
+.accent-power-supplies { --accent: var(--c2); --accent-dark: var(--c2-dark); --accent-tint: var(--c2-tint); }
+.accent-flip-flops { --accent: var(--c3); --accent-dark: var(--c3-dark); --accent-tint: var(--c3-tint); }
 
 /* Header + hamburger menu (always a hamburger) */
 .site-header { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
@@ -104,7 +107,7 @@ img { max-width: 100%; display: block; }
 .book-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); border: 2px solid var(--border); display: flex; flex-direction: column; transition: all .3s ease; }
 .book-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
 .book-cover { background: var(--accent); padding: 1.25rem; }
-.cover-frame { aspect-ratio: 1 / 1; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center; }
+.cover-frame { aspect-ratio: 1 / 1; background: transparent; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center; }
 .cover-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .cover-soon { color: var(--accent); font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 1.1rem; text-align: center; padding: 1rem; }
 .book-content { padding: 1.5rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
