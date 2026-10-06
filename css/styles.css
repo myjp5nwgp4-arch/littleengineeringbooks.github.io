@@ -4,6 +4,14 @@
   --c2: #B33380; --c2-dark: #8A1F5E; --c2-tint: #FAE5EF;
   --c3: #33B2A7; --c3-dark: #1B7F76; --c3-tint: #E1F5F3;
   --c4: #3A6FD8; --c4-dark: #2450A8; --c4-tint: #E5EDFB;
+  --c5: #2E7FE6; --c5-dark: #1F5AB5; --c5-tint: #E3EEFB;
+  --c6: #339FE6; --c6-dark: #1F77B5; --c6-tint: #E3F2FB;
+  --c7: #33C8E6; --c7-dark: #1F8FB5; --c7-tint: #E3F8FB;
+  --c8: #33E6A4; --c8-dark: #1FB582; --c8-tint: #E3FBF3;
+  --c9: #5AE633; --c9-dark: #3FB51F; --c9-tint: #F1FBE3;
+  --c10: #A4E633; --c10-dark: #82B51F; --c10-tint: #F8FBE3;
+  --c11: #E6C833; --c11-dark: #B5A01F; --c11-tint: #FBFAE3;
+  --c12: #E68833; --c12-dark: #B56B1F; --c12-tint: #FBF3E3;
   --text: #222; --text-dark: #222; --muted: #555; --white: #fff; --light: #f9f9f9; --border: #e0e0e0;
   --shadow-sm: 0 2px 4px rgba(0,0,0,.1);
   --shadow-md: 0 4px 12px rgba(0,0,0,.15);
@@ -22,6 +30,14 @@ img { max-width: 100%; display: block; }
 .accent-2 { --accent: var(--c2); --accent-dark: var(--c2-dark); --accent-tint: var(--c2-tint); }
 .accent-3 { --accent: var(--c3); --accent-dark: var(--c3-dark); --accent-tint: var(--c3-tint); }
 .accent-4 { --accent: var(--c4); --accent-dark: var(--c4-dark); --accent-tint: var(--c4-tint); }
+.accent-5 { --accent: var(--c5); --accent-dark: var(--c5-dark); --accent-tint: var(--c5-tint); }
+.accent-6 { --accent: var(--c6); --accent-dark: var(--c6-dark); --accent-tint: var(--c6-tint); }
+.accent-7 { --accent: var(--c7); --accent-dark: var(--c7-dark); --accent-tint: var(--c7-tint); }
+.accent-8 { --accent: var(--c8); --accent-dark: var(--c8-dark); --accent-tint: var(--c8-tint); }
+.accent-9 { --accent: var(--c9); --accent-dark: var(--c9-dark); --accent-tint: var(--c9-tint); }
+.accent-10 { --accent: var(--c10); --accent-dark: var(--c10-dark); --accent-tint: var(--c10-tint); }
+.accent-11 { --accent: var(--c11); --accent-dark: var(--c11-dark); --accent-tint: var(--c11-tint); }
+.accent-12 { --accent: var(--c12); --accent-dark: var(--c12-dark); --accent-tint: var(--c12-tint); }
 
 /* Header + hamburger menu (always a hamburger) */
 .site-header { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
@@ -30,13 +46,13 @@ img { max-width: 100%; display: block; }
 .logo h1 { font-size: 1.5rem; margin: 0; }
 .mobile-menu-btn { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: .5rem; }
 .mobile-menu-btn span { width: 26px; height: 3px; background: var(--text); border-radius: 2px; }
-.site-nav { display: none; position: absolute; top: 100%; right: 2rem; width: 240px; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow-lg); }
+.site-nav { display: none; position: absolute; top: 100%; right: 2rem; width: 240px; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 12px; box-sha[...]
 .site-nav.active { display: flex; }
 .site-nav a { text-decoration: none; color: var(--text); font-weight: 600; padding: .75rem 1rem; border-radius: 8px; }
 .site-nav a:hover, .site-nav a:focus { background: var(--light); outline: none; }
 
 /* Buttons */
-.btn { display: inline-flex; align-items: center; justify-content: center; padding: .75rem 1.5rem; border-radius: 8px; font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: .95rem; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all .3s ease; }
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: .75rem 1.5rem; border-radius: 8px; font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: .95rem; text[...]
 .btn:focus-visible { outline: 2px solid var(--c4); outline-offset: 2px; }
 .btn-large { padding: 1rem 2rem; font-size: 1rem; }
 .btn-primary { background: var(--c4); color: #fff; }
@@ -65,12 +81,12 @@ img { max-width: 100%; display: block; }
 .section-subtitle { text-align: center; color: var(--muted); font-size: 1.05rem; max-width: 640px; margin: 0 auto 3rem; }
 
 /* Series block (reusable: add Series Two the same way) */
-.series-label { display: block; text-align: center; font-family: 'Baloo 2', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .02em; text-transform: none; color: var(--muted); margin-bottom: .5rem; }
+.series-label { display: block; text-align: center; font-family: 'Baloo 2', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .02em; text-transform: none; color: var(--muted); margin[...]
 .series + .series { margin-top: 5rem; }
 .series-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.5rem 2.5rem; }
-.series-step { background: var(--accent-tint); border: 2px solid var(--border); border-top: 6px solid var(--accent); border-radius: 14px; padding: 1.75rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: .75rem; position: relative; box-shadow: var(--shadow-sm); transition: all .3s ease; }
+.series-step { background: var(--accent-tint); border: 2px solid var(--border); border-top: 6px solid var(--accent); border-radius: 14px; padding: 1.75rem; display: flex; flex-direction: column; a[...]
 .series-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-.step-number { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-family: 'Baloo 2', sans-serif; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.step-number { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-family: 'Baloo 2', sans-serif; font-weight: 800; display: flex; align-items: center; just[...]
 .series-step h3 { font-size: 1.3rem; }
 .series-step .step-verb { font-family: 'Baloo 2', sans-serif; font-size: .8rem; font-weight: 700; text-transform: none; letter-spacing: .02em; color: var(--accent); }
 .series-step p { color: var(--muted); font-size: .95rem; margin: 0; flex: 1; }
@@ -78,14 +94,14 @@ img { max-width: 100%; display: block; }
 .step-image { width: 180px; height: 180px; background: var(--accent-tint); flex-shrink: 0; }
 .step-image img { width: 100%; height: 100%; object-fit: contain; display: block; mix-blend-mode: multiply; }
 .step-image.book-cover-image img { object-fit: cover; mix-blend-mode: normal; }
-.series-step:not(:last-child)::after { content: '\2192'; position: absolute; right: -2.1rem; top: 50%; transform: translateY(-50%); width: 1.7rem; text-align: center; font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; }
-@media (max-width: 1100px) { .series-steps { grid-template-columns: repeat(2, 1fr); } .series-step:nth-child(2)::after { content: '\2193'; right: auto; left: 50%; top: auto; bottom: -2.2rem; transform: translateX(-50%); } .series-step:nth-child(3)::after { content: '\2192'; } .series-step:nth-child(2)::after { content: '\2199'; } }
-@media (max-width: 640px) { .series-steps { grid-template-columns: 1fr; } .series-step:not(:last-child)::after { content: '\2193'; right: auto; left: 50%; top: auto; bottom: -2.2rem; transform: translateX(-50%); } }
+.series-step:not(:last-child)::after { content: '\2192'; position: absolute; right: -2.1rem; top: 50%; transform: translateY(-50%); width: 1.7rem; text-align: center; font-size: 1.8rem; font-weigh[...]
+@media (max-width: 1100px) { .series-steps { grid-template-columns: repeat(2, 1fr); } .series-step:nth-child(2)::after { content: '\2193'; right: auto; left: 50%; top: auto; bottom: -2.2rem; trans[...]
+@media (max-width: 640px) { .series-steps { grid-template-columns: 1fr; } .series-step:not(:last-child)::after { content: '\2193'; right: auto; left: 50%; top: auto; bottom: -2.2rem; transform: tr[...]
 .series-cta { text-align: center; margin-top: 2.5rem; }
 
 /* Book tiles */
 .book-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
-.book-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); border: 2px solid var(--border); display: flex; flex-direction: column; transition: all .3s ease; }
+.book-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); border: 2px solid var(--border); display: flex; flex-direction: column; transition: all [...]
 .book-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
 .book-cover { background: var(--accent); padding: 1.25rem; }
 .cover-frame { aspect-ratio: 1 / 1; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center; }
@@ -101,7 +117,7 @@ img { max-width: 100%; display: block; }
 .page-hero-inner { display: grid; grid-template-columns: 1.2fr .8fr; gap: 2.5rem; align-items: center; }
 .page-hero h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
 .page-hero p { font-size: 1.05rem; color: var(--muted); }
-.page-hero .eyebrow { display: block; font-family: 'Baloo 2', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .02em; text-transform: none; color: var(--accent, var(--c4)); margin-bottom: .5rem; }
+.page-hero .eyebrow { display: block; font-family: 'Baloo 2', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .02em; text-transform: none; color: var(--accent, var(--c4)); margin-[...]
 .page-hero .book-cover { border-radius: 18px; max-width: 420px; margin-left: auto; width: 100%; box-shadow: var(--shadow-lg); }
 .page-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.5rem; }
 .detail-card { background: var(--white); border: 2px solid var(--border); border-radius: 16px; padding: 2rem; box-shadow: var(--shadow-sm); max-width: 800px; margin: 0 auto; }
