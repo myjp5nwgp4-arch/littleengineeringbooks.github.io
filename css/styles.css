@@ -41,12 +41,12 @@ img { max-width: 100%; display: block; }
 .btn-large { padding: 1rem 2rem; font-size: 1rem; }
 .btn-primary { background: var(--c4); color: #fff; }
 .btn-primary:hover { background: var(--c4-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.btn-secondary { background: transparent; color: var(--c4); border-color: var(--c4); }
-.btn-secondary:hover { background: var(--c4-tint); transform: translateY(-2px); }
+.btn-secondary { background: var(--c4); color: #fff; }
+.btn-secondary:hover { background: var(--c4-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 .btn-accent { background: var(--accent); color: #fff; }
 .btn-accent:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.btn-accent-outline { background: transparent; color: var(--accent); border-color: var(--accent); }
-.btn-accent-outline:hover { background: var(--accent); color: #fff; }
+.btn-accent-outline { background: var(--accent); color: #fff; }
+.btn-accent-outline:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
 /* Hero */
 .hero { background: linear-gradient(135deg, var(--c1-tint) 0%, var(--c2-tint) 25%, var(--c3-tint) 50%, var(--c4-tint) 100%); padding: 6rem 2rem; overflow: hidden; }
@@ -74,7 +74,7 @@ img { max-width: 100%; display: block; }
 .series-step h3 { font-size: 1.3rem; }
 .series-step .step-verb { font-family: 'Baloo 2', sans-serif; font-size: .8rem; font-weight: 700; text-transform: none; letter-spacing: .02em; color: var(--accent); }
 .series-step p { color: var(--muted); font-size: .95rem; margin: 0; flex: 1; }
-.series-step .btn { align-self: center; }
+.series-step .btn { align-self: stretch; }
 .step-image { width: 180px; height: 180px; background: var(--accent-tint); flex-shrink: 0; }
 .step-image img { width: 100%; height: 100%; object-fit: contain; display: block; mix-blend-mode: multiply; }
 .series-step:not(:last-child)::after { content: '\2192'; position: absolute; right: -2.1rem; top: 50%; transform: translateY(-50%); width: 1.7rem; text-align: center; font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; }
