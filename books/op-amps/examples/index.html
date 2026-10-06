@@ -40,18 +40,23 @@
     </section>
 
     <section class="section"><div class="container">
-      <div class="detail-card">
-        <h2>Getting started: what you'll need</h2>
-        <p>These examples use an Arduino to measure circuit outputs. You can follow along with an <a href="https://link.amazon/B01Hhg83L" target="_blank" rel="sponsored noopener">Arduino UNO R4</a>, a USB-C data cable, a solderless breadboard and jumper wires.</p>
-        <p><small>The Arduino link is an affiliate link. I may earn a commission from qualifying purchases, at no extra cost to you.</small></p>
-        <p>For the op-amp circuits, gather an LM358 or MCP6002 op-amp, an LM393 comparator for the comparator example, 100 nF ceramic capacitors, 10 nF capacitors, and a resistor assortment including 1 k&Omega;, 10 k&Omega; (ideally 1% matched resistors), and 1 M&Omega;. Some examples also need a small series resistor and feedback capacitor. Individual examples list their specific components.</p>
-        <p>Some circuits need a dual &plusmn;5 V supply or a suitable mid-rail reference. Check the circuit's supply requirements before wiring it; don't connect a negative op-amp output directly to an Arduino input.</p>
-        <p>New to Arduino? Start with Arduino's <a href="https://docs.arduino.cc/tutorials/uno-r4-wifi/r4-wifi-getting-started/" target="_blank" rel="noopener">UNO R4 getting-started guide</a> for setting up your board and uploading your first sketch.</p>
-      </div>
-    </div></section>
-
-    <section class="section"><div class="container">
       <div class="examples">
+      <details class="example">
+        <summary>Getting started: what you'll need</summary>
+        <div class="example-body">
+          <p>Parts are split in two. This section lists the <strong>generic kit</strong> used by every example: an Arduino, a breadboard and jumper wires. Each example below then lists the <strong>specific components</strong> for that circuit, so you only buy what you need.</p>
+          <h3>Generic kit</h3>
+          <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody>
+            <tr><td>ABX00087</td><td><a href="https://link.amazon/B01Hhg83L" target="_blank" rel="sponsored noopener">Arduino UNO R4 WiFi</a> (any MCU with an ADC also works)</td><td class="qty">1</td></tr>
+            <tr><td>USB-C data cable</td><td>USB-C to USB-A/C data cable (not charge-only)</td><td class="qty">1</td></tr>
+            <tr><td>BB830 (or equivalent)</td><td>830-point solderless breadboard</td><td class="qty">1</td></tr>
+            <tr><td>Jumper wire kit</td><td>Male-to-male breadboard jumper wires, assorted</td><td class="qty">1</td></tr>
+          </tbody></table>
+          <p><small>The Arduino link is an affiliate link. I may earn a commission from qualifying purchases, at no extra cost to you. Part numbers are suggestions; equivalent parts work.</small></p>
+          <p>Some circuits need a dual &plusmn;5 V supply or a suitable mid-rail reference. Check the circuit's supply requirements before wiring it; don't connect a negative op-amp output directly to an Arduino input.</p>
+          <p>New to Arduino? Start with Arduino's <a href="https://docs.arduino.cc/tutorials/uno-r4-wifi/r4-wifi-getting-started/" target="_blank" rel="noopener">UNO R4 getting-started guide</a> for setting up your board and uploading your first sketch.</p>
+        </div>
+      </details>
           <details class="example">
             <summary><span class="example-num">1</span> Voltage Follower (Buffer)</summary>
             <div class="example-body">
@@ -73,7 +78,7 @@ void loop() {
   delay(500);
 }</code></pre></div>
               <h3>Parts list</h3>
-              <ul><li>1 &times; Op-amp (e.g. MCP6002 or LM358))</li><li>1 &times; 100 nF decoupling capacitor</li><li>Breadboard and jumper wires</li><li>Arduino (or any MCU with an ADC)</li></ul>
+              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp, DIP-8</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
             </div>
           </details>
           <details class="example">
@@ -97,7 +102,7 @@ void loop() {
   delay(500);
 }</code></pre></div>
               <h3>Parts list</h3>
-              <ul><li>1 &times; Op-amp</li><li>1 &times; 10 k&Omega; resistor (Rf)</li><li>1 &times; 1 k&Omega; resistor (Rg)</li><li>1 &times; 100 nF capacitor</li></ul>
+              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp, DIP-8</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W (Rf)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-1K</td><td>1 k&Omega; resistor, 1%, 0.25 W (Rg)</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
             </div>
           </details>
           <details class="example">
@@ -121,7 +126,7 @@ void loop() {
   delay(500);
 }</code></pre></div>
               <h3>Parts list</h3>
-              <ul><li>1 &times; Op-amp</li><li>1 &times; 10 k&Omega; resistor (Rf)</li><li>1 &times; 1 k&Omega; resistor (Rin)</li><li>Dual supply (&plusmn;5 V)</li><li>1 &times; 100 nF capacitor</li></ul>
+              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp, DIP-8</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W (Rf)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-1K</td><td>1 k&Omega; resistor, 1%, 0.25 W (Rin)</td><td class="qty">1</td></tr><tr><td>Bench supply</td><td>Dual &plusmn;5 V supply (or split-rail module)</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
             </div>
           </details>
           <details class="example">
@@ -146,7 +151,7 @@ void loop() {
   delay(500);
 }</code></pre></div>
               <h3>Parts list</h3>
-              <ul><li>1 &times; Op-amp</li><li>3 &times; 10 k&Omega; resistors</li><li>Dual supply (&plusmn;5 V)</li><li>1 &times; 100 nF capacitor</li></ul>
+              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp, DIP-8</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">3</td></tr><tr><td>Bench supply</td><td>Dual &plusmn;5 V supply (or split-rail module)</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
             </div>
           </details>
           <details class="example">
@@ -171,13 +176,13 @@ void loop() {
   delay(500);
 }</code></pre></div>
               <h3>Parts list</h3>
-              <ul><li>1 &times; Op-amp</li><li>4 &times; 10 k&Omega; resistors (1% or better)</li><li>1 &times; 100 nF capacitor</li></ul>
+              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp, DIP-8</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">4</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
             </div>
           </details>
           <details class="example">
             <summary><span class="example-num">6</span> Comparator</summary>
             <div class="example-body">
-              <p>Compares two voltages and swings the output fully high or low.</p>
+              <p>Compares two voltages and swings the output fully high or low. A standard op-amp (the same MCP6021) stands in for a dedicated comparator chip: it isn&rsquo;t ideal, since it is slower to recover from saturation and has no built-in hysteresis, but it works.</p>
               <p class="formula"><strong>Vout = high if V+ &gt; V&minus;, otherwise low</strong></p>
               <h3>Schematic</h3>
               <svg viewBox="0 0 320 160" role="img" aria-label="Comparator schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Reference set by a divider</text></g></svg>
@@ -190,7 +195,7 @@ void loop() {
   delay(500);
 }</code></pre></div>
               <h3>Parts list</h3>
-              <ul><li>1 &times; Comparator (e.g. LM393) or op-amp</li><li>2 &times; 10 k&Omega; resistors (reference divider)</li><li>1 &times; 10 k&Omega; pull-up resistor</li><li>1 &times; 100 nF capacitor</li></ul>
+              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp, DIP-8 (used as a comparator, not ideal but it works)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W (reference divider)</td><td class="qty">2</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W (pull-up)</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
             </div>
           </details>
           <details class="example">
@@ -210,7 +215,7 @@ void loop() {
   if (now != last) { edges++; last = now; Serial.println(edges); }
 }</code></pre></div>
               <h3>Parts list</h3>
-              <ul><li>1 &times; Op-amp</li><li>2 &times; 10 k&Omega; resistors</li><li>1 &times; 100 nF capacitor</li></ul>
+              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp, DIP-8</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">2</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
             </div>
           </details>
           <details class="example">
@@ -229,7 +234,7 @@ void loop() {
   delay(200);
 }</code></pre></div>
               <h3>Parts list</h3>
-              <ul><li>1 &times; Op-amp</li><li>2 &times; 10 k&Omega; resistors</li><li>1 &times; 100 nF capacitor</li></ul>
+              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp, DIP-8</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">2</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
             </div>
           </details>
           <details class="example">
@@ -252,7 +257,7 @@ void loop() {
   delay(100);
 }</code></pre></div>
               <h3>Parts list</h3>
-              <ul><li>1 &times; Op-amp</li><li>1 &times; 10 k&Omega; resistor</li><li>1 &times; 100 nF capacitor (Cf)</li><li>1 &times; 1 M&Omega; resistor across Cf (optional, limits drift)</li><li>Dual supply (&plusmn;5 V)</li></ul>
+              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp, DIP-8</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (Cf)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-1M</td><td>1 M&Omega; resistor, 1%, 0.25 W (optional, across Cf to limit drift)</td><td class="qty">1</td></tr><tr><td>Bench supply</td><td>Dual &plusmn;5 V supply (or split-rail module)</td><td class="qty">1</td></tr></tbody></table>
             </div>
           </details>
           <details class="example">
@@ -275,7 +280,7 @@ void loop() {
   prevV = v; prevT = t; delay(10);
 }</code></pre></div>
               <h3>Parts list</h3>
-              <ul><li>1 &times; Op-amp</li><li>1 &times; 100 nF capacitor (input)</li><li>1 &times; 10 k&Omega; resistor (feedback)</li><li>Small series resistor and feedback capacitor for stability</li><li>Dual supply (&plusmn;5 V)</li></ul>
+              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp, DIP-8</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (input)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W (feedback)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-100R</td><td>100 &Omega; series resistor, 1%, 0.25 W (series, for stability)</td><td class="qty">1</td></tr><tr><td>C320C103K5R5TA</td><td>10 nF ceramic capacitor, 50 V (feedback, for stability)</td><td class="qty">1</td></tr><tr><td>Bench supply</td><td>Dual &plusmn;5 V supply (or split-rail module)</td><td class="qty">1</td></tr></tbody></table>
             </div>
           </details>
           <details class="example">
@@ -295,7 +300,7 @@ void setup() {
 }
 void loop() {}</code></pre></div>
               <h3>Parts list</h3>
-              <ul><li>1 &times; Op-amp</li><li>2 &times; 10 k&Omega; resistors</li><li>1 &times; 10 nF capacitor</li><li>Dual supply (&plusmn;5 V)</li></ul>
+              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp, DIP-8</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">2</td></tr><tr><td>C320C103K5R5TA</td><td>10 nF ceramic capacitor, 50 V</td><td class="qty">1</td></tr><tr><td>Bench supply</td><td>Dual &plusmn;5 V supply (or split-rail module)</td><td class="qty">1</td></tr></tbody></table>
             </div>
           </details>
           <details class="example">
@@ -315,7 +320,7 @@ void setup() {
 }
 void loop() {}</code></pre></div>
               <h3>Parts list</h3>
-              <ul><li>1 &times; Op-amp</li><li>2 &times; 10 k&Omega; resistors</li><li>1 &times; 10 nF capacitor</li><li>Dual supply (&plusmn;5 V)</li></ul>
+              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp, DIP-8</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">2</td></tr><tr><td>C320C103K5R5TA</td><td>10 nF ceramic capacitor, 50 V</td><td class="qty">1</td></tr><tr><td>Bench supply</td><td>Dual &plusmn;5 V supply (or split-rail module)</td><td class="qty">1</td></tr></tbody></table>
             </div>
           </details>
       </div>
