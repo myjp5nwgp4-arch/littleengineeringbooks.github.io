@@ -38,6 +38,9 @@ img { max-width: 100%; display: block; }
 .accent-10 { --accent: var(--c10); --accent-dark: var(--c10-dark); --accent-tint: var(--c10-tint); }
 .accent-11 { --accent: var(--c11); --accent-dark: var(--c11-dark); --accent-tint: var(--c11-tint); }
 .accent-12 { --accent: var(--c12); --accent-dark: var(--c12-dark); --accent-tint: var(--c12-tint); }
+.accent-digital-comms { --accent: #B2343E; --accent-dark: #7D242B; --accent-tint: #F5E6E7; }
+.accent-power-supplies { --accent: #B26834; --accent-dark: #7D4924; --accent-tint: #F5ECE6; }
+.accent-flip-flops { --accent: #B2A734; --accent-dark: #7D7524; --accent-tint: #F5F4E6; }
 
 /* Header + hamburger menu (always a hamburger) */
 .site-header { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
