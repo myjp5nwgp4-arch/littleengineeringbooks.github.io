@@ -192,7 +192,18 @@ void loop()
         <summary><span class="example-num">1</span> Non-inverting amplifier demo</summary>
         <div class="example-body">
           <h3>Breadboard schematic</h3>
-          <div class="img-placeholder" role="img" aria-label="Placeholder for breadboard schematic" style="background:#fafafa;border:2px dashed #999;border-radius:8px;padding:3rem 1rem;text-align:center;color:#555;max-width:420px;">Breadboard schematic coming soon</div>
+          <img src="/images/Non%20Inverting%20Amplifier%20Pot%20Gain.png" alt="Breadboard and schematic for the non-inverting amplifier with a potentiometer setting the gain" class="schematic" style="height:auto;">
+          <h3>Pinout wiring</h3>
+          <p>MCP6021 pins are numbered 1 to 8 anticlockwise from the notch or dot. The 10k pot pins are 1 (one end), 2 (wiper) and 3 (unused).</p>
+          <table class="bom"><thead><tr><th>From</th><th>To</th><th>Purpose</th></tr></thead><tbody>
+            <tr><td>5V</td><td>MCP6021 pin 7</td><td>Positive supply</td></tr>
+            <tr><td>0V (GND)</td><td>MCP6021 pin 4</td><td>Negative supply / ground</td></tr>
+            <tr><td>Arduino A0</td><td>MCP6021 pin 3</td><td>1 V from the Arduino DAC to the non-inverting input</td></tr>
+            <tr><td>MCP6021 pin 6</td><td>Arduino A1</td><td>Op-amp output, read by the ADC</td></tr>
+            <tr><td>MCP6021 pin 6</td><td>10k pot pin 2 (wiper)</td><td>Feedback: gives adjustable resistance of 0 to 10k (Rf)</td></tr>
+            <tr><td>10k pot pin 1</td><td>MCP6021 pin 2</td><td>Inverting input</td></tr>
+            <tr><td>10k pot pin 1</td><td>1k resistor, other side to GND</td><td>R1 to ground</td></tr>
+          </tbody></table>
           <h3>What we're doing</h3>
           <p>The Arduino uses its digital-to-analog converter (DAC) to output 1 V on pin <code>A0</code>. (Curious how DACs work? See the converters book!) That 1 V goes into the non-inverting (+) input of the op-amp.</p>
           <p>The gain is set by the ratio of the resistors: <strong>Gain = 1 + Rf/R1</strong>, where R1 is 1 k&Omega; and Rf is the 10 k&Omega; potentiometer. With the pot at 0 &Omega; the gain is 1, and with the pot at 10 k&Omega; the gain is 11 (1 + 10k/1k). Rounding for simplicity, you'd expect to see roughly 1 V up to about 10 V on the output.</p>
