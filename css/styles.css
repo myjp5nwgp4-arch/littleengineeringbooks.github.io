@@ -279,6 +279,11 @@ img { max-width: 100%; display: block; }
 .example-body { padding: 1rem 1.25rem 1.5rem; }
 .example-body h3 { margin: 1.25rem 0 0.5rem; }
 .schematic { width: 100%; max-width: 420px; color: #222; background: #fafafa; border-radius: 8px; }
+.op-amps-worked-examples .examples { max-width: 1100px; }
+.schematic-figure { margin: 0 auto 1rem; }
+.schematic-figure a { display: block; }
+.schematic-figure .schematic { width: 100%; max-width: 100%; height: auto; margin: 0 auto; }
+.schematic-figure figcaption { color: var(--muted); font-size: .9rem; margin-top: .35rem; text-align: center; }
 .code-block { position: relative; }
 .code-block pre { background: #1e1e1e; color: #eee; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.85rem; }
 .copy-btn { position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.25rem 0.75rem; border: 0; border-radius: 6px; cursor: pointer; }
