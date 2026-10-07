@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body class="accent-12">
+<body class="accent-12 op-amps-worked-examples">
   <header class="site-header">
     <div class="container header-inner">
       <div class="logo"><a href="/"><h1>Little Engineering Books</h1></a></div>
@@ -47,7 +47,7 @@
           <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody>
             <tr><td>ABX00087</td><td><a href="https://link.amazon/B01Hhg83L" target="_blank" rel="sponsored noopener">Arduino UNO R4 WiFi</a> (needs a DAC and ADC, as the UNO R4 has)</td><td class="qty">1</td></tr>
             <tr><td>USB-C data cable</td><td>USB-C to USB-A/C data cable (not charge-only)</td><td class="qty">1</td></tr>
-            <tr><td>BB830 (or equivalent)</td><td>830-point solderless breadboard</td><td class="qty">1</td></tr>
+            <tr><td>BB830 (or equivalent)</td><td><a href="https://link.amazon/B0fh213lS" target="_blank" rel="sponsored noopener">830-point solderless breadboard</a></td><td class="qty">1</td></tr>
             <tr><td>Jumper wire kit</td><td>Male-to-male breadboard jumper wires, assorted</td><td class="qty">1</td></tr>
             <tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr>
             <tr><td>1k resistor</td><td>1 k&Omega; resistor (R1). Included in the Elegoo starter kit below</td><td class="qty">1</td></tr>
@@ -192,7 +192,12 @@ void loop()
         <summary><span class="example-num">1</span> Non-inverting amplifier demo</summary>
         <div class="example-body">
           <h3>Breadboard schematic</h3>
-          <img src="/images/Non%20Inverting%20Amplifier%20Pot%20Gain.png" alt="Breadboard and schematic for the non-inverting amplifier with a potentiometer setting the gain" class="schematic" style="height:auto;">
+          <figure class="schematic-figure">
+            <a href="/images/Non%20Inverting%20Amplifier%20Pot%20Gain.png" target="_blank" rel="noopener" aria-label="Open the full-size breadboard schematic in a new tab">
+              <img src="/images/Non%20Inverting%20Amplifier%20Pot%20Gain.png" alt="Breadboard and schematic for the non-inverting amplifier with a potentiometer setting the gain" class="schematic">
+            </a>
+            <figcaption>Click the image to view it full size.</figcaption>
+          </figure>
           <h3>Pinout wiring</h3>
           <p>MCP6021 pins are numbered 1 to 8 anticlockwise from the notch or dot. The 10k pot pins are 1 (one end), 2 (wiper) and 3 (unused).</p>
           <table class="bom"><thead><tr><th>From</th><th>To</th><th>Purpose</th></tr></thead><tbody>
