@@ -42,286 +42,172 @@
       <details class="example">
         <summary>Getting started: what you'll need</summary>
         <div class="example-body">
-          <p>Parts are split in two. This section lists the <strong>generic kit</strong> used by every example: an Arduino, a breadboard and jumper wires. Each example below then lists the <strong>specific components</strong> for that circuit, so you only buy what you need.</p>
-          <h3>Generic kit</h3>
+          <p>This section lists everything you need for the worked examples below. Equivalent parts will work.</p>
+          <h3>Equipment list</h3>
           <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody>
-            <tr><td>ABX00087</td><td><a href="https://link.amazon/B01Hhg83L" target="_blank" rel="sponsored noopener">Arduino UNO R4 WiFi</a> (any MCU with an ADC also works)</td><td class="qty">1</td></tr>
+            <tr><td>ABX00087</td><td><a href="https://link.amazon/B01Hhg83L" target="_blank" rel="sponsored noopener">Arduino UNO R4 WiFi</a> (needs a DAC and ADC, as the UNO R4 has)</td><td class="qty">1</td></tr>
             <tr><td>USB-C data cable</td><td>USB-C to USB-A/C data cable (not charge-only)</td><td class="qty">1</td></tr>
             <tr><td>BB830 (or equivalent)</td><td>830-point solderless breadboard</td><td class="qty">1</td></tr>
             <tr><td>Jumper wire kit</td><td>Male-to-male breadboard jumper wires, assorted</td><td class="qty">1</td></tr>
+            <tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr>
+            <tr><td>1k resistor</td><td>1 k&Omega; resistor (R1). Included in the Elegoo starter kit below</td><td class="qty">1</td></tr>
+            <tr><td>10k potentiometer</td><td><a href="https://link.amazon/B07gI45v8" target="_blank" rel="sponsored noopener">10 k&Omega; slider potentiometer</a> (Rf). A 10k pot is also included in the Elegoo starter kit below</td><td class="qty">1</td></tr>
           </tbody></table>
-          <p>New to electronics? As an alternative to the UNO above, <a href="https://link.amazon/B0frvkQ8a" target="_blank" rel="sponsored noopener">this electronics starter kit</a> includes everything in this generic kit and much more to start exploring electronics. It doesn't include an op-amp, which you'll need to buy separately.</p>
+          <p>New to electronics? <a href="https://link.amazon/B0frvkQ8a" target="_blank" rel="sponsored noopener">This Elegoo electronics starter kit</a> includes the Arduino-compatible board, breadboard, jumper wires, 1 k&Omega; resistor and 10 k&Omega; potentiometer, and much more. It doesn't include an op-amp, which you'll need to buy separately.</p>
           <p><small>The Amazon links are affiliate links. I may earn a commission from qualifying purchases, at no extra cost to you. Part numbers are suggestions; equivalent parts work.</small></p>
-          <p>Some circuits need a dual &plusmn;5 V supply or a suitable mid-rail reference. Check the circuit's supply requirements before wiring it; don't connect a negative op-amp output directly to an Arduino input.</p>
           <p>New to Arduino? Start with Arduino's <a href="https://docs.arduino.cc/tutorials/uno-r4-wifi/r4-wifi-getting-started/" target="_blank" rel="noopener">UNO R4 getting-started guide</a> for setting up your board and uploading your first sketch.</p>
         </div>
       </details>
-          <details class="example">
-            <summary><span class="example-num">1</span> Voltage Follower (Buffer)</summary>
-            <div class="example-body">
-              <p>Gain of 1. Passes Vin to Vout while isolating the source from the load.</p>
-              <p class="formula"><strong>Vout = Vin</strong></p>
-              <h3>Schematic</h3>
-              <svg viewBox="0 0 320 160" role="img" aria-label="Voltage Follower (Buffer) schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Output wired directly to the inverting input</text></g></svg>
-              <h3>Code</h3>
-              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Reads Vout on A0 and compares it with the expected value
-const float VREF = 5.0;      // ADC reference (V)
-const float VIN  = 1.0;      // test input voltage (V)
+      <details class="example">
+        <summary>Arduino Code</summary>
+        <div class="example-body">
+          <p>This sketch outputs about 1 V on <code>A0</code> using the UNO R4's digital-to-analog converter, then reads the op-amp output on <code>A1</code> with the analog-to-digital converter and shows it on the built-in LED matrix. Use the Copy button, paste it into the Arduino IDE and upload.</p>
+          <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>#include "Arduino_LED_Matrix.h"
+// Hosted on https://LittleEngineeringBooks.com for educational purposes.
 
-void setup() { Serial.begin(9600); }
-void loop() {
-  float vout = analogRead(A0) * VREF / 1023.0;
-  float expected = VIN;
-  Serial.print(&quot;Measured: &quot;); Serial.print(vout, 3);
-  Serial.print(&quot; V  Expected: &quot;); Serial.println(expected, 3);
-  delay(500);
-}</code></pre></div>
-              <h3>Parts list</h3>
-              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
-            </div>
-          </details>
-          <details class="example">
-            <summary><span class="example-num">2</span> Non-Inverting Amplifier</summary>
-            <div class="example-body">
-              <p>Amplifies the input without flipping its sign.</p>
-              <p class="formula"><strong>Vout = Vin &times; (1 + Rf/Rg)</strong></p>
-              <h3>Schematic</h3>
-              <svg viewBox="0 0 320 160" role="img" aria-label="Non-Inverting Amplifier schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Rf = 10k, Rg = 1k</text></g></svg>
-              <h3>Code</h3>
-              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Reads Vout on A0 and compares it with the expected value
-const float VREF = 5.0;      // ADC reference (V)
-const float VIN  = 1.0;      // test input voltage (V)
-const float RF = 10000, RG = 1000;
-void setup() { Serial.begin(9600); }
-void loop() {
-  float vout = analogRead(A0) * VREF / 1023.0;
-  float expected = VIN * (1.0 + RF / RG);
-  Serial.print(&quot;Measured: &quot;); Serial.print(vout, 3);
-  Serial.print(&quot; V  Expected: &quot;); Serial.println(expected, 3);
-  delay(500);
-}</code></pre></div>
-              <h3>Parts list</h3>
-              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W (Rf)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-1K</td><td>1 k&Omega; resistor, 1%, 0.25 W (Rg)</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
-            </div>
-          </details>
-          <details class="example">
-            <summary><span class="example-num">3</span> Inverting Amplifier</summary>
-            <div class="example-body">
-              <p>Amplifies and inverts the input. Needs a negative supply or a mid-rail reference for single-supply use.</p>
-              <p class="formula"><strong>Vout = &minus;Vin &times; (Rf/Rin)</strong></p>
-              <h3>Schematic</h3>
-              <svg viewBox="0 0 320 160" role="img" aria-label="Inverting Amplifier schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Rf = 10k, Rin = 1k</text></g></svg>
-              <h3>Code</h3>
-              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Reads Vout on A0 and compares it with the expected value
-const float VREF = 5.0;      // ADC reference (V)
-const float VIN  = 1.0;      // test input voltage (V)
-const float RF = 10000, RIN = 1000;
-void setup() { Serial.begin(9600); }
-void loop() {
-  float vout = analogRead(A0) * VREF / 1023.0;
-  float expected = -VIN * (RF / RIN);
-  Serial.print(&quot;Measured: &quot;); Serial.print(vout, 3);
-  Serial.print(&quot; V  Expected: &quot;); Serial.println(expected, 3);
-  delay(500);
-}</code></pre></div>
-              <h3>Parts list</h3>
-              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W (Rf)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-1K</td><td>1 k&Omega; resistor, 1%, 0.25 W (Rin)</td><td class="qty">1</td></tr><tr><td>Bench supply</td><td>Dual &plusmn;5 V supply (or split-rail module)</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
-            </div>
-          </details>
-          <details class="example">
-            <summary><span class="example-num">4</span> Summing Amplifier (Adder)</summary>
-            <div class="example-body">
-              <p>Adds several inputs together, each with its own weighting.</p>
-              <p class="formula"><strong>Vout = &minus;Rf &times; (V1/R1 + V2/R2)</strong></p>
-              <h3>Schematic</h3>
-              <svg viewBox="0 0 320 160" role="img" aria-label="Summing Amplifier (Adder) schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Rf = R1 = R2 = 10k</text></g></svg>
-              <h3>Code</h3>
-              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Reads Vout on A0 and compares it with the expected value
-const float VREF = 5.0;      // ADC reference (V)
-const float VIN  = 1.0;      // test input voltage (V)
-const float RF = 10000, R1 = 10000, R2 = 10000;
-const float V1 = 1.0, V2 = 0.5;
-void setup() { Serial.begin(9600); }
-void loop() {
-  float vout = analogRead(A0) * VREF / 1023.0;
-  float expected = -RF * (V1 / R1 + V2 / R2);
-  Serial.print(&quot;Measured: &quot;); Serial.print(vout, 3);
-  Serial.print(&quot; V  Expected: &quot;); Serial.println(expected, 3);
-  delay(500);
-}</code></pre></div>
-              <h3>Parts list</h3>
-              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">3</td></tr><tr><td>Bench supply</td><td>Dual &plusmn;5 V supply (or split-rail module)</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
-            </div>
-          </details>
-          <details class="example">
-            <summary><span class="example-num">5</span> Differential Amplifier</summary>
-            <div class="example-body">
-              <p>Amplifies the difference between two inputs and rejects what they share.</p>
-              <p class="formula"><strong>Vout = (V2 &minus; V1) &times; (Rf/R1)</strong></p>
-              <h3>Schematic</h3>
-              <svg viewBox="0 0 320 160" role="img" aria-label="Differential Amplifier schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">All four resistors matched (10k)</text></g></svg>
-              <h3>Code</h3>
-              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Reads Vout on A0 and compares it with the expected value
-const float VREF = 5.0;      // ADC reference (V)
-const float VIN  = 1.0;      // test input voltage (V)
-const float RF = 10000, R1 = 10000;
-const float V1 = 1.0, V2 = 1.5;
-void setup() { Serial.begin(9600); }
-void loop() {
-  float vout = analogRead(A0) * VREF / 1023.0;
-  float expected = (V2 - V1) * (RF / R1);
-  Serial.print(&quot;Measured: &quot;); Serial.print(vout, 3);
-  Serial.print(&quot; V  Expected: &quot;); Serial.println(expected, 3);
-  delay(500);
-}</code></pre></div>
-              <h3>Parts list</h3>
-              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">4</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
-            </div>
-          </details>
-          <details class="example">
-            <summary><span class="example-num">6</span> Comparator</summary>
-            <div class="example-body">
-              <p>Compares two voltages and swings the output fully high or low. A standard op-amp (the same MCP6021) stands in for a dedicated comparator chip: it isn&rsquo;t ideal, since it is slower to recover from saturation and has no built-in hysteresis, but it works.</p>
-              <p class="formula"><strong>Vout = high if V+ &gt; V&minus;, otherwise low</strong></p>
-              <h3>Schematic</h3>
-              <svg viewBox="0 0 320 160" role="img" aria-label="Comparator schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Reference set by a divider</text></g></svg>
-              <h3>Code</h3>
-              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Reads the comparator output on D2 and reports its state
-const int OUT_PIN = 2;
-void setup() { Serial.begin(9600); pinMode(OUT_PIN, INPUT); }
-void loop() {
-  Serial.println(digitalRead(OUT_PIN) ? &quot;Input ABOVE reference&quot; : &quot;Input BELOW reference&quot;);
-  delay(500);
-}</code></pre></div>
-              <h3>Parts list</h3>
-              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills) (used as a comparator, not ideal but it works)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W (reference divider)</td><td class="qty">2</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W (pull-up)</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
-            </div>
-          </details>
-          <details class="example">
-            <summary><span class="example-num">7</span> Schmitt Trigger</summary>
-            <div class="example-body">
-              <p>A comparator with hysteresis, so noisy inputs don't cause chattering.</p>
-              <p class="formula"><strong>Thresholds: Vth = Vout &times; R1/(R1+R2)</strong></p>
-              <h3>Schematic</h3>
-              <svg viewBox="0 0 320 160" role="img" aria-label="Schmitt Trigger schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">R1 = 10k, R2 = 10k (positive feedback)</text></g></svg>
-              <h3>Code</h3>
-              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Counts output transitions to show noise rejection
-const int OUT_PIN = 2;
-int last = LOW; unsigned long edges = 0;
-void setup() { Serial.begin(9600); pinMode(OUT_PIN, INPUT); }
-void loop() {
-  int now = digitalRead(OUT_PIN);
-  if (now != last) { edges++; last = now; Serial.println(edges); }
-}</code></pre></div>
-              <h3>Parts list</h3>
-              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">2</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
-            </div>
-          </details>
-          <details class="example">
-            <summary><span class="example-num">8</span> Inverting Schmitt Trigger</summary>
-            <div class="example-body">
-              <p>Hysteresis comparator whose output is the opposite of the input.</p>
-              <p class="formula"><strong>Thresholds: &plusmn;Vsat &times; R1/(R1+R2)</strong></p>
-              <h3>Schematic</h3>
-              <svg viewBox="0 0 320 160" role="img" aria-label="Inverting Schmitt Trigger schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Input to inverting pin, feedback to non-inverting</text></g></svg>
-              <h3>Code</h3>
-              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Prints the output state; it flips when the input crosses either threshold
-const int OUT_PIN = 2;
-void setup() { Serial.begin(9600); pinMode(OUT_PIN, INPUT); }
-void loop() {
-  Serial.println(digitalRead(OUT_PIN) ? &quot;HIGH (input low)&quot; : &quot;LOW (input high)&quot;);
-  delay(200);
-}</code></pre></div>
-              <h3>Parts list</h3>
-              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">2</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (decoupling)</td><td class="qty">1</td></tr></tbody></table>
-            </div>
-          </details>
-          <details class="example">
-            <summary><span class="example-num">9</span> Integrator</summary>
-            <div class="example-body">
-              <p>Output is the running total (integral) of the input over time.</p>
-              <p class="formula"><strong>Vout = &minus;(1/RC) &int; Vin dt</strong></p>
-              <h3>Schematic</h3>
-              <svg viewBox="0 0 320 160" role="img" aria-label="Integrator schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">R = 10k, C = 100 nF</text></g></svg>
-              <h3>Code</h3>
-              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Integrates a constant input in software to compare with the measured Vout
-const float VREF = 5.0, VIN = 0.1, R = 10000, C = 100e-9;
-unsigned long t0;
-void setup() { Serial.begin(9600); t0 = millis(); }
-void loop() {
-  float t = (millis() - t0) / 1000.0;
-  float vout = analogRead(A0) * VREF / 1023.0;
-  Serial.print(&quot;Measured: &quot;); Serial.print(vout, 3);
-  Serial.print(&quot; V  Expected: &quot;); Serial.println(-VIN * t / (R * C), 3);
+// Create an object to control the built-in LED matrix
+ArduinoLEDMatrix matrix;
+
+// 8 rows x 12 columns display buffer
+uint8_t frame[8][12];
+
+// 3x5 font for digits 0-9
+const uint8_t digits[10][5] = {
+  {0b111, 0b101, 0b101, 0b101, 0b111}, // 0
+  {0b010, 0b110, 0b010, 0b010, 0b111}, // 1
+  {0b111, 0b001, 0b111, 0b100, 0b111}, // 2
+  {0b111, 0b001, 0b111, 0b001, 0b111}, // 3
+  {0b101, 0b101, 0b111, 0b001, 0b001}, // 4
+  {0b111, 0b100, 0b111, 0b001, 0b111}, // 5
+  {0b111, 0b100, 0b111, 0b101, 0b111}, // 6
+  {0b111, 0b001, 0b010, 0b010, 0b010}, // 7
+  {0b111, 0b101, 0b111, 0b101, 0b111}, // 8
+  {0b111, 0b101, 0b111, 0b001, 0b111}  // 9
+};
+
+// --------------------------------------------------
+// Clear display buffer
+// --------------------------------------------------
+void clearFrame()
+{
+  memset(frame, 0, sizeof(frame));
+}
+
+// --------------------------------------------------
+// Draw a digit at a specified X position
+// --------------------------------------------------
+void drawDigit(int digit, int xOffset)
+{
+  if (digit &lt; 0 || digit &gt; 9) return;
+
+  for (int row = 0; row &lt; 5; row++)
+  {
+    for (int col = 0; col &lt; 3; col++)
+    {
+      if (digits[digit][row] &amp; (1 &lt;&lt; (2 - col)))
+      {
+        frame[row + 1][xOffset + col] = 1;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Draw decimal point
+// --------------------------------------------------
+void drawDecimalPoint(int x, int y)
+{
+  frame[y][x] = 1;
+}
+
+// --------------------------------------------------
+// Setup
+// --------------------------------------------------
+void setup()
+{
+  matrix.begin();
+
+  // ADC: 10-bit (0-1023)
+  analogReadResolution(10);
+
+  // DAC: 12-bit (0-4095)
+  analogWriteResolution(12);
+
+  // Output approximately 1.0V on A0
+  //
+  // DAC Value = (1.0 / 5.0) * 4095
+  //           ≈ 819
+  analogWrite(A0, 840);
+
+  Serial.begin(115200);
+}
+
+// --------------------------------------------------
+// Main Loop
+// --------------------------------------------------
+void loop()
+{
+  // Take 16 ADC readings and average them
+  long total = 0;
+
+  for (int i = 0; i &lt; 16; i++)
+  {
+    total += analogRead(A1);
+  }
+
+  int adc = total / 16;
+
+  // Convert ADC reading to voltage
+  float voltage = adc * (5.0f / 1023.0f);
+
+  // Extract digits for X.X display
+  int whole = (int)voltage;
+  int decimal = ((int)(voltage * 10)) % 10;
+
+  // Clear the display
+  clearFrame();
+
+  // Display voltage as X.X
+  drawDigit(whole, 0);
+  drawDecimalPoint(4, 5);
+  drawDigit(decimal, 6);
+
+  // Update LED matrix
+  matrix.renderBitmap(frame, 8, 12);
+
+  // Debug output
+  Serial.print("ADC = ");
+  Serial.print(adc);
+  Serial.print("   Voltage = ");
+  Serial.println(voltage, 2);
+
   delay(100);
-}</code></pre></div>
-              <h3>Parts list</h3>
-              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (Cf)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-1M</td><td>1 M&Omega; resistor, 1%, 0.25 W (optional, across Cf to limit drift)</td><td class="qty">1</td></tr><tr><td>Bench supply</td><td>Dual &plusmn;5 V supply (or split-rail module)</td><td class="qty">1</td></tr></tbody></table>
-            </div>
-          </details>
-          <details class="example">
-            <summary><span class="example-num">10</span> Differentiator</summary>
-            <div class="example-body">
-              <p>Output is proportional to how fast the input changes.</p>
-              <p class="formula"><strong>Vout = &minus;RC &times; dVin/dt</strong></p>
-              <h3>Schematic</h3>
-              <svg viewBox="0 0 320 160" role="img" aria-label="Differentiator schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">R = 10k, C = 100 nF</text></g></svg>
-              <h3>Code</h3>
-              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Estimates the input slope and prints the expected Vout
-const float R = 10000, C = 100e-9;
-float prevV = 0; unsigned long prevT = 0;
-void setup() { Serial.begin(9600); }
-void loop() {
-  unsigned long t = micros();
-  float v = analogRead(A1) * 5.0 / 1023.0;   // Vin on A1
-  float dt = (t - prevT) / 1e6;
-  if (prevT) Serial.println(-R * C * (v - prevV) / dt, 3);
-  prevV = v; prevT = t; delay(10);
-}</code></pre></div>
-              <h3>Parts list</h3>
-              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr><tr><td>C320C104K5R5TA</td><td>100 nF ceramic capacitor, 50 V (input)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W (feedback)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-100R</td><td>100 &Omega; series resistor, 1%, 0.25 W (series, for stability)</td><td class="qty">1</td></tr><tr><td>C320C103K5R5TA</td><td>10 nF ceramic capacitor, 50 V (feedback, for stability)</td><td class="qty">1</td></tr><tr><td>Bench supply</td><td>Dual &plusmn;5 V supply (or split-rail module)</td><td class="qty">1</td></tr></tbody></table>
-            </div>
-          </details>
-          <details class="example">
-            <summary><span class="example-num">11</span> Active Low-Pass Filter</summary>
-            <div class="example-body">
-              <p>Passes low frequencies and attenuates high ones, with optional gain.</p>
-              <p class="formula"><strong>fc = 1/(2&pi;RfCf), gain = &minus;Rf/Rin</strong></p>
-              <h3>Schematic</h3>
-              <svg viewBox="0 0 320 160" role="img" aria-label="Active Low-Pass Filter schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Rf = Rin = 10k, Cf = 10 nF (fc &amp;asymp; 1.6 kHz)</text></g></svg>
-              <h3>Code</h3>
-              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Calculates cutoff frequency and gain for the chosen parts
-const float RF = 10000, RIN = 10000, CF = 10e-9;
-void setup() {
-  Serial.begin(9600);
-  Serial.print(&quot;Cutoff (Hz): &quot;); Serial.println(1.0 / (2 * PI * RF * CF));
-  Serial.print(&quot;Gain: &quot;); Serial.println(-RF / RIN);
 }
-void loop() {}</code></pre></div>
-              <h3>Parts list</h3>
-              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">2</td></tr><tr><td>C320C103K5R5TA</td><td>10 nF ceramic capacitor, 50 V</td><td class="qty">1</td></tr><tr><td>Bench supply</td><td>Dual &plusmn;5 V supply (or split-rail module)</td><td class="qty">1</td></tr></tbody></table>
-            </div>
-          </details>
-          <details class="example">
-            <summary><span class="example-num">12</span> Active High-Pass Filter</summary>
-            <div class="example-body">
-              <p>Passes high frequencies and attenuates low ones, with optional gain.</p>
-              <p class="formula"><strong>fc = 1/(2&pi;RinCin), gain = &minus;Rf/Rin</strong></p>
-              <h3>Schematic</h3>
-              <svg viewBox="0 0 320 160" role="img" aria-label="Active High-Pass Filter schematic" class="schematic"><g fill="none" stroke="currentColor" stroke-width="2"><polygon points="140,30 140,130 230,80"/><line x1="230" y1="80" x2="290" y2="80"/><line x1="20" y1="50" x2="140" y2="50"/><line x1="100" y1="110" x2="140" y2="110"/><path d="M260 80 V145 H110 V110"/></g><g fill="currentColor" font-size="13" font-family="sans-serif"><text x="146" y="55">&minus;</text><text x="146" y="115">+</text><text x="22" y="42">Vin</text><text x="262" y="72">Vout</text><text x="150" y="158" font-size="11">Rin = Rf = 10k, Cin = 10 nF (fc &amp;asymp; 1.6 kHz)</text></g></svg>
-              <h3>Code</h3>
-              <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Calculates cutoff frequency and gain for the chosen parts
-const float RF = 10000, RIN = 10000, CIN = 10e-9;
-void setup() {
-  Serial.begin(9600);
-  Serial.print(&quot;Cutoff (Hz): &quot;); Serial.println(1.0 / (2 * PI * RIN * CIN));
-  Serial.print(&quot;Gain: &quot;); Serial.println(-RF / RIN);
-}
-void loop() {}</code></pre></div>
-              <h3>Parts list</h3>
-              <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody><tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr><tr><td>MFR-25FRF52-10K</td><td>10 k&Omega; resistor, 1%, 0.25 W</td><td class="qty">2</td></tr><tr><td>C320C103K5R5TA</td><td>10 nF ceramic capacitor, 50 V</td><td class="qty">1</td></tr><tr><td>Bench supply</td><td>Dual &plusmn;5 V supply (or split-rail module)</td><td class="qty">1</td></tr></tbody></table>
-            </div>
-          </details>
+
+// Hosted on https://LittleEngineeringBooks.com for educational purposes.
+</code></pre></div>
+        </div>
+      </details>
+      <details class="example">
+        <summary><span class="example-num">1</span> Non-inverting amplifier demo</summary>
+        <div class="example-body">
+          <h3>Breadboard schematic</h3>
+          <div class="img-placeholder" role="img" aria-label="Placeholder for breadboard schematic" style="background:#fafafa;border:2px dashed #999;border-radius:8px;padding:3rem 1rem;text-align:center;color:#555;max-width:420px;">Breadboard schematic coming soon</div>
+          <h3>What we're doing</h3>
+          <p>The Arduino uses its digital-to-analog converter (DAC) to output 1 V on pin <code>A0</code>. (Curious how DACs work? See the converters book!) That 1 V goes into the non-inverting (+) input of the op-amp.</p>
+          <p>The gain is set by the ratio of the resistors: <strong>Gain = 1 + Rf/R1</strong>, where R1 is 1 k&Omega; and Rf is the 10 k&Omega; potentiometer. With the pot at 0 &Omega; the gain is 1, and with the pot at 10 k&Omega; the gain is 11 (1 + 10k/1k). Rounding for simplicity, you'd expect to see roughly 1 V up to about 10 V on the output.</p>
+          <p>There's a catch: the op-amp only has the Arduino's 5 V rail, and it can't quite reach the rail. Any output that should be above just under 5 V will <strong>clip</strong> at just under 5 V. The Arduino's A1 input also can't read above 5 V.</p>
+          <p class="formula"><strong>Vout = Vin &times; (1 + Rf/R1)</strong></p>
+          <h3>My results</h3>
+          <p>Photos of the LED matrix display for each pot setting (images coming soon):</p>
+          <ul>
+            <li><strong>1 V displayed (gain of 1):</strong> pot at 0. Output equals the input.</li>
+            <li><strong>3.3 V expected (gain of 3.3):</strong> pot at about 2.3 k&Omega;. The amplifier is still in its linear range.</li>
+            <li><strong>5 V expected (gain of 5):</strong> pot at about 4 k&Omega;. The output is right at the limit and starts to clip just below 5 V.</li>
+            <li><strong>10 V expected (gain of 10):</strong> pot at about 9 k&Omega;. The output clips just below 5 V, since the op-amp can't go higher than its supply.</li>
+          </ul>
+        </div>
+      </details>
       </div>
     </div></section>
   </main>
