@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ADC Demo | Little Engineering Books</title>
-  <meta name="description" content="Read a potentiometer voltage divider with the Arduino UNO R4 analog-to-digital converter and show the result on the LED matrix.">
+  <title>ADC Worked Examples | Little Engineering Books</title>
+  <meta name="description" content="Op-amp worked examples with schematics, code and parts lists.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body class="accent-7 converters-worked-examples">
+<body class="accent-7">
   <header class="site-header">
     <div class="container header-inner">
       <div class="logo"><a href="/"><h1>Little Engineering Books</h1></a></div>
@@ -26,214 +26,33 @@
   </header>
 
   <main>
-    <nav class="breadcrumb" aria-label="Breadcrumb"><div class="container"><a href="/">Home</a><span class="sep" aria-hidden="true">/</span><a href="/topics/">Topics</a><span class="sep" aria-hidden="true">/</span><a href="/topics/converters/">Converters</a><span class="sep" aria-hidden="true">/</span><a href="/topics/converters/worked-examples/">Worked Examples</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">ADC demo</span></div></nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><div class="container"><a href="/">Home</a><span class="sep" aria-hidden="true">/</span><a href="/topics/">Topics</a><span class="sep" aria-hidden="true">/</span><a href="/topics/converters/">Converters</a><span class="sep" aria-hidden="true">/</span><a href="/topics/converters/worked-examples/">Worked Examples</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">ADC</span></div></nav>
     <section class="page-hero">
       <div class="container">
-        <span class="eyebrow">Converters Worked Example</span>
-        <h1>ADC demo</h1>
-        <p>Turn a potentiometer to change a voltage, then watch the Arduino's ADC turn it into a number.</p>
+        <span class="eyebrow">Worked Examples</span>
+        <h1>ADC: Worked Examples</h1>
+        <p>Choose a demo to open its schematic, code, parts list and explanation.</p>
         <div class="page-actions">
-          <a href="/topics/converters/worked-examples/" class="btn btn-accent-outline btn-large">&larr; More Converters examples</a>
+          <a href="/topics/converters/worked-examples/" class="btn btn-accent-outline btn-large">&larr; Converters worked examples</a>
         </div>
       </div>
     </section>
 
-    <section class="section"><div class="container">
-      <div class="examples">
-      <details class="example">
-        <summary>Getting started: what you'll need</summary>
-        <div class="example-body">
-          <p>This section lists everything you need for the worked example below. Equivalent parts will work.</p>
-          <h3>Equipment list</h3>
-          <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody>
-            <tr><td>ABX00087</td><td><a href="https://link.amazon/B01Hhg83L" target="_blank" rel="sponsored noopener">Arduino UNO R4 WiFi</a></td><td class="qty">1</td></tr>
-            <tr><td>USB-C data cable</td><td>USB-C to USB-A/C data cable (not charge-only)</td><td class="qty">1</td></tr>
-            <tr><td>BB830 (or equivalent)</td><td><a href="https://link.amazon/B0fh213lS" target="_blank" rel="sponsored noopener">830-point solderless breadboard</a></td><td class="qty">1</td></tr>
-            <tr><td>Jumper wire kit</td><td>Male-to-male breadboard jumper wires, assorted</td><td class="qty">1</td></tr>
-            <tr><td>10k potentiometer</td><td><a href="https://link.amazon/B07gI45v8" target="_blank" rel="sponsored noopener">10 k&Omega; slider potentiometer</a>. A 10k pot is also included in the Elegoo starter kit below</td><td class="qty">1</td></tr>
-          </tbody></table>
-          <p>New to electronics? <a href="https://link.amazon/B0frvkQ8a" target="_blank" rel="sponsored noopener">This Elegoo electronics starter kit</a> includes the Arduino-compatible board, breadboard, jumper wires and 10 k&Omega; potentiometer, and much more. It has everything you need for this example.</p>
-          <p><small>The Amazon links are affiliate links. I may earn a commission from qualifying purchases, at no extra cost to you. Part numbers are suggestions; equivalent parts work.</small></p>
-          <p>New to Arduino? Start with Arduino's <a href="https://docs.arduino.cc/tutorials/uno-r4-wifi/r4-wifi-getting-started/" target="_blank" rel="noopener">UNO R4 getting-started guide</a> for setting up your board and uploading your first sketch.</p>
+    <section class="section section-alt">
+      <div class="container">
+        <div class="book-grid">
+          <article class="book-card example-card accent-7">
+            <div class="book-cover"><div class="cover-frame"><img src="/images/arduino_uno_r4_ADCVolts.png" alt="Schematic for a potentiometer connected to an Arduino analog input"></div></div>
+            <div class="book-content">
+              <span class="example-subject">ADC</span>
+              <h2>Potentiometer voltage</h2>
+              <p class="tagline">Use a potentiometer voltage divider and read it with the Arduino's ADC.</p>
+              <a href="/topics/converters/worked-examples/adc/potentiometer-voltage/" class="btn btn-accent">Open example</a>
+            </div>
+          </article>
         </div>
-      </details>
-      <details class="example">
-        <summary>Arduino Code</summary>
-        <div class="example-body">
-          <p>This sketch reads the voltage on <code>A0</code> with the UNO R4's analog-to-digital converter and shows the raw ADC count (0 to 1023) on the built-in LED matrix and in the Serial Monitor. Use the Copy button, paste it into the Arduino IDE and upload.</p>
-          <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>#include "Arduino_LED_Matrix.h"
-
-// Code provided on https://littleengineeringbooks.com for educational purposes only
-// Create an object to control the built-in LED matrix
-ArduinoLEDMatrix matrix;
-
-// Create an 8-row by 12-column display buffer.
-//
-// Each element can be:
-// 0 = LED OFF
-// 1 = LED ON
-//
-// We draw into this buffer first, then send it to the matrix.
-uint8_t frame[8][12];
-
-// Simple 3x5 font for the digits 0-9.
-//
-// Each digit is made of 5 rows.
-// Each row contains 3 bits:
-//
-// Example:
-// 0b111 = ###
-// 0b101 = # #
-//
-// Digit 0:
-//
-// ###
-// # #
-// # #
-// # #
-// ###
-//
-// This allows us to draw numbers on the matrix.
-const uint8_t digits[10][5] = {
-  {0b111, 0b101, 0b101, 0b101, 0b111}, // 0
-  {0b010, 0b110, 0b010, 0b010, 0b111}, // 1
-  {0b111, 0b001, 0b111, 0b100, 0b111}, // 2
-  {0b111, 0b001, 0b111, 0b001, 0b111}, // 3
-  {0b101, 0b101, 0b111, 0b001, 0b001}, // 4
-  {0b111, 0b100, 0b111, 0b001, 0b111}, // 5
-  {0b111, 0b100, 0b111, 0b101, 0b111}, // 6
-  {0b111, 0b001, 0b010, 0b010, 0b010}, // 7
-  {0b111, 0b101, 0b111, 0b101, 0b111}, // 8
-  {0b111, 0b101, 0b111, 0b001, 0b111}  // 9
-};
-
-// --------------------------------------------------
-// Clear the display buffer
-// --------------------------------------------------
-void clearFrame()
-{
-  // Set every element in the frame to 0
-  memset(frame, 0, sizeof(frame));
-}
-
-// --------------------------------------------------
-// Draw a single digit at a chosen X position
-// --------------------------------------------------
-void drawDigit(int digit, int xOffset)
-{
-  // Ignore invalid digits
-  if (digit &lt; 0 || digit &gt; 9) return;
-
-  // Go through the 5 rows of the digit
-  for (int row = 0; row &lt; 5; row++)
-  {
-    // Go through the 3 columns of the digit
-    for (int col = 0; col &lt; 3; col++)
-    {
-      // Check if the corresponding bit is set
-      if (digits[digit][row] &amp; (1 &lt;&lt; (2 - col)))
-      {
-        // Turn on an LED in the display buffer
-        frame[row + 1][xOffset + col] = 1;
-      }
-    }
-  }
-}
-
-// --------------------------------------------------
-// Draw a decimal point
-// --------------------------------------------------
-void drawDecimalPoint(int x, int y)
-{
-  frame[y][x] = 1;
-}
-
-// --------------------------------------------------
-// Runs once when the Arduino starts
-// --------------------------------------------------
-void setup()
-{
-  // Start the LED matrix
-  matrix.begin();
-
-  // Use a standard 10-bit ADC
-  //
-  // ADC values:
-  // 0V = 0
-  // 5V = 1023
-  analogReadResolution(10);
-
-  // Start Serial Monitor for debugging
-  Serial.begin(115200);
-}
-
-// --------------------------------------------------
-// Main program loop
-// --------------------------------------------------
-void loop()
-{
-  int adc = analogRead(A0);
-
-  // Split into 4 decimal digits
-  int thousands = adc / 1000;
-  int hundreds  = (adc / 100) % 10;
-  int tens      = (adc / 10) % 10;
-  int ones      = adc % 10;
-
-  clearFrame();
-
-  // Draw four touching digits
-  drawDigit(thousands, 0);
-  drawDigit(hundreds, 3);
-  drawDigit(tens, 6);
-  drawDigit(ones, 9);
-
-  matrix.renderBitmap(frame, 8, 12);
-
-  Serial.println(adc);
-
-  delay(50);
-}
-</code></pre></div>
-        </div>
-      </details>
-      <details class="example">
-        <summary><span class="example-num">1</span> ADC demo</summary>
-        <div class="example-body">
-          <h3>Breadboard schematic</h3>
-          <figure class="schematic-figure">
-            <a href="/images/arduino_uno_r4_ADCVolts.png" target="_blank" rel="noopener" aria-label="Open the full-size breadboard schematic in a new tab">
-              <img src="/images/arduino_uno_r4_ADCVolts.png" alt="Breadboard and schematic for a 10k potentiometer connected to 5V, 0V and Arduino input A0" class="schematic">
-            </a>
-            <figcaption>Click the image to view it full size.</figcaption>
-          </figure>
-          <h3>Pinout wiring</h3>
-          <p>The 10k pot pins are 1 (one end), 2 (wiper) and 3 (other end).</p>
-          <table class="bom"><thead><tr><th>From</th><th>To</th><th>Purpose</th></tr></thead><tbody>
-            <tr><td>5V</td><td>10k pot pin 1</td><td>Top of the voltage divider</td></tr>
-            <tr><td>0V (GND)</td><td>10k pot pin 3</td><td>Bottom of the voltage divider</td></tr>
-            <tr><td>10k pot pin 2 (wiper)</td><td>Arduino A0</td><td>Divider output, read by the ADC</td></tr>
-          </tbody></table>
-          <h3>What we're doing</h3>
-          <p>The Arduino's on-board 5 V and 0 V are connected across the ends of a 10 k&Omega; potentiometer, making a <strong>voltage divider</strong>. As you turn the pot, the wiper picks off a voltage anywhere between 0 V and 5 V, depending on its position. The wiper is connected to analog input <code>A0</code>, which is read by the Arduino's analog-to-digital converter (ADC).</p>
-          <p>The ADC is set to 10 bits, so it turns the voltage into a number from 0 (0 V) to 1023 (5 V). The sketch shows that number on the LED matrix. (Curious how ADCs work? See the <a href="/topics/converters/">converters book</a>!)</p>
-          <p class="formula"><strong>Voltage = ADC value &times; (5 / 1023)</strong></p>
-          <h3>My results</h3>
-          <p>Photos of the LED matrix display for two pot settings:</p>
-          <figure class="schematic-figure">
-            <a href="/images/IMG_8888.jpeg" target="_blank" rel="noopener"><img src="/images/IMG_8888.jpeg" alt="Arduino UNO R4 LED matrix showing 0779 with the potentiometer turned up" class="schematic"></a>
-            <figcaption>The LED matrix showing <strong>0779</strong>.</figcaption>
-          </figure>
-          <p><strong>0779:</strong> the ADC reads 779 out of 1023, which corresponds to about 779 &times; 5 / 1023 &asymp; 3.81 V on the wiper, so the pot is turned about three-quarters of the way towards 5 V.</p>
-          <figure class="schematic-figure">
-            <a href="/images/IMG_8887.jpeg" target="_blank" rel="noopener"><img src="/images/IMG_8887.jpeg" alt="Arduino UNO R4 LED matrix showing 0477 with the potentiometer near the middle" class="schematic"></a>
-            <figcaption>The LED matrix showing <strong>0477</strong>.</figcaption>
-          </figure>
-          <p><strong>0477:</strong> the ADC reads 477 out of 1023, which corresponds to about 477 &times; 5 / 1023 &asymp; 2.33 V, so the pot is a little under halfway (halfway would read about 512, or 2.5 V).</p>
-        </div>
-      </details>
       </div>
-    </div></section>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -242,6 +61,7 @@ void loop()
       <nav class="footer-nav">
         <a href="/">Home</a>
         <a href="/topics/">Topics</a>
+        <a href="/worked-examples/">Worked Examples</a>
         <a href="/why/">Why Little Engineering Books</a>
         <a href="/about/">About the Author</a>
       </nav>
