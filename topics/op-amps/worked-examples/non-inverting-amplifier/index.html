@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Non-Inverting Amplifier Demo | Little Engineering Books</title>
+  <meta name="description" content="Build and test a non-inverting op-amp amplifier with an Arduino, adjustable gain, a schematic and code.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="accent-12 op-amps-worked-examples">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo"><a href="/"><h1>Little Engineering Books</h1></a></div>
+      <button class="mobile-menu-btn" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/topics/">Topics</a>
+        <a href="/worked-examples/">Worked Examples</a>
+        <a href="/why/">Why Little Engineering Books</a>
+        <a href="/about/">About the Author</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><div class="container"><a href="/">Home</a><span class="sep" aria-hidden="true">/</span><a href="/topics/">Topics</a><span class="sep" aria-hidden="true">/</span><a href="/topics/op-amps/">Op-Amps</a><span class="sep" aria-hidden="true">/</span><a href="/topics/op-amps/worked-examples/">Worked Examples</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Non-inverting amplifier</span></div></nav>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Op-Amps Worked Example</span>
+        <h1>Non-inverting amplifier demo</h1>
+        <p>Build an adjustable-gain amplifier, then measure its output with an Arduino.</p>
+        <div class="page-actions">
+          <a href="/topics/op-amps/worked-examples/" class="btn btn-accent-outline btn-large">&larr; More Op-Amps examples</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section"><div class="container">
+      <div class="examples">
+      <details class="example">
+        <summary>Getting started: what you'll need</summary>
+        <div class="example-body">
+          <p>This section lists everything you need for the worked examples below. Equivalent parts will work.</p>
+          <h3>Equipment list</h3>
+          <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody>
+            <tr><td>ABX00087</td><td><a href="https://link.amazon/B01Hhg83L" target="_blank" rel="sponsored noopener">Arduino UNO R4 WiFi</a> (needs a DAC and ADC, as the UNO R4 has)</td><td class="qty">1</td></tr>
+            <tr><td>USB-C data cable</td><td>USB-C to USB-A/C data cable (not charge-only)</td><td class="qty">1</td></tr>
+            <tr><td>BB830 (or equivalent)</td><td><a href="https://link.amazon/B0fh213lS" target="_blank" rel="sponsored noopener">830-point solderless breadboard</a></td><td class="qty">1</td></tr>
+            <tr><td>Jumper wire kit</td><td>Male-to-male breadboard jumper wires, assorted</td><td class="qty">1</td></tr>
+            <tr><td>MCP6021-I/P</td><td>Single rail-to-rail op-amp: <a href="https://link.amazon/B08o4GSiE" target="_blank" rel="sponsored noopener">1x MCP6021 DIP Style Package</a> (plugs directly into breadboard), or the lower-cost <a href="https://link.amazon/B0781kVCN" target="_blank" rel="sponsored noopener">5x MCP6021 SOP Style Devices</a> with a <a href="https://link.amazon/B0azSAPVG" target="_blank" rel="sponsored noopener">SOP to DIP Adapter board</a> (requires soldering skills)</td><td class="qty">1</td></tr>
+            <tr><td>1k resistor</td><td>1 k&Omega; resistor (R1). Included in the Elegoo starter kit below</td><td class="qty">1</td></tr>
+            <tr><td>10k potentiometer</td><td><a href="https://link.amazon/B07gI45v8" target="_blank" rel="sponsored noopener">10 k&Omega; slider potentiometer</a> (Rf). A 10k pot is also included in the Elegoo starter kit below</td><td class="qty">1</td></tr>
+          </tbody></table>
+          <p>New to electronics? <a href="https://link.amazon/B0frvkQ8a" target="_blank" rel="sponsored noopener">This Elegoo electronics starter kit</a> includes the Arduino-compatible board, breadboard, jumper wires, 1 k&Omega; resistor and 10 k&Omega; potentiometer, and much more. It doesn't include an op-amp, which you'll need to buy separately.</p>
+          <p><small>The Amazon links are affiliate links. I may earn a commission from qualifying purchases, at no extra cost to you. Part numbers are suggestions; equivalent parts work.</small></p>
+          <p>New to Arduino? Start with Arduino's <a href="https://docs.arduino.cc/tutorials/uno-r4-wifi/r4-wifi-getting-started/" target="_blank" rel="noopener">UNO R4 getting-started guide</a> for setting up your board and uploading your first sketch.</p>
+        </div>
+      </details>
+      <details class="example">
+        <summary>Arduino Code</summary>
+        <div class="example-body">
+          <p>This sketch outputs about 1 V on <code>A0</code> using the UNO R4's digital-to-analog converter, then reads the op-amp output on <code>A1</code> with the analog-to-digital converter and shows it on the built-in LED matrix. Use the Copy button, paste it into the Arduino IDE and upload.</p>
+          <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>#include "Arduino_LED_Matrix.h"
+// Hosted on https://LittleEngineeringBooks.com for educational purposes.
+
+// Create an object to control the built-in LED matrix
+ArduinoLEDMatrix matrix;
+
+// 8 rows x 12 columns display buffer
+uint8_t frame[8][12];
+
+// 3x5 font for digits 0-9
+const uint8_t digits[10][5] = {
+  {0b111, 0b101, 0b101, 0b101, 0b111}, // 0
+  {0b010, 0b110, 0b010, 0b010, 0b111}, // 1
+  {0b111, 0b001, 0b111, 0b100, 0b111}, // 2
+  {0b111, 0b001, 0b111, 0b001, 0b111}, // 3
+  {0b101, 0b101, 0b111, 0b001, 0b001}, // 4
+  {0b111, 0b100, 0b111, 0b001, 0b111}, // 5
+  {0b111, 0b100, 0b111, 0b101, 0b111}, // 6
+  {0b111, 0b001, 0b010, 0b010, 0b010}, // 7
+  {0b111, 0b101, 0b111, 0b101, 0b111}, // 8
+  {0b111, 0b101, 0b111, 0b001, 0b111}  // 9
+};
+
+// --------------------------------------------------
+// Clear display buffer
+// --------------------------------------------------
+void clearFrame()
+{
+  memset(frame, 0, sizeof(frame));
+}
+
+// --------------------------------------------------
+// Draw a digit at a specified X position
+// --------------------------------------------------
+void drawDigit(int digit, int xOffset)
+{
+  if (digit &lt; 0 || digit &gt; 9) return;
+
+  for (int row = 0; row &lt; 5; row++)
+  {
+    for (int col = 0; col &lt; 3; col++)
+    {
+      if (digits[digit][row] &amp; (1 &lt;&lt; (2 - col)))
+      {
+        frame[row + 1][xOffset + col] = 1;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Draw decimal point
+// --------------------------------------------------
+void drawDecimalPoint(int x, int y)
+{
+  frame[y][x] = 1;
+}
+
+// --------------------------------------------------
+// Setup
+// --------------------------------------------------
+void setup()
+{
+  matrix.begin();
+
+  // ADC: 10-bit (0-1023)
+  analogReadResolution(10);
+
+  // DAC: 12-bit (0-4095)
+  analogWriteResolution(12);
+
+  // Output approximately 1.0V on A0
+  //
+  // DAC Value = (1.0 / 5.0) * 4095
+  //           ≈ 819
+  analogWrite(A0, 840);
+
+  Serial.begin(115200);
+}
+
+// --------------------------------------------------
+// Main Loop
+// --------------------------------------------------
+void loop()
+{
+  // Take 16 ADC readings and average them
+  long total = 0;
+
+  for (int i = 0; i &lt; 16; i++)
+  {
+    total += analogRead(A1);
+  }
+
+  int adc = total / 16;
+
+  // Convert ADC reading to voltage
+  float voltage = adc * (5.0f / 1023.0f);
+
+  // Extract digits for X.X display
+  int whole = (int)voltage;
+  int decimal = ((int)(voltage * 10)) % 10;
+
+  // Clear the display
+  clearFrame();
+
+  // Display voltage as X.X
+  drawDigit(whole, 0);
+  drawDecimalPoint(4, 5);
+  drawDigit(decimal, 6);
+
+  // Update LED matrix
+  matrix.renderBitmap(frame, 8, 12);
+
+  // Debug output
+  Serial.print("ADC = ");
+  Serial.print(adc);
+  Serial.print("   Voltage = ");
+  Serial.println(voltage, 2);
+
+  delay(100);
+}
+
+// Hosted on https://LittleEngineeringBooks.com for educational purposes.
+</code></pre></div>
+        </div>
+      </details>
+      <details class="example">
+        <summary><span class="example-num">1</span> Non-inverting amplifier demo</summary>
+        <div class="example-body">
+          <h3>Breadboard schematic</h3>
+          <figure class="schematic-figure">
+            <a href="/images/Non%20Inverting%20Amplifier%20Pot%20Gain.png" target="_blank" rel="noopener" aria-label="Open the full-size breadboard schematic in a new tab">
+              <img src="/images/Non%20Inverting%20Amplifier%20Pot%20Gain.png" alt="Breadboard and schematic for the non-inverting amplifier with a potentiometer setting the gain" class="schematic">
+            </a>
+            <figcaption>Click the image to view it full size.</figcaption>
+          </figure>
+          <h3>Pinout wiring</h3>
+          <p>MCP6021 pins are numbered 1 to 8 anticlockwise from the notch or dot. The 10k pot pins are 1 (one end), 2 (wiper) and 3 (unused).</p>
+          <table class="bom"><thead><tr><th>From</th><th>To</th><th>Purpose</th></tr></thead><tbody>
+            <tr><td>5V</td><td>MCP6021 pin 7</td><td>Positive supply</td></tr>
+            <tr><td>0V (GND)</td><td>MCP6021 pin 4</td><td>Negative supply / ground</td></tr>
+            <tr><td>Arduino A0</td><td>MCP6021 pin 3</td><td>1 V from the Arduino DAC to the non-inverting input</td></tr>
+            <tr><td>MCP6021 pin 6</td><td>Arduino A1</td><td>Op-amp output, read by the ADC</td></tr>
+            <tr><td>MCP6021 pin 6</td><td>10k pot pin 2 (wiper)</td><td>Feedback: gives adjustable resistance of 0 to 10k (Rf)</td></tr>
+            <tr><td>10k pot pin 1</td><td>MCP6021 pin 2</td><td>Inverting input</td></tr>
+            <tr><td>10k pot pin 1</td><td>1k resistor, other side to GND</td><td>R1 to ground</td></tr>
+          </tbody></table>
+          <h3>What we're doing</h3>
+          <p>The Arduino uses its digital-to-analog converter (DAC) to output 1 V on pin <code>A0</code>. (Curious how DACs work? See the <a href="/topics/converters/">converters book</a>!) That 1 V goes into the non-inverting (+) input of the op-amp.</p>
+          <p>The gain is set by the ratio of the resistors: <strong>Gain = 1 + Rf/R1</strong>, where R1 is 1 k&Omega; and Rf is the 10 k&Omega; potentiometer. With the pot at 0 &Omega; the gain is 1, and with the pot at 10 k&Omega; the gain is 11 (1 + 10k/1k). Rounding for simplicity, you'd expect to see roughly 1 V up to about 10 V on the output.</p>
+          <p>There's a catch: the op-amp only has the Arduino's 5 V rail, and it can't quite reach the rail. Any output that should be above just under 5 V will <strong>clip</strong> at just under 5 V. The Arduino's A1 input also can't read above 5 V.</p>
+          <p class="formula"><strong>Vout = Vin &times; (1 + Rf/R1)</strong></p>
+          <h3>My results</h3>
+          <p>Photos of the LED matrix display for each pot setting (images coming soon):</p>
+          <ul>
+            <li><strong>1 V displayed (gain of 1):</strong> pot at 0. Output equals the input.</li>
+            <li><strong>3.3 V expected (gain of 3.3):</strong> pot at about 2.3 k&Omega;. The amplifier is still in its linear range.</li>
+            <li><strong>5 V expected (gain of 5):</strong> pot at about 4 k&Omega;. The output is right at the limit and starts to clip just below 5 V.</li>
+            <li><strong>10 V expected (gain of 10):</strong> pot at about 9 k&Omega;. The output clips just below 5 V, since the op-amp can't go higher than its supply.</li>
+          </ul>
+        </div>
+      </details>
+      </div>
+    </div></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-text"><h3>Little Engineering Books</h3><p>Big Subjects. Small Books. No Waffle.</p></div>
+      <nav class="footer-nav">
+        <a href="/">Home</a>
+        <a href="/topics/">Topics</a>
+        <a href="/why/">Why Little Engineering Books</a>
+        <a href="/about/">About the Author</a>
+      </nav>
+      <div class="footer-legal"><p>&copy; 2026 Alistair Likeman. All rights reserved.</p></div>
+    </div>
+  </footer>
+  <script src="/js/main.js"></script>
+</body>
+</html>
