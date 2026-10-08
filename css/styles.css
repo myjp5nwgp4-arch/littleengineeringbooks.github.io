@@ -103,7 +103,7 @@ img { max-width: 100%; display: block; }
 .series-cta { text-align: center; margin-top: 2.5rem; }
 
 /* Book tiles */
-.book-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
+.book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2rem; }
 .book-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); border: 2px solid var(--border); display: flex; flex-direction: column; transition: all .3s ease; }
 .book-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
 .book-cover { background: var(--accent); padding: 1.25rem; }
