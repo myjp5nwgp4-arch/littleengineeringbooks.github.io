@@ -103,7 +103,7 @@ img { max-width: 100%; display: block; }
 .series-cta { text-align: center; margin-top: 2.5rem; }
 
 /* Book tiles */
-.book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2rem; }
+.book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 300px)); justify-content: center; gap: 2rem; }
 .book-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); border: 2px solid var(--border); display: flex; flex-direction: column; transition: all .3s ease; }
 .book-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
 .book-cover { background: var(--accent); padding: 1.25rem; }
@@ -312,3 +312,9 @@ img { max-width: 100%; display: block; }
 .bom td:first-child { font-family: ui-monospace, Menlo, Consolas, monospace; white-space: nowrap; }
 .bom .qty { text-align: right; width: 3.5rem; }
 @media (max-width: 600px) { .bom td:first-child { white-space: normal; } }
+
+/* Home hero */
+.home-hero { background: linear-gradient(135deg, var(--c1-tint) 0%, var(--c2-tint) 25%, var(--c3-tint) 50%, var(--c4-tint) 100%); padding: 2.5rem 2rem; text-align: center; }
+.home-hero h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin-bottom: 1.5rem; }
+.home-hero-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; max-width: 720px; margin: 0 auto; }
+.home-hero-links p { color: var(--muted); margin-bottom: .75rem; }
