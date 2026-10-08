@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Using the ADC to read a voltage and display the binary value | Little Engineering Books</title>
+  <title>Using the ADC To read a voltage and display the voltage level | Little Engineering Books</title>
   <meta name="description" content="Read a potentiometer voltage divider with the Arduino UNO R4 analog-to-digital converter and show the result on the LED matrix.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,12 +26,12 @@
   </header>
 
   <main>
-    <nav class="breadcrumb" aria-label="Breadcrumb"><div class="container"><a href="/">Home</a><span class="sep" aria-hidden="true">/</span><a href="/topics/">Topics</a><span class="sep" aria-hidden="true">/</span><a href="/topics/converters/">Converters</a><span class="sep" aria-hidden="true">/</span><a href="/topics/converters/worked-examples/">Worked Examples</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Using the ADC to read a voltage and display the binary value</span></div></nav>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><div class="container"><a href="/">Home</a><span class="sep" aria-hidden="true">/</span><a href="/topics/">Topics</a><span class="sep" aria-hidden="true">/</span><a href="/topics/converters/">Converters</a><span class="sep" aria-hidden="true">/</span><a href="/topics/converters/worked-examples/">Worked Examples</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Using the ADC To read a voltage and display the voltage level</span></div></nav>
     <section class="page-hero">
       <div class="container">
         <span class="eyebrow">ADC Worked Example</span>
-        <h1>Using the ADC to read a voltage and display the binary value</h1>
-        <p>Turn a potentiometer to change a voltage, then watch the Arduino's ADC turn it into a number.</p>
+        <h1>Using the ADC To read a voltage and display the voltage level</h1>
+        <p>Turn a potentiometer to change a voltage, then watch the Arduino read it and display the voltage level.</p>
         <div class="page-actions">
           <a href="/topics/converters/worked-examples/" class="btn btn-accent-outline btn-large">&larr; Converters worked examples</a>
         </div>
@@ -60,40 +60,17 @@
       <details class="example">
         <summary>Arduino Code</summary>
         <div class="example-body">
-          <p>This sketch reads the voltage on <code>A0</code> with the UNO R4's analog-to-digital converter and shows the raw ADC count (0 to 1023) on the built-in LED matrix and in the Serial Monitor. Use the Copy button, paste it into the Arduino IDE and upload.</p>
+          <p>This sketch reads the voltage on <code>A0</code> with the UNO R4's analog-to-digital converter and averages 16 readings, converts the ADC count back into a voltage and shows it as X.X volts on the built-in LED matrix, with the count and voltage also sent to the Serial Monitor. Use the Copy button, paste it into the Arduino IDE and upload.</p>
           <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>#include "Arduino_LED_Matrix.h"
+// Hosted on https://LittleEngineeringBooks.com for educational purposes.
 
-// Code provided on https://littleengineeringbooks.com for educational purposes only
 // Create an object to control the built-in LED matrix
 ArduinoLEDMatrix matrix;
 
-// Create an 8-row by 12-column display buffer.
-//
-// Each element can be:
-// 0 = LED OFF
-// 1 = LED ON
-//
-// We draw into this buffer first, then send it to the matrix.
+// 8 rows x 12 columns display buffer
 uint8_t frame[8][12];
 
-// Simple 3x5 font for the digits 0-9.
-//
-// Each digit is made of 5 rows.
-// Each row contains 3 bits:
-//
-// Example:
-// 0b111 = ###
-// 0b101 = # #
-//
-// Digit 0:
-//
-// ###
-// # #
-// # #
-// # #
-// ###
-//
-// This allows us to draw numbers on the matrix.
+// 3x5 font for digits 0-9
 const uint8_t digits[10][5] = {
   {0b111, 0b101, 0b101, 0b101, 0b111}, // 0
   {0b010, 0b110, 0b010, 0b010, 0b111}, // 1
@@ -108,32 +85,26 @@ const uint8_t digits[10][5] = {
 };
 
 // --------------------------------------------------
-// Clear the display buffer
+// Clear display buffer
 // --------------------------------------------------
 void clearFrame()
 {
-  // Set every element in the frame to 0
   memset(frame, 0, sizeof(frame));
 }
 
 // --------------------------------------------------
-// Draw a single digit at a chosen X position
+// Draw a digit at a specified X position
 // --------------------------------------------------
 void drawDigit(int digit, int xOffset)
 {
-  // Ignore invalid digits
   if (digit &lt; 0 || digit &gt; 9) return;
 
-  // Go through the 5 rows of the digit
   for (int row = 0; row &lt; 5; row++)
   {
-    // Go through the 3 columns of the digit
     for (int col = 0; col &lt; 3; col++)
     {
-      // Check if the corresponding bit is set
       if (digits[digit][row] &amp; (1 &lt;&lt; (2 - col)))
       {
-        // Turn on an LED in the display buffer
         frame[row + 1][xOffset + col] = 1;
       }
     }
@@ -141,7 +112,7 @@ void drawDigit(int digit, int xOffset)
 }
 
 // --------------------------------------------------
-// Draw a decimal point
+// Draw decimal point
 // --------------------------------------------------
 void drawDecimalPoint(int x, int y)
 {
@@ -149,61 +120,71 @@ void drawDecimalPoint(int x, int y)
 }
 
 // --------------------------------------------------
-// Runs once when the Arduino starts
+// Setup
 // --------------------------------------------------
 void setup()
 {
-  // Start the LED matrix
   matrix.begin();
 
-  // Use a standard 10-bit ADC
-  //
-  // ADC values:
-  // 0V = 0
-  // 5V = 1023
+  // ADC: 10-bit (0-1023)
   analogReadResolution(10);
 
-  // Start Serial Monitor for debugging
   Serial.begin(115200);
 }
 
 // --------------------------------------------------
-// Main program loop
+// Main Loop
 // --------------------------------------------------
 void loop()
 {
-  int adc = analogRead(A0);
+  // Take 16 ADC readings and average them
+  long total = 0;
 
-  // Split into 4 decimal digits
-  int thousands = adc / 1000;
-  int hundreds  = (adc / 100) % 10;
-  int tens      = (adc / 10) % 10;
-  int ones      = adc % 10;
+  for (int i = 0; i &lt; 16; i++)
+  {
+    total += analogRead(A0);
+  }
 
+  int adc = total / 16;
+
+  // Convert ADC reading to voltage
+  float voltage = adc * (5.0f / 1023.0f);
+
+  // Extract digits for X.X display
+  int whole = (int)voltage;
+  int decimal = ((int)(voltage * 10)) % 10;
+
+  // Clear the display
   clearFrame();
 
-  // Draw four touching digits
-  drawDigit(thousands, 0);
-  drawDigit(hundreds, 3);
-  drawDigit(tens, 6);
-  drawDigit(ones, 9);
+  // Display voltage as X.X
+  drawDigit(whole, 0);
+  drawDecimalPoint(4, 5);
+  drawDigit(decimal, 6);
 
+  // Update LED matrix
   matrix.renderBitmap(frame, 8, 12);
 
-  Serial.println(adc);
+  // Debug output
+  Serial.print("ADC = ");
+  Serial.print(adc);
+  Serial.print("   Voltage = ");
+  Serial.println(voltage, 2);
 
-  delay(50);
+  delay(100);
 }
+
+// Hosted on https://LittleEngineeringBooks.com for educational purposes.
 </code></pre></div>
         </div>
       </details>
       <details class="example">
-        <summary><span class="example-num">1</span> Using the ADC to read a voltage and display the binary value</summary>
+        <summary><span class="example-num">1</span> Using the ADC To read a voltage and display the voltage level</summary>
         <div class="example-body">
           <h3>Breadboard schematic</h3>
           <figure class="schematic-figure">
-            <a href="/images/arduino_uno_r4_ADC.png" target="_blank" rel="noopener" aria-label="Open the full-size breadboard schematic in a new tab">
-              <img src="/images/arduino_uno_r4_ADC.png" alt="Breadboard and schematic for a 10k potentiometer connected to 5V, 0V and Arduino input A0" class="schematic">
+            <a href="/images/arduino_uno_r4_ADCVolts.png" target="_blank" rel="noopener" aria-label="Open the full-size breadboard schematic in a new tab">
+              <img src="/images/arduino_uno_r4_ADCVolts.png" alt="Breadboard and schematic for a 10k potentiometer connected to 5V, 0V and Arduino input A0" class="schematic">
             </a>
             <figcaption>Click the image to view it full size.</figcaption>
           </figure>
@@ -216,20 +197,26 @@ void loop()
           </tbody></table>
           <h3>What we're doing</h3>
           <p>The Arduino's on-board 5 V and 0 V are connected across the ends of a 10 k&Omega; potentiometer, making a <strong>voltage divider</strong>. As you turn the pot, the wiper picks off a voltage anywhere between 0 V and 5 V, depending on its position. The wiper is connected to analog input <code>A0</code>, which is read by the Arduino's analog-to-digital converter (ADC).</p>
-          <p>The ADC is set to 10 bits, so it turns the voltage into a number from 0 (0 V) to 1023 (5 V). The sketch shows that number on the LED matrix. (Curious how ADCs work? See the <a href="/topics/converters/">converters book</a>!)</p>
+          <p>The ADC is set to 10 bits, so it turns the voltage into a binary number from 0 (0 V) to 1023 (5 V). To reduce noise, the sketch averages 16 readings. It then converts that count back into a voltage and shows it on the LED matrix as <strong>X.X</strong>.</p>
           <p class="formula"><strong>Voltage = ADC value &times; (5 / 1023)</strong></p>
+          <p>Each ADC step is worth 5 / 1023 &asymp; 4.89 mV. The whole number of volts is the integer part of the result, and the digit after the decimal point is found by multiplying by 10 and taking the remainder after dividing by 10. For example, an ADC count of 614 gives 614 &times; 5 / 1023 &asymp; 3.0 V.</p>
           <h3>My results</h3>
-          <p>Photos of the LED matrix display for two pot settings:</p>
+          <p>Photos of the LED matrix display for three pot settings:</p>
           <figure class="schematic-figure">
-            <a href="/images/IMG_8888.jpeg" target="_blank" rel="noopener"><img src="/images/IMG_8888.jpeg" alt="Arduino UNO R4 LED matrix showing 0779 with the potentiometer turned up" class="schematic"></a>
-            <figcaption>The LED matrix showing <strong>0779</strong>.</figcaption>
+            <a href="/images/IMG_8892.jpeg" target="_blank" rel="noopener"><img src="/images/IMG_8892.jpeg" alt="Arduino UNO R4 LED matrix showing 0.0 with the potentiometer turned fully to 0V" class="schematic"></a>
+            <figcaption>The LED matrix showing <strong>0.0</strong> V.</figcaption>
           </figure>
-          <p><strong>0779:</strong> the ADC reads 779 out of 1023, which corresponds to about 779 &times; 5 / 1023 &asymp; 3.81 V on the wiper, so the pot is turned about three-quarters of the way towards 5 V.</p>
+          <p><strong>0 V:</strong> the wiper is at 0 V, so the ADC reads 0 and 0 &times; 5 / 1023 = 0.0 V.</p>
           <figure class="schematic-figure">
-            <a href="/images/IMG_8887.jpeg" target="_blank" rel="noopener"><img src="/images/IMG_8887.jpeg" alt="Arduino UNO R4 LED matrix showing 0477 with the potentiometer near the middle" class="schematic"></a>
-            <figcaption>The LED matrix showing <strong>0477</strong>.</figcaption>
+            <a href="/images/IMG_8890.jpeg" target="_blank" rel="noopener"><img src="/images/IMG_8890.jpeg" alt="Arduino UNO R4 LED matrix showing 3.0 volts" class="schematic"></a>
+            <figcaption>The LED matrix showing <strong>3.0</strong> V.</figcaption>
           </figure>
-          <p><strong>0477:</strong> the ADC reads 477 out of 1023, which corresponds to about 477 &times; 5 / 1023 &asymp; 2.33 V, so the pot is a little under halfway (halfway would read about 512, or 2.5 V).</p>
+          <p><strong>3.0 V:</strong> the ADC reads about 614 out of 1023, and 614 &times; 5 / 1023 &asymp; 3.0 V.</p>
+          <figure class="schematic-figure">
+            <a href="/images/IMG_8891.jpeg" target="_blank" rel="noopener"><img src="/images/IMG_8891.jpeg" alt="Arduino UNO R4 LED matrix showing 5.0 volts" class="schematic"></a>
+            <figcaption>The LED matrix showing <strong>5.0</strong> V.</figcaption>
+          </figure>
+          <p><strong>5.0 V:</strong> the wiper is at 5 V, so the ADC reads its maximum of 1023 and 1023 &times; 5 / 1023 = 5.0 V.</p>
         </div>
       </details>
       </div>
