@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Using the ADC To read a voltage and display the voltage level | Little Engineering Books</title>
-  <meta name="description" content="Read a potentiometer voltage divider with the Arduino UNO R4 analog-to-digital converter and show the result on the LED matrix.">
+  <meta name="description" content="Read a potentiometer voltage divider with the Arduino UNO R4 analogue-to-digital converter and show the result on the LED matrix.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body class="accent-7 converters-worked-examples">
+<body class="accent-teal converters-worked-examples">
   <header class="site-header">
     <div class="container header-inner">
       <div class="logo"><a href="/"><h1>Little Engineering Books</h1></a></div>
@@ -59,7 +59,7 @@
       <details class="example">
         <summary>Arduino Code</summary>
         <div class="example-body">
-          <p>This sketch reads the voltage on <code>A0</code> with the UNO R4's analog-to-digital converter and averages 16 readings, converts the ADC count back into a voltage and shows it as X.X volts on the built-in LED matrix, with the count and voltage also sent to the Serial Monitor. Use the Copy button, paste it into the Arduino IDE and upload.</p>
+          <p>This sketch reads the voltage on <code>A0</code> with the UNO R4's analogue-to-digital converter and averages 16 readings, converts the ADC count back into a voltage and shows it as X.X volts on the built-in LED matrix, with the count and voltage also sent to the Serial Monitor. Use the Copy button, paste it into the Arduino IDE and upload.</p>
           <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>#include "Arduino_LED_Matrix.h"
 // Hosted on https://LittleEngineeringBooks.com for educational purposes.
 
@@ -195,7 +195,7 @@ void loop()
             <tr><td>10k pot pin 2 (wiper)</td><td>Arduino A0</td><td>Divider output, read by the ADC</td></tr>
           </tbody></table>
           <h3>What we're doing</h3>
-          <p>The Arduino's on-board 5 V and 0 V are connected across the ends of a 10 k&Omega; potentiometer, making a <strong>voltage divider</strong>. As you turn the pot, the wiper picks off a voltage anywhere between 0 V and 5 V, depending on its position. The wiper is connected to analog input <code>A0</code>, which is read by the Arduino's analog-to-digital converter (ADC).</p>
+          <p>The Arduino's on-board 5 V and 0 V are connected across the ends of a 10 k&Omega; potentiometer, making a <strong>voltage divider</strong>. As you turn the pot, the wiper picks off a voltage anywhere between 0 V and 5 V, depending on its position. The wiper is connected to analogue input <code>A0</code>, which is read by the Arduino's analogue-to-digital converter (ADC).</p>
           <p>The ADC is set to 10 bits, so it turns the voltage into a binary number from 0 (0 V) to 1023 (5 V). To reduce noise, the sketch averages 16 readings. It then converts that count back into a voltage and shows it on the LED matrix as <strong>X.X</strong>.</p>
           <p class="formula"><strong>Voltage = ADC value &times; (5 / 1023)</strong></p>
           <p>Each ADC step is worth 5 / 1023 &asymp; 4.89 mV. The whole number of volts is the integer part of the result, and the digit after the decimal point is found by multiplying by 10 and taking the remainder after dividing by 10. For example, an ADC count of 614 gives 614 &times; 5 / 1023 &asymp; 3.0 V.</p>

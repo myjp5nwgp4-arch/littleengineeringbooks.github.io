@@ -1,17 +1,21 @@
 
 :root {
-  --c1: #B2343E; --c1-dark: #7D242B; --c1-tint: #F5E6E7;
+  --coral: #B2343E; --coral-dark: #7D242B; --coral-tint: #F5E6E7;
+  --berry: #B33380; --berry-dark: #8A1F5E; --berry-tint: #FAE5EF;
+  --teal: #33B2A7; --teal-dark: #1B7F76; --teal-tint: #E1F5F3;
+  --purple: #6934B2; --purple-dark: #4A247D; --purple-tint: #ECE6F5;
+  --c1: var(--coral); --c1-dark: var(--coral-dark); --c1-tint: var(--coral-tint);
   --c2: #B26834; --c2-dark: #7D4924; --c2-tint: #F5ECE6;
   --c3: #B2A734; --c3-dark: #7D7524; --c3-tint: #F5F4E6;
   --c4: #7DB234; --c4-dark: #587D24; --c4-tint: #EFF5E6;
   --c5: #3EB234; --c5-dark: #2B7D24; --c5-tint: #E7F5E6;
   --c6: #34B269; --c6-dark: #247D4A; --c6-tint: #E6F5EC;
-  --c7: #33B2A7; --c7-dark: #1B7F76; --c7-tint: #E1F5F3;
+  --c7: var(--teal); --c7-dark: var(--teal-dark); --c7-tint: var(--teal-tint);
   --c8: #347DB2; --c8-dark: #24587D; --c8-tint: #E6EFF5;
   --c9: #343EB2; --c9-dark: #242B7D; --c9-tint: #E6E7F5;
-  --c10: #6934B2; --c10-dark: #4A247D; --c10-tint: #ECE6F5;
+  --c10: var(--purple); --c10-dark: var(--purple-dark); --c10-tint: var(--purple-tint);
   --c11: #A834B2; --c11-dark: #76247D; --c11-tint: #F4E6F5;
-  --c12: #B33380; --c12-dark: #8A1F5E; --c12-tint: #FAE5EF;
+  --c12: var(--berry); --c12-dark: var(--berry-dark); --c12-tint: var(--berry-tint);
   --text: #222; --text-dark: #222; --muted: #555; --white: #fff; --light: #f9f9f9; --border: #e0e0e0;
   --shadow-sm: 0 2px 4px rgba(0,0,0,.1);
   --shadow-md: 0 4px 12px rgba(0,0,0,.15);
@@ -38,7 +42,10 @@ img { max-width: 100%; display: block; }
 .accent-10 { --accent: var(--c10); --accent-dark: var(--c10-dark); --accent-tint: var(--c10-tint); }
 .accent-11 { --accent: var(--c11); --accent-dark: var(--c11-dark); --accent-tint: var(--c11-tint); }
 .accent-12 { --accent: var(--c12); --accent-dark: var(--c12-dark); --accent-tint: var(--c12-tint); }
-.accent-digital-comms { --accent: var(--c1); --accent-dark: var(--c1-dark); --accent-tint: var(--c1-tint); }
+.accent-coral { --accent: var(--coral); --accent-dark: var(--coral-dark); --accent-tint: var(--coral-tint); }
+.accent-teal { --accent: var(--teal); --accent-dark: var(--teal-dark); --accent-tint: var(--teal-tint); }
+.accent-purple { --accent: var(--purple); --accent-dark: var(--purple-dark); --accent-tint: var(--purple-tint); }
+.accent-berry { --accent: var(--berry); --accent-dark: var(--berry-dark); --accent-tint: var(--berry-tint); }
 
 /* Header + hamburger menu (always a hamburger) */
 .site-header { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
@@ -284,7 +291,7 @@ img { max-width: 100%; display: block; }
 .example-body { padding: 1rem 1.25rem 1.5rem; }
 .example-body h3 { margin: 1.25rem 0 0.5rem; }
 .schematic { width: 100%; max-width: 420px; color: #222; background: #fafafa; border-radius: 8px; }
-.op-amps-worked-examples .examples { max-width: 1100px; }
+.operational-amplifiers-worked-examples .examples { max-width: 1100px; }
 .schematic-figure { margin: 0 auto 1rem; }
 .schematic-figure a { display: block; }
 .schematic-figure .schematic { width: 100%; max-width: 100%; height: auto; margin: 0 auto; }
