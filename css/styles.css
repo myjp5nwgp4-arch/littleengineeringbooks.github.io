@@ -38,7 +38,10 @@ img { max-width: 100%; display: block; }
 .accent-10 { --accent: var(--c10); --accent-dark: var(--c10-dark); --accent-tint: var(--c10-tint); }
 .accent-11 { --accent: var(--c11); --accent-dark: var(--c11-dark); --accent-tint: var(--c11-tint); }
 .accent-12 { --accent: var(--c12); --accent-dark: var(--c12-dark); --accent-tint: var(--c12-tint); }
-.accent-digital-comms { --accent: var(--c1); --accent-dark: var(--c1-dark); --accent-tint: var(--c1-tint); }
+.accent-coral { --accent: var(--c1); --accent-dark: var(--c1-dark); --accent-tint: var(--c1-tint); }
+.accent-teal { --accent: var(--c7); --accent-dark: var(--c7-dark); --accent-tint: var(--c7-tint); }
+.accent-purple { --accent: var(--c10); --accent-dark: var(--c10-dark); --accent-tint: var(--c10-tint); }
+.accent-berry { --accent: var(--c12); --accent-dark: var(--c12-dark); --accent-tint: var(--c12-tint); }
 
 /* Header + hamburger menu (always a hamburger) */
 .site-header { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
@@ -284,7 +287,7 @@ img { max-width: 100%; display: block; }
 .example-body { padding: 1rem 1.25rem 1.5rem; }
 .example-body h3 { margin: 1.25rem 0 0.5rem; }
 .schematic { width: 100%; max-width: 420px; color: #222; background: #fafafa; border-radius: 8px; }
-.op-amps-worked-examples .examples { max-width: 1100px; }
+.operational-amplifiers-worked-examples .examples { max-width: 1100px; }
 .schematic-figure { margin: 0 auto 1rem; }
 .schematic-figure a { display: block; }
 .schematic-figure .schematic { width: 100%; max-width: 100%; height: auto; margin: 0 auto; }
