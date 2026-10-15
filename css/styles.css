@@ -16,6 +16,7 @@
   --c6: var(--green); --c6-dark: var(--green-dark); --c6-tint: var(--green-light);
   --c7: var(--purple); --c7-dark: var(--purple-dark); --c7-tint: var(--purple-light);
   --c8: var(--sky-blue); --c8-dark: var(--sky-blue-dark); --c8-tint: var(--sky-blue-light);
+  --accent: var(--c8); --accent-dark: var(--c8-dark); --accent-tint: var(--c8-tint);
   --text: #222; --text-dark: #222; --muted: #555; --white: #fff; --light: #f9f9f9; --border: #e0e0e0;
   --shadow-sm: 0 2px 4px rgba(0,0,0,.1);
   --shadow-md: 0 4px 12px rgba(0,0,0,.15);
