@@ -63,8 +63,10 @@ img { max-width: 100%; display: block; }
 .btn { display: inline-flex; align-items: center; justify-content: center; padding: .75rem 1.5rem; border-radius: 8px; font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: .95rem; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all .3s ease; }
 .btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 .btn-large { padding: 1rem 2rem; font-size: 1rem; }
-.btn-primary, .btn-secondary, .btn-accent, .btn-accent-outline { background: var(--teal); color: #fff; }
-.btn-primary:hover, .btn-secondary:hover, .btn-accent:hover, .btn-accent-outline:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn-primary, .btn-secondary { background: var(--teal); color: #fff; }
+.btn-primary:hover, .btn-secondary:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn-accent, .btn-accent-outline { background: var(--accent); color: #fff; }
+.btn-accent:hover, .btn-accent-outline:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
 /* Hero */
 .hero { background: linear-gradient(135deg, var(--c1-tint) 0%, var(--c2-tint) 25%, var(--c3-tint) 50%, var(--c4-tint) 100%); padding: 6rem 2rem; overflow: hidden; }
