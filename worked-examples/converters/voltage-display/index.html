@@ -199,7 +199,11 @@ void loop()
           <p>The ADC is set to 10 bits, so it turns the voltage into a binary number from 0 (0 V) to 1023 (5 V). To reduce noise, the sketch averages 16 readings. It then converts that count back into a voltage and shows it on the LED matrix as <strong>X.X</strong>.</p>
           <p class="formula"><strong>Voltage = ADC value &times; (5 / 1023)</strong></p>
           <p>Each ADC step is worth 5 / 1023 &asymp; 4.89 mV. The whole number of volts is the integer part of the result, and the digit after the decimal point is found by multiplying by 10 and taking the remainder after dividing by 10. For example, an ADC count of 614 gives 614 &times; 5 / 1023 &asymp; 3.0 V.</p>
-          <h3>My results</h3>
+        </div>
+      </details>
+      <details class="example">
+        <summary>Testing and results</summary>
+        <div class="example-body">
           <p>Photos of the LED matrix display for three pot settings:</p>
           <figure class="schematic-figure">
             <a href="/images/worked-examples/converters/voltage-display/IMG_8892.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/converters/voltage-display/IMG_8892.jpeg" alt="Arduino UNO R4 LED matrix showing 0.0 with the potentiometer turned fully to 0V" class="schematic"></a>
