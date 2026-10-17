@@ -227,6 +227,23 @@ void loop()
             <p>The GL5528's resistance falls as more light reaches it. With the LDR connected to 5V and the 10 kΩ resistor connected to GND, brighter light pulls the A0 voltage and ADC reading down. The sketch inverts that reading to make a brightness value, then automatically tracks the lowest and highest brightness seen since startup.</p>
             <p>As it learns the range, the matrix fills from the bottom-left in reverse: the brightest light seen lights no LEDs, while the dimmest lights all 96. So more ambient light means fewer LEDs, and a darker room means more. The bar adapts to the conditions it has encountered since the board was powered on; reset the board to start a fresh calibration.</p>
             <p>Open the Serial Monitor at <strong>115200 baud</strong> to see the raw ADC reading, learned brightness range and current LED count. The LED bar stays empty until the sensor has seen a brightness span of at least 20 ADC counts, which gives the mapping a safe non-zero range.</p>
+            <h3>My results</h3>
+            <p>Photos of the LED bar graph for three light levels:</p>
+            <figure class="schematic-figure">
+              <a href="/images/worked-examples/analogue-sensors/ldr-light-sensor-bar/IMG_9266.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/analogue-sensors/ldr-light-sensor-bar/IMG_9266.jpeg" alt="Arduino UNO R4 LED matrix with a few LEDs lit in bright light" class="schematic"></a>
+              <figcaption>Bright light: only a few LEDs lit.</figcaption>
+            </figure>
+            <p><strong>Brightest:</strong> the LDR resistance is low, so the A0 voltage is low and the brightness value is high. The bar shows only a few LEDs.</p>
+            <figure class="schematic-figure">
+              <a href="/images/worked-examples/analogue-sensors/ldr-light-sensor-bar/IMG_9267.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/analogue-sensors/ldr-light-sensor-bar/IMG_9267.jpeg" alt="Arduino UNO R4 LED matrix with a mid-range number of LEDs lit with the LDR partially covered" class="schematic"></a>
+              <figcaption>LDR partially covered: a mid-range number of LEDs lit.</figcaption>
+            </figure>
+            <p><strong>Partially covered:</strong> less light reaches the LDR, so a mid-range number of LEDs is lit.</p>
+            <figure class="schematic-figure">
+              <a href="/images/worked-examples/analogue-sensors/ldr-light-sensor-bar/IMG_9268.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/analogue-sensors/ldr-light-sensor-bar/IMG_9268.jpeg" alt="Arduino UNO R4 LED matrix with the most LEDs lit with the LDR in darkness" class="schematic"></a>
+              <figcaption>LDR in the dark: the most LEDs lit.</figcaption>
+            </figure>
+            <p><strong>Darkest:</strong> the LDR resistance is high, so the A0 voltage is high and the brightness value is low. The bar shows the most LEDs.</p>
           </div>
         </details>
       </div>
