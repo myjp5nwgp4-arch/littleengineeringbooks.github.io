@@ -3,7 +3,7 @@
 const BUY_LINKS = {
   'analogue-sensors': null,
   'op-amps': 'https://link.amazon/B00Ctd8Zt',
-  'converters': 'https://www.amazon.co.uk/dp/B0HNCF35FG?spcref=PRINT_LISTING',
+  'converters': 'https://link.amazon/B05cBkwWZ',
   'digital-communications': null
 };
 
