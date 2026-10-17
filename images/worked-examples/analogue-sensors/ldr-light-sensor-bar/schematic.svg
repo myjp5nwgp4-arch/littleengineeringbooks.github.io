@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title description">
+  <title id="title">LDR light sensor voltage divider</title>
+  <desc id="description">Connect a GL5528 light-dependent resistor from 5 volts to A0, and a 10 kilohm resistor from A0 to ground.</desc>
+  <rect width="640" height="400" rx="18" fill="#fff"/>
+  <g fill="none" stroke="#27364b" stroke-linecap="round" stroke-linejoin="round" stroke-width="7">
+    <path d="M185 74v46m0 60v54m0 111v25"/>
+    <path d="M185 120l-18 10 36 12-36 12 36 12-18 10"/>
+    <path d="M185 234v35m0 76v25"/>
+    <path d="M185 269h-35v76h70v-76z"/>
+    <path d="M150 345h70m-58 12h46m-32 12h18"/>
+    <path d="M185 234h190"/>
+    <path d="M375 234h120"/>
+    <circle cx="185" cy="234" r="9" fill="#27364b" stroke="none"/>
+    <path d="M116 138l29-24m-22 42 29-24"/>
+    <path d="M135 113l10 1-1 10m-2 9 10 1-1 10"/>
+  </g>
+  <g fill="#27364b" font-family="Arial, sans-serif" font-size="24" font-weight="700">
+    <text x="185" y="48" text-anchor="middle">+5 V</text>
+    <text x="250" y="160">GL5528 LDR</text>
+    <text x="415" y="220">A0</text>
+    <text x="250" y="310">10 kΩ</text>
+    <text x="185" y="390" text-anchor="middle">GND</text>
+  </g>
+</svg>

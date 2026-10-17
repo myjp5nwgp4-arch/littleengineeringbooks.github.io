@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Self-calibrating LDR Light Sensor Bar | Little Engineering Books</title>
+  <meta name="description" content="Build an Arduino UNO R4 light sensor with a GL5528 LDR and 10 kΩ resistor, then show room brightness on the LED matrix.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="accent-orange">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo"><a href="/"><h1>Little Engineering Books</h1></a></div>
+      <button class="mobile-menu-btn" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/topics/">Books</a>
+        <a href="/worked-examples/">Worked Examples</a>
+        <a href="/why/">Why Little Engineering Books</a>
+        <a href="/about/">About the Author</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><div class="container"><a href="/">Home</a><span class="sep" aria-hidden="true">/</span><a href="/worked-examples/">Worked Examples</a><span class="sep" aria-hidden="true">/</span><a href="/worked-examples/analogue-sensors/">Analogue Sensors</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Self-calibrating LDR light sensor bar</span></div></nav>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Analogue Sensors Worked Example</span>
+        <h1>Self-calibrating LDR light sensor bar</h1>
+        <p>Build a light-sensitive voltage divider and let the Arduino UNO R4's 12 × 8 LED matrix show the changing room brightness.</p>
+        <div class="page-actions">
+          <a href="/worked-examples/analogue-sensors/" class="btn btn-accent-outline btn-large">&larr; Analogue Sensors Worked Examples</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section"><div class="container">
+      <div class="examples">
+        <details class="example">
+          <summary>Getting started: what you'll need</summary>
+          <div class="example-body">
+            <p>This project uses the UNO R4 WiFi's built-in LED matrix. An equivalent GL5528 photoresistor and 10 kΩ resistor will work.</p>
+            <h3>Equipment list</h3>
+            <table class="bom"><thead><tr><th>Part</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody>
+              <tr><td>ABX00087</td><td>Arduino UNO R4 WiFi with built-in 12 × 8 LED matrix</td><td class="qty">1</td></tr>
+              <tr><td>USB-C data cable</td><td>USB-C to USB-A/C data cable (not charge-only)</td><td class="qty">1</td></tr>
+              <tr><td>BB830 (or equivalent)</td><td>Solderless breadboard</td><td class="qty">1</td></tr>
+              <tr><td>Jumper wires</td><td>Male-to-male breadboard jumper wires</td><td class="qty">3</td></tr>
+              <tr><td>GL5528 LDR</td><td>Light-dependent resistor (photoresistor)</td><td class="qty">1</td></tr>
+              <tr><td>10 kΩ resistor</td><td>Fixed resistor for the voltage divider</td><td class="qty">1</td></tr>
+            </tbody></table>
+            <p>New to Arduino? Start with Arduino's <a href="https://docs.arduino.cc/tutorials/uno-r4-wifi/r4-wifi-getting-started/" target="_blank" rel="noopener">UNO R4 getting-started guide</a> to set up the board and upload a sketch.</p>
+          </div>
+        </details>
+        <details class="example">
+          <summary>Arduino code</summary>
+          <div class="example-body">
+            <p>This sketch averages 16 readings from <code>A0</code>, learns the dimmest and brightest values it has seen, and fills the LED matrix from the bottom-left. It waits until it has seen a 20-count brightness range before mapping values, avoiding a divide-by-zero during startup. Copy the sketch into the Arduino IDE and upload it to an UNO R4 WiFi.</p>
+            <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>#include "Arduino_LED_Matrix.h"
+
+ArduinoLEDMatrix matrix;
+
+const int LDR_PIN = A0;
+
+// Matrix pixel buffer (12x8 = 96 LEDs)
+uint8_t frame[96];
+
+// Auto-calibration values
+int minBrightness = 4095;
+int maxBrightness = 0;
+
+// --------------------------------------------------
+// Read averaged ADC
+// --------------------------------------------------
+int readSensor()
+{
+  uint32_t sum = 0;
+
+  for (int i = 0; i &lt; 16; i++)
+  {
+    sum += analogRead(LDR_PIN);
+    delay(2);
+  }
+
+  return sum / 16;
+}
+
+// --------------------------------------------------
+// Clear matrix buffer
+// --------------------------------------------------
+void clearDisplay()
+{
+  memset(frame, 0, sizeof(frame));
+}
+
+// --------------------------------------------------
+// Set one LED
+// --------------------------------------------------
+void setPixel(int x, int y, bool on)
+{
+  if (x &lt; 0 || x &gt;= 12 || y &lt; 0 || y &gt;= 8)
+    return;
+
+  frame[y * 12 + x] = on ? 1 : 0;
+}
+
+// --------------------------------------------------
+// Draw LED bar graph
+// Fills left-&gt;right, bottom-&gt;top
+// --------------------------------------------------
+void drawBarGraph(int ledsToLight)
+{
+  clearDisplay();
+
+  ledsToLight = constrain(ledsToLight, 0, 96);
+
+  for (int i = 0; i &lt; ledsToLight; i++)
+  {
+    int x = i % 12;
+    int y = 7 - (i / 12);
+
+    setPixel(x, y, true);
+  }
+
+  matrix.loadPixels(frame, 96);
+}
+
+// --------------------------------------------------
+// Setup
+// --------------------------------------------------
+void setup()
+{
+  matrix.begin();
+
+  analogReadResolution(12);
+
+  Serial.begin(115200);
+
+  Serial.println("GL5528 Light Meter");
+
+  // Startup flash
+  for (int j = 0; j &lt; 3; j++)
+  {
+    memset(frame, 1, sizeof(frame));
+    matrix.loadPixels(frame, 96);
+    delay(150);
+
+    clearDisplay();
+    matrix.loadPixels(frame, 96);
+    delay(150);
+  }
+
+  Serial.println("Auto-calibrating...");
+}
+
+// --------------------------------------------------
+// Main loop
+// --------------------------------------------------
+void loop()
+{
+  int adc = readSensor();
+
+  // More light means lower LDR resistance and a lower ADC reading
+  int brightness = 4095 - adc;
+
+  // Learn min/max automatically
+  if (brightness &lt; minBrightness)
+    minBrightness = brightness;
+
+  if (brightness &gt; maxBrightness)
+    maxBrightness = brightness;
+
+  int range = maxBrightness - minBrightness;
+  int ledsToLight = 0;
+
+  // Wait for enough calibration range before mapping
+  if (range &gt;= 20)
+  {
+    ledsToLight = map(
+        brightness,
+        minBrightness,
+        maxBrightness,
+        0,
+        96);
+  }
+
+  ledsToLight = constrain(ledsToLight, 0, 96);
+
+  drawBarGraph(ledsToLight);
+
+  Serial.print("ADC=");
+  Serial.print(adc);
+  Serial.print(" Brightness=");
+  Serial.print(brightness);
+  Serial.print(" Min=");
+  Serial.print(minBrightness);
+  Serial.print(" Max=");
+  Serial.print(maxBrightness);
+  Serial.print(" LEDs=");
+  Serial.println(ledsToLight);
+
+  delay(50);
+}</code></pre></div>
+          </div>
+        </details>
+        <details class="example">
+          <summary><span class="example-num">1</span> Build the light sensor bar</summary>
+          <div class="example-body">
+            <h3>Voltage divider schematic</h3>
+            <figure class="schematic-figure">
+              <a href="/images/worked-examples/analogue-sensors/ldr-light-sensor-bar/schematic.svg" target="_blank" rel="noopener" aria-label="Open the full-size LDR voltage divider schematic in a new tab">
+                <img src="/images/worked-examples/analogue-sensors/ldr-light-sensor-bar/schematic.svg" alt="Connect the GL5528 LDR between 5 volts and A0, and the 10 kΩ resistor between A0 and ground" class="schematic">
+              </a>
+              <figcaption>The LDR and fixed resistor form a voltage divider, with their junction connected to A0.</figcaption>
+            </figure>
+            <h3>Pinout wiring</h3>
+            <table class="bom"><thead><tr><th>From</th><th>To</th><th>Purpose</th></tr></thead><tbody>
+              <tr><td>5V</td><td>One LDR leg</td><td>Top of the voltage divider</td></tr>
+              <tr><td>Other LDR leg</td><td>10 kΩ resistor and Arduino A0</td><td>Divider output read by the ADC</td></tr>
+              <tr><td>Other 10 kΩ resistor leg</td><td>GND</td><td>Bottom of the voltage divider</td></tr>
+            </tbody></table>
+            <h3>How it works</h3>
+            <p>The GL5528's resistance falls as more light reaches it. With the LDR connected to 5V and the 10 kΩ resistor connected to GND, brighter light pulls the A0 voltage and ADC reading down. The sketch inverts that reading to make a brightness value, then automatically tracks the lowest and highest brightness seen since startup.</p>
+            <p>As it learns the range, the matrix fills from the bottom-left: the brightest light seen lights all 96 LEDs, while the dimmest lights none. So more ambient light means fewer LEDs, and a darker room means more. The bar adapts to the conditions it has encountered since the board was powered on; reset the board to start a fresh calibration.</p>
+            <p>Open the Serial Monitor at <strong>115200 baud</strong> to see the raw ADC reading, learned brightness range and current LED count. The LED bar stays empty until the sensor has seen a brightness span of at least 20 ADC counts, which gives the mapping a safe non-zero range.</p>
+          </div>
+        </details>
+      </div>
+    </div></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-text"><h3>Little Engineering Books</h3><p>Big Subjects. Small Books. No Waffle.</p></div>
+      <nav class="footer-nav">
+        <a href="/">Home</a>
+        <a href="/topics/">Books</a>
+        <a href="/worked-examples/">Worked Examples</a>
+        <a href="/why/">Why Little Engineering Books</a>
+        <a href="/about/">About the Author</a>
+      </nav>
+      <div class="footer-legal"><p>&copy; 2026 Alistair Likeman. All rights reserved.</p><p class="affiliate-disclosure">Purchases made through Amazon affiliate links on this site may earn the author a commission, at no extra cost to you.</p></div>
+    </div>
+  </footer>
+  <script src="/js/main.js"></script>
+</body>
+</html>
