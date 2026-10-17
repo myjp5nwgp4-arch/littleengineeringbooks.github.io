@@ -184,8 +184,8 @@ void loop()
         brightness,
         minBrightness,
         maxBrightness,
-        0,
-        96);
+        96,
+        0);
   }
 
   ledsToLight = constrain(ledsToLight, 0, 96);
@@ -225,7 +225,7 @@ void loop()
             </tbody></table>
             <h3>How it works</h3>
             <p>The GL5528's resistance falls as more light reaches it. With the LDR connected to 5V and the 10 kΩ resistor connected to GND, brighter light pulls the A0 voltage and ADC reading down. The sketch inverts that reading to make a brightness value, then automatically tracks the lowest and highest brightness seen since startup.</p>
-            <p>As it learns the range, the matrix fills from the bottom-left: the brightest light seen lights all 96 LEDs, while the dimmest lights none. So more ambient light means fewer LEDs, and a darker room means more. The bar adapts to the conditions it has encountered since the board was powered on; reset the board to start a fresh calibration.</p>
+            <p>As it learns the range, the matrix fills from the bottom-left in reverse: the brightest light seen lights no LEDs, while the dimmest lights all 96. So more ambient light means fewer LEDs, and a darker room means more. The bar adapts to the conditions it has encountered since the board was powered on; reset the board to start a fresh calibration.</p>
             <p>Open the Serial Monitor at <strong>115200 baud</strong> to see the raw ADC reading, learned brightness range and current LED count. The LED bar stays empty until the sensor has seen a brightness span of at least 20 ADC counts, which gives the mapping a safe non-zero range.</p>
           </div>
         </details>
