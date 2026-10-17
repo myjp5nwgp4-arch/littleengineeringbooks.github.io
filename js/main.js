@@ -1,3 +1,24 @@
+// Central store of "Buy Book" links. Edit links here only; any element with
+// data-buy="<key>" gets its href set from this list. Use null for "not yet available".
+const BUY_LINKS = {
+  'analogue-sensors': null,
+  'op-amps': 'https://link.amazon/B00Ctd8Zt',
+  'converters': 'https://www.amazon.co.uk/dp/B0HNCF35FG?spcref=PRINT_LISTING',
+  'digital-communications': null
+};
+
+document.querySelectorAll('[data-buy]').forEach(el => {
+  const url = BUY_LINKS[el.dataset.buy];
+  if (url) {
+    el.href = url;
+  } else {
+    el.removeAttribute('href');
+    el.classList.add('btn-coming-soon');
+    el.textContent = 'Coming Soon!';
+    el.removeAttribute('target');
+  }
+});
+
 // Mobile menu toggle
 const menuBtn = document.querySelector('.mobile-menu-btn');
 const nav = document.querySelector('.site-nav');
