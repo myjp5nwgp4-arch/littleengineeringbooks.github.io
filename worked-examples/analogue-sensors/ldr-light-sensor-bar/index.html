@@ -43,14 +43,14 @@
         <details class="example">
           <summary>Getting started: what you'll need</summary>
           <div class="example-body">
-            <p>This project uses the UNO R4 WiFi's built-in LED matrix. An equivalent GL5528 photoresistor and 10 kΩ resistor will work.</p>
+            <p>This project uses the UNO R4 WiFi's built-in LED matrix. An LDR GL5528 photoresistor and 10 kΩ resistor. Alternative parts should work but might will need to adjust the code for it to fully work.</p>
             <h3>Equipment list</h3>
             <table class="bom"><thead><tr><th>Part</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody>
-              <tr><td>ABX00087</td><td>Arduino UNO R4 WiFi with built-in 12 × 8 LED matrix</td><td class="qty">1</td></tr>
+              <tr><td>ABX00087</td><td><a href="https://link.amazon/B01Hhg83L" target="_blank" rel="sponsored noopener">Arduino UNO R4 WiFi with built-in 12 × 8 LED matrix</a></td><td class="qty">1</td></tr>
               <tr><td>USB-C data cable</td><td>USB-C to USB-A/C data cable (not charge-only)</td><td class="qty">1</td></tr>
-              <tr><td>BB830 (or equivalent)</td><td>Solderless breadboard</td><td class="qty">1</td></tr>
+              <tr><td>BB830 (or equivalent)</td><td><a href="https://link.amazon/B0fh213lS" target="_blank" rel="sponsored noopener">Solderless breadboard</a></td><td class="qty">1</td></tr>
               <tr><td>Jumper wires</td><td>Male-to-male breadboard jumper wires</td><td class="qty">3</td></tr>
-              <tr><td>GL5528 LDR</td><td>Light-dependent resistor (photoresistor)</td><td class="qty">1</td></tr>
+              <tr><td><a href="https://link.amazon/B03tQTYnU" target="_blank" rel="sponsored noopener">GL5528 LDR</a></td><td>Light-dependent resistor (photoresistor)</td><td class="qty">1</td></tr>
               <tr><td>10 kΩ resistor</td><td>Fixed resistor for the voltage divider</td><td class="qty">1</td></tr>
             </tbody></table>
             <p>New to Arduino? Start with Arduino's <a href="https://docs.arduino.cc/tutorials/uno-r4-wifi/r4-wifi-getting-started/" target="_blank" rel="noopener">UNO R4 getting-started guide</a> to set up the board and upload a sketch.</p>
@@ -210,12 +210,12 @@ void loop()
         <details class="example">
           <summary><span class="example-num">1</span> Build the light sensor bar</summary>
           <div class="example-body">
-            <h3>Voltage divider schematic</h3>
+            <h3>Breadboard wiring</h3>
             <figure class="schematic-figure">
-              <a href="/images/worked-examples/analogue-sensors/ldr-light-sensor-bar/schematic.svg" target="_blank" rel="noopener" aria-label="Open the full-size LDR voltage divider schematic in a new tab">
-                <img src="/images/worked-examples/analogue-sensors/ldr-light-sensor-bar/schematic.svg" alt="Connect the GL5528 LDR between 5 volts and A0, and the 10 kΩ resistor between A0 and ground" class="schematic">
+              <a href="/images/worked-examples/analogue-sensors/ldr-light-sensor-bar/breadboard-2.jpg" target="_blank" rel="noopener" aria-label="Open the full-size LDR breadboard wiring photo in a new tab">
+                <img src="/images/worked-examples/analogue-sensors/ldr-light-sensor-bar/breadboard-2.jpg" alt="Breadboard wiring for a GL5528 LDR and 10 kΩ resistor connected to 5V, A0 and GND" class="schematic">
               </a>
-              <figcaption>The LDR and fixed resistor form a voltage divider, with their junction connected to A0.</figcaption>
+              <figcaption>Connect the GL5528 LDR and 10 kΩ resistor to 5V, A0 and GND as shown.</figcaption>
             </figure>
             <h3>Pinout wiring</h3>
             <table class="bom"><thead><tr><th>From</th><th>To</th><th>Purpose</th></tr></thead><tbody>
