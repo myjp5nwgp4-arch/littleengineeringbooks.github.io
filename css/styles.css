@@ -8,7 +8,7 @@
   --green: #76A83B; --green-light: #EAF1DE; --green-dark: #4F7E28;
   --purple: #7B4D9E; --purple-light: #EAE1F1; --purple-dark: #4B2E6E;
   --sky-blue: #3BA7F2; --sky-blue-light: #DDEFFD; --sky-blue-dark: #1F78B1;
-  --neutral-light: #F3F4F6; --neutral-main: #9CA3AF; --neutral-dark: #4B5563;
+  --neutral-light: #D1D5DB; --neutral-main: #4B5563; --neutral-dark: #1F2937;
   --c1: var(--magenta); --c1-dark: var(--magenta-dark); --c1-tint: var(--magenta-light);
   --c2: var(--teal); --c2-dark: var(--teal-dark); --c2-tint: var(--teal-light);
   --c3: var(--yellow); --c3-dark: var(--yellow-dark); --c3-tint: var(--yellow-light);
@@ -325,5 +325,5 @@ img { max-width: 100%; display: block; }
 .bom .qty { text-align: right; width: 3.5rem; }
 @media (max-width: 600px) { .bom td:first-child { white-space: normal; } }
 
-.btn-coming-soon { background: var(--accent); color: var(--neutral-dark); cursor: default; opacity: .85; }
+.btn-coming-soon { background: var(--accent); color: #fff; cursor: default; opacity: .85; }
 .btn-coming-soon:hover { transform: none; box-shadow: none; }
