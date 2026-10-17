@@ -128,7 +128,7 @@ img { max-width: 100%; display: block; }
 .example-card .book-cover { padding: 1rem; }
 .example-card .cover-frame { background: var(--accent-tint); }
 .example-card .cover-frame img { object-fit: contain; mix-blend-mode: multiply; }
-.example-subject { align-self: flex-start; background: var(--accent-tint); color: var(--accent-dark); border-radius: 999px; padding: .25rem .75rem; font-size: .8rem; font-weight: 700; }
+.example-subject { align-self: center; background: var(--accent-tint); color: var(--accent-dark); border-radius: 999px; padding: .25rem .75rem; font-size: .8rem; font-weight: 700; }
 .example-card h2 { font-size: 1.35rem; }
 
 /* Page hero (inner pages) */
