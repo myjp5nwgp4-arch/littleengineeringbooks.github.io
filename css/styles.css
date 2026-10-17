@@ -328,5 +328,5 @@ img { max-width: 100%; display: block; }
 .bom .qty { text-align: right; width: 3.5rem; }
 @media (max-width: 600px) { .bom td:first-child { white-space: normal; } }
 
-.btn-coming-soon { background: var(--neutral-light); color: var(--neutral-dark); border-color: var(--neutral-main); cursor: default; }
+.btn-coming-soon { background: color-mix(in srgb, var(--neutral-main) 70%, white); color: #fff; border-color: color-mix(in srgb, var(--neutral-main) 70%, white); cursor: default; }
 .btn-coming-soon:hover { transform: none; box-shadow: none; }
