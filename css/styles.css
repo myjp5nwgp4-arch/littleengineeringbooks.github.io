@@ -324,3 +324,6 @@ img { max-width: 100%; display: block; }
 .bom td:first-child { font-family: ui-monospace, Menlo, Consolas, monospace; white-space: nowrap; }
 .bom .qty { text-align: right; width: 3.5rem; }
 @media (max-width: 600px) { .bom td:first-child { white-space: normal; } }
+
+.btn-coming-soon { background: var(--accent); color: var(--neutral-dark); cursor: default; opacity: .85; }
+.btn-coming-soon:hover { transform: none; box-shadow: none; }
