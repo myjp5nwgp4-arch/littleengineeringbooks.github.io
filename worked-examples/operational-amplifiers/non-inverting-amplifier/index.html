@@ -214,7 +214,11 @@ void loop()
           <p>The gain is set by the ratio of the resistors: <strong>Gain = 1 + Rf/R1</strong>, where R1 is 1 k&Omega; and Rf is the 10 k&Omega; potentiometer. With the pot at 0 &Omega; the gain is 1, and with the pot at 10 k&Omega; the gain is 11 (1 + 10k/1k). Rounding for simplicity, you'd expect to see roughly 1 V up to about 10 V on the output.</p>
           <p>There's a catch: the op-amp only has the Arduino's 5 V rail, and it can't quite reach the rail. Any output that should be above just under 5 V will <strong>clip</strong> at just under 5 V. The Arduino's A1 input also can't read above 5 V.</p>
           <p class="formula"><strong>Vout = Vin &times; (1 + Rf/R1)</strong></p>
-          <h3>My results</h3>
+        </div>
+      </details>
+      <details class="example">
+        <summary>Testing and results</summary>
+        <div class="example-body">
           <p>Photos of the LED matrix display for each pot setting (images coming soon):</p>
           <ul>
             <li><strong>1 V displayed (gain of 1):</strong> pot at 0. Output equals the input.</li>
