@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantisation Explained | Little Engineering Books</title>
+  <meta name="description" content="See how a 3-bit ADC quantises a voltage, using the Arduino UNO R4 LED matrix to show the exact position within each band.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="accent-teal converters-worked-examples">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo"><a href="/"><h1>Little Engineering Books</h1></a></div>
+      <button class="mobile-menu-btn" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/topics/">Books</a>
+        <a href="/worked-examples/">Worked Examples</a>
+        <a href="/why/">Why Little Engineering Books</a>
+        <a href="/about/">About the Author</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><div class="container"><a href="/">Home</a><span class="sep" aria-hidden="true">/</span><a href="/worked-examples/">Worked Examples</a><span class="sep" aria-hidden="true">/</span><a href="/worked-examples/converters/">Converters</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Quantisation Explained</span></div></nav>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">ADC Worked Example</span>
+        <h1>Quantisation Explained</h1>
+        <p>Turn a potentiometer and watch the 3-bit code change only when the voltage overflows the top of a band.</p>
+        <div class="page-actions">
+          <a href="/worked-examples/converters/" class="btn btn-accent-outline btn-large">&larr; Converters Worked Examples</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section"><div class="container">
+      <div class="examples">
+      <details class="example">
+        <summary>Getting started: what you'll need</summary>
+        <div class="example-body">
+          <p>This section lists everything you need for the worked example below. Equivalent parts will work.</p>
+          <h3>Equipment list</h3>
+          <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody>
+            <tr><td>ABX00087</td><td><a href="https://link.amazon/B01Hhg83L" target="_blank" rel="sponsored noopener">Arduino UNO R4 WiFi</a></td><td class="qty">1</td></tr>
+            <tr><td>USB-C data cable</td><td>USB-C to USB-A/C data cable (not charge-only)</td><td class="qty">1</td></tr>
+            <tr><td>BB830 (or equivalent)</td><td><a href="https://link.amazon/B0fh213lS" target="_blank" rel="sponsored noopener">830-point solderless breadboard</a></td><td class="qty">1</td></tr>
+            <tr><td>Jumper wire kit</td><td><a href="https://link.amazon/B0bPns90S" target="_blank" rel="sponsored noopener">Male-to-male breadboard jumper wires</a>, assorted</td><td class="qty">1</td></tr>
+            <tr><td>10k potentiometer</td><td><a href="https://link.amazon/B07gI45v8" target="_blank" rel="sponsored noopener">10 k&Omega; slider potentiometer</a>. A 10k pot is also included in the Elegoo starter kit below</td><td class="qty">1</td></tr>
+          </tbody></table>
+          <p>New to electronics? <a href="https://link.amazon/B0frvkQ8a" target="_blank" rel="sponsored noopener">This Elegoo electronics starter kit</a> includes the Arduino-compatible board, breadboard, jumper wires and 10 k&Omega; potentiometer, and much more. It has everything you need for this example.</p>
+          <p>New to Arduino? Start with Arduino's <a href="https://docs.arduino.cc/tutorials/uno-r4-wifi/r4-wifi-getting-started/" target="_blank" rel="noopener">UNO R4 getting-started guide</a> for setting up your board and uploading your first sketch.</p>
+        </div>
+      </details>
+      <details class="example">
+        <summary>Arduino Code</summary>
+        <div class="example-body">
+          <p>This sketch reads <code>A0</code> at 12 bits, keeps only the top 3 bits to simulate a 3-bit ADC, and draws those three bits as digits on the built-in LED matrix. The bottom row shows a single moving LED marker for the position within the current band. Use the Copy button, paste it into the Arduino IDE and upload.</p>
+          <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>#include "Arduino_LED_Matrix.h"
+// Hosted on https://LittleEngineeringBooks.com for educational purposes.
+
+ArduinoLEDMatrix matrix;
+
+const int ANALOG_PIN = A0;
+
+uint8_t frame[96];
+
+// 3x5 font for binary digits
+const uint8_t DIGITS[2][5] =
+{
+  // 0
+  {
+    0b111,
+    0b101,
+    0b101,
+    0b101,
+    0b111
+  },
+
+  // 1
+  {
+    0b010,
+    0b110,
+    0b010,
+    0b010,
+    0b111
+  }
+};
+
+void clearFrame()
+{
+  memset(frame, 0, sizeof(frame));
+}
+
+void setPixel(int x, int y, bool state = true)
+{
+  if (x &lt; 0 || x &gt; 11 || y &lt; 0 || y &gt; 7)
+    return;
+
+  frame[y * 12 + x] = state ? 1 : 0;
+}
+
+void drawBinaryDigit(uint8_t value, int xOffset)
+{
+  for (int y = 0; y &lt; 5; y++)
+  {
+    for (int x = 0; x &lt; 3; x++)
+    {
+      if (DIGITS[value][y] &amp; (1 &lt;&lt; (2 - x)))
+      {
+        setPixel(xOffset + x, y);
+      }
+    }
+  }
+}
+
+void render()
+{
+  matrix.loadPixels(frame, 96);
+}
+
+void drawDisplay(uint8_t code, uint16_t remainder)
+{
+  clearFrame();
+
+  // Draw three bits
+  drawBinaryDigit((code &gt;&gt; 2) &amp; 1, 0);   // MSB
+  drawBinaryDigit((code &gt;&gt; 1) &amp; 1, 4);   // Middle bit
+  drawBinaryDigit(code &amp; 1, 8);          // LSB
+
+  // Marker along bottom row
+  int markerX = map(remainder, 0, 511, 0, 11);
+
+  setPixel(markerX, 7);
+
+  render();
+}
+
+void setup()
+{
+  matrix.begin();
+
+  analogReadResolution(12);
+
+  Serial.begin(115200);
+
+  Serial.println("3-bit ADC Quantisation Demo");
+}
+
+void loop()
+{
+  // Full-resolution reading
+  uint16_t adc = analogRead(ANALOG_PIN);
+
+  // Simulated 3-bit ADC
+  uint8_t code = adc &gt;&gt; 9;
+
+  // Position within current quantisation bucket
+  uint16_t remainder = adc &amp; 0x01FF;
+
+  drawDisplay(code, remainder);
+
+  Serial.print("ADC=");
+  Serial.print(adc);
+
+  Serial.print("  Binary=");
+  Serial.print((code &gt;&gt; 2) &amp; 1);
+  Serial.print((code &gt;&gt; 1) &amp; 1);
+  Serial.print(code &amp; 1);
+
+  Serial.print("  Bucket=");
+  Serial.println(remainder);
+
+  delay(20);
+}
+
+// Hosted on https://LittleEngineeringBooks.com for educational purposes.
+</code></pre></div>
+        </div>
+      </details>
+      <details class="example">
+        <summary>Quantisation Explained</summary>
+        <div class="example-body">
+          <h3>Breadboard schematic</h3>
+          <figure class="schematic-figure">
+            <a href="/images/worked-examples/converters/quantisation-explained/quantisation-explained-schematic.png" target="_blank" rel="noopener" aria-label="Open the full-size breadboard schematic in a new tab">
+              <img src="/images/worked-examples/converters/quantisation-explained/quantisation-explained-schematic.png" alt="Breadboard and schematic for a 10k potentiometer connected to 5V, 0V and Arduino input A0" class="schematic">
+            </a>
+            <figcaption>Click the image to view it full size.</figcaption>
+          </figure>
+          <h3>Pinout wiring</h3>
+          <p>The 10k pot pins are 1 (one end), 2 (wiper) and 3 (other end).</p>
+          <table class="bom"><thead><tr><th>From</th><th>To</th><th>Purpose</th></tr></thead><tbody>
+            <tr><td>5V</td><td>10k pot pin 1</td><td>Top of the voltage divider</td></tr>
+            <tr><td>0V (GND)</td><td>10k pot pin 3</td><td>Bottom of the voltage divider</td></tr>
+            <tr><td>10k pot pin 2 (wiper)</td><td>Arduino A0</td><td>Divider output, read by the ADC</td></tr>
+          </tbody></table>
+          <h3>What we're doing</h3>
+          <p>The potentiometer makes a voltage divider whose output, between 0 V and 5 V, is read on <code>A0</code>. The ADC is run at 12 bits (0 to 4095), but the sketch only keeps the top 3 bits (<code>adc &gt;&gt; 9</code>), as if the converter only had 3 bits. That splits the input range into 2<sup>3</sup> = 8 equal bands, each 512 counts (about 0.625 V) wide.</p>
+          <p>The LED matrix shows two things at once:</p>
+          <ul>
+            <li><strong>The three digits</strong> are the 3-bit output code, from 000 to 111.</li>
+            <li><strong>The single LED on the bottom row</strong> shows where you are inside the current band. It is the 9 bits that were thrown away (<code>adc &amp; 0x01FF</code>), scaled across the 12 columns.</li>
+          </ul>
+          <h3>Why this matters</h3>
+          <p>Quantisation is the step where a continuous voltage is forced onto a limited set of values. Turn the pot slowly and the marker crawls from left to right while the digits stay perfectly still. Only when the marker runs off the right-hand end, and the voltage overflows the top of the band, do the digits change by one step and the marker jump back to the left.</p>
+          <p>Every voltage inside a band gives exactly the same code, so the converter cannot tell them apart. That lost detail is the <strong>quantisation error</strong>, and it can be as large as one whole band. More bits means narrower bands and a smaller error, which is why a 12-bit ADC resolves much finer detail than a 3-bit one.</p>
+        </div>
+      </details>
+      <details class="example">
+        <summary>Testing and results</summary>
+        <div class="example-body">
+          <p>Photos of the LED matrix for five pot settings. Watch the digits and the marker position:</p>
+          <figure class="schematic-figure">
+            <a href="/images/worked-examples/converters/quantisation-explained/IMG_9278-000-bottom.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/converters/quantisation-explained/IMG_9278-000-bottom.jpeg" alt="LED matrix showing 000 with the marker at the far left of the bottom row" class="schematic"></a>
+            <figcaption>The display shows <strong>000</strong> with the marker at the far left.</figcaption>
+          </figure>
+          <p><strong>000, bottom of the band:</strong> the ADC reading is near 0, so the bucket position is at its minimum and the marker sits at the left.</p>
+          <figure class="schematic-figure">
+            <a href="/images/worked-examples/converters/quantisation-explained/IMG_9274-001-top.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/converters/quantisation-explained/IMG_9274-001-top.jpeg" alt="LED matrix showing 001 with the marker at the far right of the bottom row" class="schematic"></a>
+            <figcaption>The display shows <strong>001</strong> with the marker at the far right.</figcaption>
+          </figure>
+          <p><strong>001, top of the band:</strong> the voltage is about to tip into the next band. The marker is at the far right, but the digits still read 001.</p>
+          <figure class="schematic-figure">
+            <a href="/images/worked-examples/converters/quantisation-explained/IMG_9275-010-bottom.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/converters/quantisation-explained/IMG_9275-010-bottom.jpeg" alt="LED matrix showing 010 with the marker at the far left of the bottom row" class="schematic"></a>
+            <figcaption>The display shows <strong>010</strong> with the marker at the far left.</figcaption>
+          </figure>
+          <p><strong>010, bottom of the band:</strong> the voltage has just crossed the threshold. The code stepped from 001 to 010 and the marker jumped back to the left.</p>
+          <figure class="schematic-figure">
+            <a href="/images/worked-examples/converters/quantisation-explained/IMG_9276-101-middle.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/converters/quantisation-explained/IMG_9276-101-middle.jpeg" alt="LED matrix showing 101 with the marker in the middle of the bottom row" class="schematic"></a>
+            <figcaption>The display shows <strong>101</strong> with the marker in the middle.</figcaption>
+          </figure>
+          <p><strong>101, middle of the band:</strong> the marker sits half way along. Many different voltages in this band all give the same code, 101.</p>
+          <figure class="schematic-figure">
+            <a href="/images/worked-examples/converters/quantisation-explained/IMG_9277-111-top.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/converters/quantisation-explained/IMG_9277-111-top.jpeg" alt="LED matrix showing 111 with the marker at the far right of the bottom row" class="schematic"></a>
+            <figcaption>The display shows <strong>111</strong> with the marker at the far right.</figcaption>
+          </figure>
+          <p><strong>111, top of the range:</strong> the highest code, with the marker at the far right as the input approaches full scale.</p>
+          <p>Notice that going from <strong>001</strong> at the top of its band to <strong>010</strong> at the bottom of the next one takes only a tiny change in voltage, while moving the marker across a whole band changes nothing in the digits.</p>
+        </div>
+      </details>
+      </div>
+    </div></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-text"><h3>Little Engineering Books</h3><p>Big Subjects. Small Books. No Waffle.</p></div>
+      <nav class="footer-nav">
+        <a href="/">Home</a>
+        <a href="/topics/">Books</a>
+        <a href="/worked-examples/">Worked Examples</a>
+        <a href="/why/">Why Little Engineering Books</a>
+        <a href="/about/">About the Author</a>
+      </nav>
+      <div class="footer-legal"><p>&copy; 2026 Alistair Likeman. All rights reserved.</p><p class="affiliate-disclosure">Purchases made through Amazon affiliate links on this site may earn the author a commission, at no extra cost to you.</p></div>
+    </div>
+  </footer>
+  <script src="/js/main.js"></script>
+</body>
+</html>
