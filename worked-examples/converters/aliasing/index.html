@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sampling and Aliasing | Little Engineering Books</title>
+  <meta name="description" content="See how sampling a sine wave too slowly can distort its apparent shape and produce aliasing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="accent-teal converters-worked-examples">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo"><a href="/"><h1>Little Engineering Books</h1></a></div>
+      <button class="mobile-menu-btn" aria-label="Toggle navigation menu"><span></span><span></span><span></span></button>
+      <nav class="site-nav">
+        <a href="/">Home</a>
+        <a href="/topics/">Books</a>
+        <a href="/worked-examples/">Worked Examples</a>
+        <a href="/why/">Why Little Engineering Books</a>
+        <a href="/about/">About the Author</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><div class="container"><a href="/">Home</a><span class="sep" aria-hidden="true">/</span><a href="/worked-examples/">Worked Examples</a><span class="sep" aria-hidden="true">/</span><a href="/worked-examples/converters/">Converters</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Sampling and Aliasing</span></div></nav>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">ADC Worked Example</span>
+        <h1>Sampling and Aliasing</h1>
+        <p>Compare a sine wave sampled at different rates and see why sampling too slowly can make a signal appear different from the original.</p>
+        <div class="page-actions">
+          <a href="/worked-examples/converters/" class="btn btn-accent-outline btn-large">&larr; Converters Worked Examples</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section"><div class="container">
+      <div class="examples">
+        <details class="example" open>
+          <summary>The sampling setup</summary>
+          <div class="example-body">
+            <p>The diagram shows the wiring for the demonstration. An analogue-to-digital converter measures the input voltage at regular intervals; the resulting samples are used to represent the signal.</p>
+            <figure class="schematic-figure">
+              <a href="/images/worked-examples/converters/aliasing_demo.png" target="_blank" rel="noopener" aria-label="Open the full-size sampling demonstration wiring diagram in a new tab">
+                <img src="/images/worked-examples/converters/aliasing_demo.png" alt="Wiring diagram for the Arduino UNO R4 signal-sampling demonstration" class="schematic">
+              </a>
+              <figcaption>Click the image to view it full size.</figcaption>
+            </figure>
+            <p><strong>Input safety:</strong> keep the voltage at analogue input A0 between 0 V and 5 V relative to the Arduino's ground. Do not connect a negative-going or higher-voltage signal directly to the board.</p>
+          </div>
+        </details>
+        <details class="example">
+          <summary>What aliasing means</summary>
+          <div class="example-body">
+            <p>Sampling records snapshots of a changing voltage. With many samples during each cycle, those points describe the sine wave clearly. As the sampling rate falls, fewer points are captured and the reconstructed shape becomes less reliable.</p>
+            <p>If the signal changes more than the samples can distinguish, different input frequencies can produce the same sample pattern. This distortion is called <strong>aliasing</strong>: the sampled signal can appear slower or otherwise unlike the original.</p>
+            <p>The Nyquist criterion says the sampling rate must be greater than twice the highest frequency in the signal to represent that frequency without aliasing. In practice, sampling faster provides a clearer representation and room for real-world filtering.</p>
+          </div>
+        </details>
+        <details class="example">
+          <summary>Sampling-rate comparison</summary>
+          <div class="example-body">
+            <p>These results show the progression from a clear sine wave to a poorly represented signal as the sampling rate is reduced:</p>
+            <figure class="schematic-figure">
+              <a href="/images/worked-examples/converters/IMG_9281.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/converters/IMG_9281.jpeg" alt="Sine-wave sampling demonstration at its maximum sampling rate, showing a clean trace" class="schematic"></a>
+              <figcaption>Maximum sampling rate: a clean sine-wave trace.</figcaption>
+            </figure>
+            <figure class="schematic-figure">
+              <a href="/images/worked-examples/converters/IMG_9282.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/converters/IMG_9282.jpeg" alt="Sine-wave sampling demonstration at a high rate, still showing the sine shape" class="schematic"></a>
+              <figcaption>High sampling rate: the sine shape is still clear.</figcaption>
+            </figure>
+            <figure class="schematic-figure">
+              <a href="/images/worked-examples/converters/IMG_9283.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/converters/IMG_9283.jpeg" alt="Sine-wave sampling demonstration at the lowest rate that still shows a sine shape" class="schematic"></a>
+              <figcaption>Near the minimum useful rate: the sine shape is just distinguishable.</figcaption>
+            </figure>
+            <figure class="schematic-figure">
+              <a href="/images/worked-examples/converters/IMG_9284.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/converters/IMG_9284.jpeg" alt="Sine-wave sampling demonstration at a rate too low to represent the signal usefully" class="schematic"></a>
+              <figcaption>Too low: most samples are near zero, so the output is not useful.</figcaption>
+            </figure>
+            <figure class="schematic-figure">
+              <a href="/images/worked-examples/converters/IMG_9285.jpeg" target="_blank" rel="noopener"><img src="/images/worked-examples/converters/IMG_9285.jpeg" alt="Sine-wave sampling demonstration at a much-too-low rate, producing mostly zero or misleading data" class="schematic"></a>
+              <figcaption>Much too low: the samples are mostly zero or misleading.</figcaption>
+            </figure>
+          </div>
+        </details>
+      </div>
+    </div></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-text"><h3>Little Engineering Books</h3><p>Big Subjects. Small Books. No Waffle.</p></div>
+      <nav class="footer-nav">
+        <a href="/">Home</a>
+        <a href="/topics/">Books</a>
+        <a href="/worked-examples/">Worked Examples</a>
+        <a href="/why/">Why Little Engineering Books</a>
+        <a href="/about/">About the Author</a>
+      </nav>
+      <div class="footer-legal"><p>&copy; 2026 Alistair Likeman. All rights reserved.</p><p class="affiliate-disclosure">Purchases made through Amazon affiliate links on this site may earn the author a commission, at no extra cost to you.</p></div>
+    </div>
+  </footer>
+  <script src="/js/main.js"></script>
+</body>
+</html>
