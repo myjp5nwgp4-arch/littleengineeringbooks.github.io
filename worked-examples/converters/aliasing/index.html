@@ -40,17 +40,167 @@
 
     <section class="section"><div class="container">
       <div class="examples">
+        <details class="example">
+          <summary>Getting started: what you'll need</summary>
+          <div class="example-body">
+            <p>This section lists everything you need for the worked example below. Equivalent parts will work.</p>
+            <h3>Equipment list</h3>
+            <table class="bom"><thead><tr><th>Part number</th><th>Description</th><th class="qty">Qty</th></tr></thead><tbody>
+              <tr><td>10k potentiometer</td><td><a href="https://link.amazon/B07gI45v8" target="_blank" rel="sponsored noopener">10 k&Omega; slider potentiometer</a>. A 10k pot is also included in the Elegoo starter kit below</td><td class="qty">1</td></tr>
+              <tr><td>ABX00087</td><td><a href="https://link.amazon/B01Hhg83L" target="_blank" rel="sponsored noopener">Arduino UNO R4 WiFi</a></td><td class="qty">1</td></tr>
+              <tr><td>Jumper wire kit</td><td><a href="https://link.amazon/B0bPns90S" target="_blank" rel="sponsored noopener">Male-to-male breadboard jumper wires</a>, assorted</td><td class="qty">1</td></tr>
+              <tr><td>BB830 (or equivalent)</td><td><a href="https://link.amazon/B0fh213lS" target="_blank" rel="sponsored noopener">830-point solderless breadboard</a></td><td class="qty">1</td></tr>
+              <tr><td>USB-C data cable</td><td>USB-C to USB-A/C data cable (not charge-only)</td><td class="qty">1</td></tr>
+            </tbody></table>
+            <p>New to electronics? <a href="https://link.amazon/B0frvkQ8a" target="_blank" rel="sponsored noopener">This Elegoo electronics starter kit</a> includes the Arduino-compatible board, breadboard, jumper wires and 10 k&Omega; potentiometer, and much more. It has everything you need for this example.</p>
+            <p>New to Arduino? Start with Arduino's <a href="https://docs.arduino.cc/tutorials/uno-r4-wifi/r4-wifi-getting-started/" target="_blank" rel="noopener">UNO R4 getting-started guide</a> for setting up your board and uploading your first sketch.</p>
+          </div>
+        </details>
+        <details class="example">
+          <summary>Arduino Code</summary>
+          <div class="example-body">
+            <p>This sketch generates a sine wave on the UNO R4's DAC output, samples it at a rate set by the potentiometer, and scrolls the samples on the LED matrix. Use the Copy button, paste it into the Arduino IDE and upload.</p>
+            <div class="code-block"><button class="copy-btn" type="button">Copy</button><pre><code>// Nyquist / aliasing demo for Arduino UNO R4 WiFi
+//
+// Wiring:
+//   A0 (DAC out) --&gt; jumper --&gt; A1 (ADC in)
+//   Pot: one end 5V, other end GND, wiper to A2
+
+#include "Arduino_LED_Matrix.h"
+
+// ---------- Settings you may want to tweak ----------
+const float SIGNAL_HZ      = 2.0;   // DAC sine frequency
+const float FS_MIN         = 1.0;   // lowest sample rate (Hz)
+const float FS_MAX         = 20.0;  // highest sample rate (Hz)
+const float SIGNAL_AMP_V   = 2.3;   // sine amplitude (V) around 2.5 V midpoint; max ~2.5
+const float DISPLAY_BOT_V  = 0.0;   // voltage shown on bottom LED row
+const float DISPLAY_TOP_V  = 5.0;   // voltage shown on top LED row
+const float ADC_REF_V      = 5.0;   // R4 ADC reference
+const bool  HOLD_MODE      = true;  // true = staircase, false = isolated samples
+// ----------------------------------------------------
+
+// Display scroll rate = max sample rate (one column per sample at full rate)
+const int SCROLL_COLS_SEC = (int)FS_MAX;
+
+ArduinoLEDMatrix matrix;
+
+uint8_t frame[8][12] = {0};   // [row][col], row 0 = top
+int     rowForCol[12];        // row lit in each column (-1 = none)
+
+const unsigned long DAC_PERIOD_US = 500;   // DAC update every 0.5 ms
+unsigned long lastDacUs    = 0;
+unsigned long lastSampleUs = 0;
+unsigned long lastScrollUs = 0;
+
+float phase       = 0;        // DAC sine phase (radians)
+float fs          = FS_MIN;   // current (smoothed) sample rate
+float potSmoothed = 0;
+
+int  heldRow = 7;             // most recent sample as a row
+bool newSampleThisColumn = false;
+
+int voltsToRow(float v) {
+  float frac = (v - DISPLAY_BOT_V) / (DISPLAY_TOP_V - DISPLAY_BOT_V);
+  if (frac &lt; 0) frac = 0;
+  if (frac &gt; 1) frac = 1;
+  return 7 - (int)(frac * 7.0 + 0.5);      // bottom V -&gt; row 7, top V -&gt; row 0
+}
+
+void drawFrame() {
+  memset(frame, 0, sizeof(frame));
+  for (int c = 0; c &lt; 12; c++) {
+    if (rowForCol[c] &lt; 0) continue;
+    frame[rowForCol[c]][c] = 1;
+    // fill the gap to the previous column so steep edges look like a line
+    if (c &gt; 0 &amp;&amp; rowForCol[c - 1] &gt;= 0) {
+      int a = rowForCol[c - 1], b = rowForCol[c];
+      int lo = min(a, b), hi = max(a, b);
+      for (int r = lo; r &lt;= hi; r++) frame[r][c] = 1;
+    }
+  }
+  matrix.renderBitmap(frame, 8, 12);
+}
+
+void setup() {
+  Serial.begin(115200);
+  analogWriteResolution(12);
+  analogReadResolution(12);
+  matrix.begin();
+  for (int c = 0; c &lt; 12; c++) rowForCol[c] = -1;
+  potSmoothed = analogRead(A2);
+  lastDacUs = lastSampleUs = lastScrollUs = micros();
+}
+
+void loop() {
+  unsigned long now = micros();
+
+  // 1) Drive the DAC sine on A0, centred on 2.5 V
+  if (now - lastDacUs &gt;= DAC_PERIOD_US) {
+    lastDacUs += DAC_PERIOD_US;
+    phase += 2.0 * PI * SIGNAL_HZ * (DAC_PERIOD_US * 1e-6);
+    if (phase &gt;= 2.0 * PI) phase -= 2.0 * PI;
+    float volts = 2.5 + SIGNAL_AMP_V * sin(phase);
+    analogWrite(A0, (int)(volts / 5.0 * 4095.0 + 0.5));
+  }
+
+  // 2) Read pot -&gt; sample rate (smoothed to avoid jitter)
+  potSmoothed += 0.02 * (analogRead(A2) - potSmoothed);
+  fs = FS_MIN + (potSmoothed / 4095.0) * (FS_MAX - FS_MIN);
+
+  // 3) Take a sample at the chosen rate
+  unsigned long samplePeriodUs = (unsigned long)(1e6 / fs);
+  if (now - lastSampleUs &gt;= samplePeriodUs) {
+    lastSampleUs += samplePeriodUs;
+    if (now - lastSampleUs &gt;= samplePeriodUs) lastSampleUs = now;  // catch up after pot jumps
+    float v = analogRead(A1) * ADC_REF_V / 4095.0;
+    heldRow = voltsToRow(v);
+    newSampleThisColumn = true;
+  }
+
+  // 4) Scroll the display at a FIXED real-time rate, independent of fs
+  const unsigned long scrollPeriodUs = 1000000UL / SCROLL_COLS_SEC;
+  if (now - lastScrollUs &gt;= scrollPeriodUs) {
+    lastScrollUs += scrollPeriodUs;
+
+    for (int c = 0; c &lt; 11; c++) rowForCol[c] = rowForCol[c + 1];
+    if (HOLD_MODE)               rowForCol[11] = heldRow;
+    else                         rowForCol[11] = newSampleThisColumn ? heldRow : -1;
+    newSampleThisColumn = false;
+
+    drawFrame();
+
+    // Print sample rate and predicted alias twice a second
+    static uint8_t n = 0;
+    if (++n &gt;= SCROLL_COLS_SEC / 2) {
+      n = 0;
+      float k = round(SIGNAL_HZ / fs);
+      Serial.print("fs = ");            Serial.print(fs, 1);
+      Serial.print(" Hz   apparent freq = ");
+      Serial.print(fabs(SIGNAL_HZ - k * fs), 2);
+      Serial.println(" Hz");
+    }
+  }
+}</code></pre></div>
+          </div>
+        </details>
         <details class="example" open>
           <summary>The sampling setup</summary>
           <div class="example-body">
-            <p>The diagram shows the wiring for the demonstration. An analogue-to-digital converter measures the input voltage at regular intervals; the resulting samples are used to represent the signal.</p>
+            <p>The Arduino generates a sine wave on A0 and reads it on A1. The potentiometer connected to A2 sets the sampling rate.</p>
             <figure class="schematic-figure">
               <a href="/images/worked-examples/converters/aliasing_demo.png" target="_blank" rel="noopener" aria-label="Open the full-size sampling demonstration wiring diagram in a new tab">
                 <img src="/images/worked-examples/converters/aliasing_demo.png" alt="Wiring diagram for the Arduino UNO R4 signal-sampling demonstration" class="schematic">
               </a>
               <figcaption>Click the image to view it full size.</figcaption>
             </figure>
-            <p><strong>Input safety:</strong> keep the voltage at analogue input A0 between 0 V and 5 V relative to the Arduino's ground. Do not connect a negative-going or higher-voltage signal directly to the board.</p>
+            <h3>Pinout wiring</h3>
+            <table class="bom"><thead><tr><th>From</th><th>To</th><th>Purpose</th></tr></thead><tbody>
+              <tr><td>Arduino A0 (DAC out)</td><td>Arduino A1 (ADC in)</td><td>Sine-wave signal; connect with a jumper wire</td></tr>
+              <tr><td>5V</td><td>One end of the 10k pot</td><td>Top of the potentiometer divider</td></tr>
+              <tr><td>GND</td><td>Other end of the 10k pot</td><td>Bottom of the potentiometer divider</td></tr>
+              <tr><td>10k pot wiper</td><td>Arduino A2</td><td>Sets the sampling rate</td></tr>
+            </tbody></table>
+            <p><strong>Input safety:</strong> keep the voltage at analogue input A1 between 0 V and 5 V relative to the Arduino's ground. Do not connect a negative-going or higher-voltage signal directly to the board.</p>
           </div>
         </details>
         <details class="example">
