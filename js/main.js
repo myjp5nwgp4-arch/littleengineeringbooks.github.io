@@ -1,7 +1,7 @@
 // Central store of "Buy Book" links. Edit links here only; any element with
 // data-buy="<key>" gets its href set from this list. Use null for "not yet available".
 const BUY_LINKS = {
-  'analogue-sensors': null,
+  'analogue-sensors': 'https://link.amazon/B0g71sMA2',
   'op-amps': 'https://link.amazon/B00Ctd8Zt',
   'converters': 'https://link.amazon/B05cBkwWZ',
   'digital-communications': null
