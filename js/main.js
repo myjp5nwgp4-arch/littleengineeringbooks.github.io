@@ -11,6 +11,8 @@ document.querySelectorAll('[data-buy]').forEach(el => {
   const url = BUY_LINKS[el.dataset.buy];
   if (url) {
     el.href = url;
+    el.textContent = 'Buy Now';
+    el.classList.remove('btn-coming-soon');
   } else {
     el.removeAttribute('href');
     el.classList.add('btn-coming-soon');
