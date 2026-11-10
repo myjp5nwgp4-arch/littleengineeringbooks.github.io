@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Little Engineering Books: Plain-English electronics guides. Big subjects. Small books. No waffle.">
-  <title>Little Engineering Books | Big Subjects. Small Books. No Waffle.</title>
+  <title>Books | Little Engineering Books</title>
+  <meta name="description" content="Explore electronics books from sensing the real world to communicating digital data.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -26,92 +26,54 @@
   </header>
 
   <main>
-    <section class="section section-alt" id="series-one">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><div class="container"><a href="/">Home</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Books</span></div></nav>
+    <section class="page-hero">
       <div class="container">
-        <div class="series">
-          <span class="series-label">Series One</span>
-          <h2 class="section-title">Sensors to Code</h2>
-          <p class="section-subtitle">Follow a measurement from the physical world to useful digital information. A sensor produces an electrical signal; supporting circuits can buffer, amplify or filter it before an ADC samples it into data. A microcontroller can then process that data and exchange it with peripherals or other systems. Start with the topic you need, or follow the series in order.</p>
-
-          <div class="series-links">
-            <a href="/topics/" class="btn btn-accent accent-9">Browse All Books</a>
-            <a href="/worked-examples/" class="btn btn-accent accent-9">Browse All Worked Examples</a>
-          </div>
-          <div class="series-steps">
-            <article class="series-step accent-orange">
-              <h3 class="step-header">Analogue Sensors</h3>
-              <div class="step-number">1</div>
-              <span class="step-verb">Measure</span>
-              <div class="step-image"><img src="/images/topics/analogue-sensors/1-analogue-sensor.png" alt="Analogue sensor technical diagram"></div>
-              <p>Start with the physical world: learn how sensors turn temperature, light, force and position into electrical signals you can measure.</p>
-              <a href="/topics/" class="btn btn-accent-outline" data-buy="analogue-sensors" target="_blank" rel="sponsored noopener">Buy Book</a>
-              <a href="/worked-examples/analogue-sensors/" class="btn btn-accent">Worked Examples</a>
-            </article>
-            <article class="series-step accent-magenta">
-              <h3 class="step-header">Operational Amplifiers</h3>
-              <div class="step-number">2</div>
-              <span class="step-verb">Clean up</span>
-              <div class="step-image"><img src="/images/topics/operational-amplifiers/2-opamp-buffer.png" alt="Op-amp buffer technical diagram"></div>
-              <p>Prepare sensor signals for reliable use by buffering, amplifying, comparing or filtering them.</p>
-              <a href="/topics/" class="btn btn-accent-outline" data-buy="op-amps" target="_blank" rel="sponsored noopener">Buy Book</a>
-              <a href="/worked-examples/operational-amplifiers/" class="btn btn-accent">Worked Examples</a>
-            </article>
-            <article class="series-step accent-teal">
-              <h3 class="step-header">Converters</h3>
-              <div class="step-number">3</div>
-              <span class="step-verb">Convert</span>
-              <div class="step-image"><img src="/images/topics/converters/3-adc.png" alt="Analogue-to-digital converter technical diagram"></div>
-              <p>Turn conditioned analogue signals into digital values a system can process, and learn how DACs turn values back into signals.</p>
-              <a href="/topics/" class="btn btn-accent-outline" data-buy="converters" target="_blank" rel="sponsored noopener">Buy Book</a>
-              <a href="/worked-examples/converters/" class="btn btn-accent">Worked Examples</a>
-            </article>
-            <article class="series-step accent-purple">
-              <h3 class="step-header">Digital Communications</h3>
-              <div class="step-number">4</div>
-              <span class="step-verb">Send</span>
-              <div class="step-image"><img src="/images/topics/microcontrollers/4-mcu.png" alt="Microcontroller technical diagram"></div>
-              <p>Carry those measurements between microcontrollers, peripherals and other systems using common communication protocols.</p>
-              <a href="/topics/" class="btn btn-accent-outline" data-buy="digital-communications" target="_blank" rel="sponsored noopener">Buy Now</a>
-              <a href="/worked-examples/digital-communications/" class="btn btn-accent">Worked Examples</a>
-            </article>
-          </div>
-        </div>
+        <span class="eyebrow">Library</span>
+        <h1>All Books</h1>
+        <p>Browse the books and their worked examples covering analogue sensors, practical op-amp circuits, converters and digital communication protocols.</p>
       </div>
     </section>
 
-    <section class="section section-alt" id="series-two">
+    <section class="section section-alt">
       <div class="container">
-        <div class="series">
-          <span class="series-label">Series Two</span>
-          <h2 class="section-title">HELP! I need to talk to ...</h2>
-          <p class="section-subtitle">Two non-technical books with a lighter tone, designed to be human, funny and genuinely useful when communication breaks down.</p>
-
-          <div class="series-links">
-            <a href="/topics/#series-two" class="btn btn-accent accent-9">Browse Series Two</a>
-            <a href="/topics/" class="btn btn-accent accent-9">Browse All Books</a>
-          </div>
-
-          <div class="series-steps">
-            <article class="series-step accent-help-engineers">
-              <h3 class="step-header">HELP! I need to talk to engineers</h3>
-              <div class="step-number">1</div>
-              <span class="step-verb">Ask better questions</span>
-              <div class="step-image"><img src="/images/book-covers/series-two/help-engineers/cover.svg" alt="HELP! I need to talk to engineers cover placeholder"></div>
-              <p>Humorous guidance for understanding engineers, asking clearer questions, and getting useful answers without the usual jargon fog.</p>
-              <a href="/topics/#series-two" class="btn btn-accent-outline">View Book</a>
-              <a href="/topics/#series-two" class="btn btn-accent">Browse Series</a>
-            </article>
-
-            <article class="series-step accent-help-managers">
-              <h3 class="step-header">HELP! I need to talk to managers</h3>
-              <div class="step-number">2</div>
-              <span class="step-verb">Turn friction into clarity</span>
-              <div class="step-image"><img src="/images/book-covers/series-two/help-managers/cover.svg" alt="HELP! I need to talk to managers cover placeholder"></div>
-              <p>Lightweight, practical advice for communicating with managers without losing the point, the timeline, or the sanity.</p>
-              <a href="/topics/#series-two" class="btn btn-accent-outline">View Book</a>
-              <a href="/topics/#series-two" class="btn btn-accent">Browse Series</a>
-            </article>
-          </div>
+        <div class="book-grid">
+          <article class="book-card accent-orange">
+            <div class="book-cover"><div class="cover-frame"><img src="/images/book-covers/Analogue%20Sensors%20Cover.png" alt="Analogue Sensors book cover"></div></div>
+            <div class="book-content">
+              <h3>Analogue Sensors</h3>
+              <p class="tagline">Explore how temperature, light, force and position become electrical signals, and learn how to measure them.</p>
+              <a data-buy="analogue-sensors" class="btn btn-accent" target="_blank" rel="sponsored noopener">Buy Book</a>
+              <a href="/worked-examples/analogue-sensors/" class="btn btn-accent-outline">Worked Examples</a>
+            </div>
+          </article>
+          <article class="book-card accent-magenta">
+            <div class="book-cover"><div class="cover-frame"><img src="/images/book-covers/IMG_8821.jpeg" alt="Operational Amplifiers book cover"></div></div>
+            <div class="book-content">
+              <h3>Operational Amplifiers</h3>
+              <p class="tagline">Understand practical op-amp circuits, from amplifiers and comparators to integrators and filters, without getting lost in theory.</p>
+              <a href="/topics/" data-buy="op-amps" class="btn btn-accent" target="_blank" rel="sponsored noopener">Buy Book</a>
+              <a href="/worked-examples/operational-amplifiers/" class="btn btn-accent-outline">Worked Examples</a>
+            </div>
+          </article>
+          <article class="book-card accent-teal">
+            <div class="book-cover"><div class="cover-frame"><img src="/images/book-covers/ADC%20Cover.jpeg" alt="Converters cover"></div></div>
+            <div class="book-content">
+              <h3>Converters</h3>
+              <p class="tagline">Learn how sampling and ADCs turn real-world signals into numbers, and how DACs turn digital values back into analogue signals.</p>
+              <a href="/topics/" data-buy="converters" class="btn btn-accent" target="_blank" rel="sponsored noopener">Buy Book</a>
+              <a href="/worked-examples/converters/" class="btn btn-accent-outline">Worked Examples</a>
+            </div>
+          </article>
+          <article class="book-card accent-purple">
+            <div class="book-cover"><div class="cover-frame"><img src="/images/book-covers/Digital%20Communications%20Cover.png" alt="Digital Communications book cover"></div></div>
+            <div class="book-content">
+              <h3>Digital Communications</h3>
+              <p class="tagline">Understand UART, SPI, I²C, CAN and other protocols for moving data between sensors, microcontrollers and systems.</p>
+              <a data-buy="digital-communications" class="btn btn-accent" target="_blank" rel="sponsored noopener">Buy Now</a>
+              <a href="/worked-examples/digital-communications/" class="btn btn-accent-outline">Worked Examples</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
