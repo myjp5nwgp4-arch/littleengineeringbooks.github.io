@@ -40,3 +40,10 @@
   content: none;
   display: none;
 }
+
+/* Give both Series Two cover frames the same portrait dimensions. */
+#series-two .step-image.book-cover-image {
+  width: 180px;
+  height: 225px;
+  flex: 0 0 225px;
+}
