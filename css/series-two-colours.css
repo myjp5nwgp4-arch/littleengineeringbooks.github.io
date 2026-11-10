@@ -34,3 +34,9 @@
 .book-card.accent-help-managers .book-content {
   background: var(--series-primary);
 }
+
+/* The two Series Two cards are standalone guides, not a directional sequence. */
+#series-two .series-step::after {
+  content: none;
+  display: none;
+}

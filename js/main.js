@@ -1,10 +1,12 @@
-// Central store of "Buy Book" links. Edit links here only; any element with
-// data-buy="<key>" gets its href set from this list. Use null for "not yet available".
+// Central store of book links. Edit links here only; any element with
+// data-buy="<key>" gets its href set from this list. Use null until a link is available.
 const BUY_LINKS = {
   'analogue-sensors': 'https://link.amazon/B05M1KRMV',
   'op-amps': 'https://link.amazon/B0dMsSQop',
   'converters': 'https://link.amazon/B06JfCC0e',
   'digital-communications': 'https://link.amazon/B0cJGFcHZ',
+  'help-engineers': null, // Replace with the Amazon URL when available.
+  'help-managers': null, // Replace with the Amazon URL when available.
 };
 
 document.querySelectorAll('[data-buy]').forEach(el => {
@@ -14,8 +16,14 @@ document.querySelectorAll('[data-buy]').forEach(el => {
   } else {
     el.removeAttribute('href');
     el.classList.add('btn-coming-soon');
-    el.textContent = 'Coming Soon!';
     el.removeAttribute('target');
+    if (el.dataset.buyLabel) {
+      el.textContent = el.dataset.buyLabel;
+      el.setAttribute('aria-disabled', 'true');
+      el.title = 'Amazon link coming soon';
+    } else {
+      el.textContent = 'Coming Soon!';
+    }
   }
 });
 
@@ -23,14 +31,13 @@ document.querySelectorAll('[data-buy]').forEach(el => {
 const menuBtn = document.querySelector('.mobile-menu-btn');
 const nav = document.querySelector('.site-nav');
 
-if (menuBtn) {
+if (menuBtn && nav) {
   menuBtn.addEventListener('click', () => {
     nav.classList.toggle('active');
   });
 
   // Close menu when a link is clicked
-  const navLinks = nav.querySelectorAll('a');
-  navLinks.forEach(link => {
+  nav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       nav.classList.remove('active');
     });
@@ -43,9 +50,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const href = this.getAttribute('href');
     if (href !== '#' && document.querySelector(href)) {
       e.preventDefault();
-      document.querySelector(href).scrollIntoView({
-        behavior: 'smooth'
-      });
+      document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
     }
   });
 });
@@ -54,9 +59,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 document.querySelectorAll('.btn, a, button').forEach(element => {
   element.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      if (element.tagName !== 'A') {
-        element.click();
-      }
+      if (element.tagName !== 'A') element.click();
     }
   });
 });
