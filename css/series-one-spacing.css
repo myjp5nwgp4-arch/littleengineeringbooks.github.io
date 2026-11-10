@@ -1,0 +1,4 @@
+/* Keep stacked Series One actions visually separated. */
+#series-one .series-step .btn + .btn {
+  margin-top: 0.75rem;
+}
