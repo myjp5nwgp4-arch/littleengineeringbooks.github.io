@@ -32,7 +32,7 @@ p { margin-bottom: 1rem; }
 img { max-width: 100%; display: block; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
 
-/* Accent colour per book / series step */
+/* General-purpose accents */
 .accent-1 { --accent: var(--c1); --accent-dark: var(--c1-dark); --accent-tint: var(--c1-tint); }
 .accent-2 { --accent: var(--c2); --accent-dark: var(--c2-dark); --accent-tint: var(--c2-tint); }
 .accent-3 { --accent: var(--c3); --accent-dark: var(--c3-dark); --accent-tint: var(--c3-tint); }
@@ -42,14 +42,23 @@ img { max-width: 100%; display: block; }
 .accent-7 { --accent: var(--c7); --accent-dark: var(--c7-dark); --accent-tint: var(--c7-tint); }
 .accent-8 { --accent: var(--c8); --accent-dark: var(--c8-dark); --accent-tint: var(--c8-tint); }
 .accent-9 { --accent: var(--c9); --accent-dark: var(--c9-dark); --accent-tint: var(--c9-tint); }
-.accent-magenta { --accent: var(--magenta); --accent-dark: var(--magenta-dark); --accent-tint: var(--magenta-light); }
-.accent-teal { --accent: var(--teal); --accent-dark: var(--teal-dark); --accent-tint: var(--teal-light); }
-.accent-orange { --accent: var(--orange); --accent-dark: var(--orange-dark); --accent-tint: var(--orange-light); }
-.accent-purple { --accent: var(--purple); --accent-dark: var(--purple-dark); --accent-tint: var(--purple-light); }
 .accent-blue { --accent: var(--blue); --accent-dark: var(--blue-dark); --accent-tint: var(--blue-light); }
 .accent-sky-blue { --accent: var(--sky-blue); --accent-dark: var(--sky-blue-dark); --accent-tint: var(--sky-blue-light); }
 .accent-yellow { --accent: var(--yellow); --accent-dark: var(--yellow-dark); --accent-tint: var(--yellow-light); }
 .accent-green { --accent: var(--green); --accent-dark: var(--green-dark); --accent-tint: var(--green-light); }
+
+/* Book colours: accent, hover colour, and card tint */
+.accent-analogue-sensors { --accent: var(--orange); --accent-dark: var(--orange-dark); --accent-tint: var(--orange-light); }
+.accent-operational-amplifiers { --accent: var(--magenta); --accent-dark: var(--magenta-dark); --accent-tint: var(--magenta-light); }
+.accent-converters { --accent: var(--teal); --accent-dark: var(--teal-dark); --accent-tint: var(--teal-light); }
+.accent-digital-communications { --accent: var(--purple); --accent-dark: var(--purple-dark); --accent-tint: var(--purple-light); }
+.accent-help-engineers { --accent: #FF6B81; --accent-dark: #A64E67; --accent-tint: #B5EBD2; --accent-text: #222; }
+.accent-help-managers { --accent: #7C4DBA; --accent-dark: #4E327E; --accent-tint: #FFE45C; }
+/* Future book templates (fill in the title and colours when needed):
+.accent-book-1 { --accent: ; --accent-dark: ; --accent-tint: ; }
+.accent-book-2 { --accent: ; --accent-dark: ; --accent-tint: ; }
+.accent-book-3 { --accent: ; --accent-dark: ; --accent-tint: ; }
+*/
 
 /* Header + hamburger menu (always a hamburger) */
 .site-header { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
@@ -95,22 +104,35 @@ img { max-width: 100%; display: block; }
 .series-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin: 0 auto 1rem; }
 .series-links .btn { padding: .5rem 1rem; }
 .series-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.5rem 2.5rem; }
-.series-step { background: var(--accent-tint); border: 2px solid var(--border); border-radius: 14px; padding: 1.75rem; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; transition: transform .3s ease, box-shadow .3s ease; overflow: hidden; }
-.series-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-.step-number { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-family: 'Baloo 2', sans-serif; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: .75rem; }
+.series-step { background: var(--accent-tint); border-radius: 14px; box-shadow: inset 0 0 0 2px var(--border); padding: 1.75rem; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; transition: transform .3s ease, box-shadow .3s ease; overflow: hidden; }
+.series-step:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 2px var(--border), var(--shadow-md); }
 .series-step h3 { font-size: 1.3rem; }
-.series-step .step-header { align-self: stretch; margin: -1.75rem -1.75rem .25rem; padding: .9rem 1rem; background: var(--accent); color: #fff; text-align: center; font-size: 1.15rem; border-radius: 12px 12px 0 0; }
+.series-step .step-header, .series-step .step-verb { font-family: 'Baloo 2', sans-serif; font-size: 1.15rem; font-weight: 800; line-height: 1.2; }
+.series-step .step-header { align-self: stretch; margin: -1.75rem -1.75rem .25rem; padding: .9rem 1rem; background: var(--accent); color: #fff; text-align: center; border-radius: 14px 14px 0 0; }
 .series-step .step-header { transition: background .3s ease; }
 .series-step:hover .step-header { background: var(--accent-dark); }
-.series-step .step-verb { font-family: 'Baloo 2', sans-serif; font-size: .8rem; font-weight: 700; text-transform: none; letter-spacing: .02em; color: var(--accent); }
+.series-step .step-verb { color: var(--accent); }
 .series-step p { color: var(--muted); font-size: .95rem; margin: 0; flex: 1; }
-.series-step .btn { align-self: stretch; }
+.series-step .btn { align-self: stretch; margin-top: 1.25rem; }
 .step-image { width: 180px; height: 180px; background: var(--accent-tint); flex-shrink: 0; }
 .step-image img { width: 100%; height: 100%; object-fit: contain; display: block; mix-blend-mode: multiply; }
 .step-image.book-cover-image img { object-fit: cover; mix-blend-mode: normal; }
 .series-step:not(:last-child)::after { content: '\2192'; position: absolute; right: -2.1rem; top: 50%; transform: translateY(-50%); width: 1.7rem; text-align: center; font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; }
 @media (max-width: 1100px) { .series-steps { grid-template-columns: repeat(2, 1fr); } .series-step:nth-child(2)::after { content: '\2193'; right: auto; left: 50%; top: auto; bottom: -2.2rem; transform: translateX(-50%); } .series-step:nth-child(3)::after { content: '\2192'; } .series-step:nth-child(2)::after { content: '\2199'; } }
 @media (max-width: 640px) { .series-steps { grid-template-columns: 1fr; } .series-step:not(:last-child)::after { content: '\2193'; right: auto; left: 50%; top: auto; bottom: -2.2rem; transform: translateX(-50%); } }
+#series-two .series-step::after { content: none; display: none; }
+@media (min-width: 1101px) {
+  #series-two .series-steps { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  #series-two .series-step { left: calc(100% + 2.5rem); }
+}
+@media (min-width: 1101px) and (max-width: 1143px) {
+  #series-two .series-step { left: calc(50% + 1.25rem); }
+}
+#series-two .series-step .step-header { color: var(--accent-text, #fff); }
+#series-two .series-step:hover .step-header { color: #fff; }
+#series-two .series-step .step-image.book-cover-image { width: 180px; height: 225px; flex: 0 0 225px; margin: 0 auto; }
+#series-two .btn-accent:not(.btn-coming-soon) { color: var(--accent-text, #fff); }
+#series-two .btn-accent:not(.btn-coming-soon):hover { color: #fff; }
 .series-cta { text-align: center; margin-top: 2.5rem; }
 
 /* Book tiles */
@@ -122,6 +144,10 @@ img { max-width: 100%; display: block; }
 .cover-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .cover-soon { color: var(--accent); font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 1.1rem; text-align: center; padding: 1rem; }
 .book-content { padding: 1.5rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
+.book-card.accent-help-engineers .book-content,
+.book-card.accent-help-managers .book-content { background: var(--accent-tint); }
+.book-card.accent-help-engineers .btn-accent:not(.btn-coming-soon) { color: var(--accent-text); }
+.book-card.accent-help-engineers .btn-accent:not(.btn-coming-soon):hover { color: #fff; }
 .book-card h3 { font-size: 1.35rem; }
 .book-card .tagline { color: var(--muted); font-size: .9rem; margin: 0; flex: 1; }
 .book-card .btn { margin-top: .75rem; width: 100%; }
