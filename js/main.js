@@ -5,7 +5,7 @@ const BUY_LINKS = {
   'op-amps': 'https://link.amazon/B0dMsSQop',
   'converters': 'https://link.amazon/B06JfCC0e',
   'digital-communications': 'https://link.amazon/B0cJGFcHZ',
-  'help-engineers': null, // Replace with the Amazon URL when available.
+  'help-engineers': 'https://link.amazon/B0fDh9bcf',
   'help-managers': null, // Replace with the Amazon URL when available.
 };
 
