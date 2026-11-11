@@ -1,15 +1,15 @@
 /* Series Two book palettes: primary colour fills cards; accent colours are used for banners and buttons. */
 .accent-help-engineers {
-  --accent: #D46B79;
+  --accent: #FF6B81;
   --accent-dark: #A64E67;
-  --accent-tint: #BFDBC4;
-  --series-primary: #BFDBC4;
+  --accent-tint: #B5EBD2;
+  --series-primary: #B5EBD2;
 }
 .accent-help-managers {
-  --accent: #754FB4;
+  --accent: #7C4DBA;
   --accent-dark: #4E327E;
-  --accent-tint: #FBE573;
-  --series-primary: #FBE573;
+  --accent-tint: #FFE45C;
+  --series-primary: #FFE45C;
 }
 .series-step.accent-help-engineers,
 .book-card.accent-help-engineers,
