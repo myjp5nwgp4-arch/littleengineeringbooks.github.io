@@ -6,7 +6,7 @@ const BUY_LINKS = {
   'converters': 'https://link.amazon/B06JfCC0e',
   'digital-communications': 'https://link.amazon/B0cJGFcHZ',
   'help-engineers': 'https://link.amazon/B0fDh9bcf',
-  'help-managers': null, // Replace with the Amazon URL when available.
+  'help-managers': 'https://link.amazon/B02MLnUHz',
 };
 
 document.querySelectorAll('[data-buy]').forEach(el => {
